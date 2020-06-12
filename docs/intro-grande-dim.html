@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 1 Introduction à la grande dimension | Régression en grande dimension</title>
+  <meta name="description" content="Chapitre 1 Introduction à la grande dimension | Régression en grande dimension" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 1 Introduction à la grande dimension | Régression en grande dimension" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 1 Introduction à la grande dimension | Régression en grande dimension" />
+  
+  
+  
+
+<meta name="author" content="Laurent Rouvière" />
+
+
+<meta name="date" content="2020-06-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="literature.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Régression en grande dimension<br> <br> L. Rouvière</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Présentation</a></li>
+<li class="chapter" data-level="1" data-path="intro-grande-dim.html"><a href="intro-grande-dim.html"><i class="fa fa-check"></i><b>1</b> Introduction à la grande dimension</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro-grande-dim.html"><a href="intro-grande-dim.html#fléau-de-la-dimension-pour-les-plus-proches-voisins"><i class="fa fa-check"></i><b>1.1</b> Fléau de la dimension pour les plus proches voisins</a></li>
+<li class="chapter" data-level="1.2" data-path="intro-grande-dim.html"><a href="intro-grande-dim.html#influence-de-la-dimension-dans-le-modèle-linéaire"><i class="fa fa-check"></i><b>1.2</b> Influence de la dimension dans le modèle linéaire</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>2</b> Literature</a></li>
+<li class="chapter" data-level="3" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>3</b> Methods</a></li>
+<li class="chapter" data-level="4" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>4</b> Applications</a><ul>
+<li class="chapter" data-level="4.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>4.1</b> Example one</a></li>
+<li class="chapter" data-level="4.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>4.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Régression en grande dimension</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="intro-grande-dim" class="section level1">
+<h1><span class="header-section-number">Chapitre 1</span> Introduction à la grande dimension</h1>
+<div id="fléau-de-la-dimension-pour-les-plus-proches-voisins" class="section level2">
+<h2><span class="header-section-number">1.1</span> Fléau de la dimension pour les plus proches voisins</h2>
+<p>La fonction suivante permet de générer un échantillon d’apprentissage et un échantillon test selon le modèle
+<span class="math display">\[Y=X_1^2+\dots+X_p^2+\varepsilon\]</span>
+où les <span class="math inline">\(X_j\)</span> sont uniformes i.i.d de loi uniorme sur <span class="math inline">\([0,1]\)</span> et le bruit <span class="math inline">\(\varepsilon\)</span> suit une loi <span class="math inline">\(\mathcal N(0,0.5^2)\)</span>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="intro-grande-dim.html#cb1-1"></a><span class="op">&gt;</span><span class="st"> </span>simu &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">napp=</span><span class="dv">300</span>,<span class="dt">ntest=</span><span class="dv">500</span>,<span class="dt">p=</span><span class="dv">3</span>,<span class="dt">graine=</span><span class="dv">1234</span>){</span>
+<span id="cb1-2"><a href="intro-grande-dim.html#cb1-2"></a><span class="op">+</span><span class="st">   </span><span class="kw">set.seed</span>(graine)</span>
+<span id="cb1-3"><a href="intro-grande-dim.html#cb1-3"></a><span class="op">+</span><span class="st">   </span>n &lt;-<span class="st"> </span>napp<span class="op">+</span>ntest</span>
+<span id="cb1-4"><a href="intro-grande-dim.html#cb1-4"></a><span class="op">+</span><span class="st">   </span>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(n<span class="op">*</span>p),<span class="dt">ncol=</span>p)</span>
+<span id="cb1-5"><a href="intro-grande-dim.html#cb1-5"></a><span class="op">+</span><span class="st">   </span>Y &lt;-<span class="st"> </span><span class="kw">apply</span>(X<span class="op">^</span><span class="dv">2</span>,<span class="dv">1</span>,sum)<span class="op">+</span><span class="kw">rnorm</span>(n,<span class="dt">sd=</span><span class="fl">0.5</span>)</span>
+<span id="cb1-6"><a href="intro-grande-dim.html#cb1-6"></a><span class="op">+</span><span class="st">   </span>Yapp &lt;-<span class="st"> </span>Y[<span class="dv">1</span><span class="op">:</span>napp]</span>
+<span id="cb1-7"><a href="intro-grande-dim.html#cb1-7"></a><span class="op">+</span><span class="st">   </span>Ytest &lt;-<span class="st"> </span>Y[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span>napp)]</span>
+<span id="cb1-8"><a href="intro-grande-dim.html#cb1-8"></a><span class="op">+</span><span class="st">   </span>Xapp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(X[<span class="dv">1</span><span class="op">:</span>napp,])</span>
+<span id="cb1-9"><a href="intro-grande-dim.html#cb1-9"></a><span class="op">+</span><span class="st">   </span>Xtest &lt;-<span class="st"> </span><span class="kw">data.frame</span>(X[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span>napp),])</span>
+<span id="cb1-10"><a href="intro-grande-dim.html#cb1-10"></a><span class="op">+</span><span class="st">   </span><span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">Xapp=</span>Xapp,<span class="dt">Yapp=</span>Yapp,<span class="dt">Xtest=</span>Xtest,<span class="dt">Ytest=</span>Ytest))</span>
+<span id="cb1-11"><a href="intro-grande-dim.html#cb1-11"></a><span class="op">+</span><span class="st"> </span>}</span>
+<span id="cb1-12"><a href="intro-grande-dim.html#cb1-12"></a><span class="op">&gt;</span><span class="st"> </span>df &lt;-<span class="st"> </span><span class="kw">simu</span>(<span class="dt">napp=</span><span class="dv">300</span>,<span class="dt">ntest=</span><span class="dv">500</span>,<span class="dt">p=</span><span class="dv">3</span>,<span class="dt">graine=</span><span class="dv">1234</span>)</span></code></pre></div>
+<p>La fonction <strong>knn.reg</strong> du package <strong>FNN</strong> permet de construire des estimateurs des <span class="math inline">\(k\)</span> plus proches voisins en régression. On peut par exemple faire du 3 plus proches voisin avec</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="intro-grande-dim.html#cb2-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(FNN)</span>
+<span id="cb2-2"><a href="intro-grande-dim.html#cb2-2"></a><span class="op">&gt;</span><span class="st"> </span>mod3ppv &lt;-<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train=</span>df<span class="op">$</span>Xapp,<span class="dt">y=</span>df<span class="op">$</span>Yapp,<span class="dt">k=</span><span class="dv">3</span>)</span></code></pre></div>
+<p>Parmi toutes les sorties proposées par cette fonction on a notamment</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="intro-grande-dim.html#cb3-1"></a><span class="op">&gt;</span><span class="st"> </span>mod3ppv<span class="op">$</span>PRESS</span>
+<span id="cb3-2"><a href="intro-grande-dim.html#cb3-2"></a><span class="co">## [1] 98.98178</span></span></code></pre></div>
+<p>qui renvoie la somme des carrés des erreurs de prévision par validation croisée Leave-one-out (LOO). On peut ainsi obtenir l’erreur quadratique moyenne LOO</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="intro-grande-dim.html#cb4-1"></a><span class="op">&gt;</span><span class="st"> </span>mod3ppv<span class="op">$</span>PRESS<span class="op">/</span><span class="kw">max</span>(<span class="kw">c</span>(<span class="kw">nrow</span>(df<span class="op">$</span>Xapp),<span class="dv">1</span>))</span>
+<span id="cb4-2"><a href="intro-grande-dim.html#cb4-2"></a><span class="co">## [1] 0.3299393</span></span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Construire la fonction <strong>sel.k</strong> qui admet en entrée :
+<ul>
+<li>une grille de valeurs possibles de plus proches voisins (un vecteur).</li>
+<li>une matrice <strong>Xapp</strong> de dimension <span class="math inline">\(n\times p\)</span> qui contient les valeurs variables explicatives.</li>
+<li>un vecteur <strong>Yapp</strong> de dimension <span class="math inline">\(n\)</span> qui contient les valeurs de la variable à expliquer</li>
+</ul>
+et qui renvoie en sortie la valeur de <span class="math inline">\(k\)</span> dans la grille qui minimise l’erreur LOO présentée ci-dessus.</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="intro-grande-dim.html#cb5-1"></a><span class="op">&gt;</span><span class="st"> </span>sel.k &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">K_cand=</span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">50</span>,<span class="dt">by=</span><span class="dv">5</span>),Xapp,Yapp){</span>
+<span id="cb5-2"><a href="intro-grande-dim.html#cb5-2"></a><span class="op">+</span><span class="st">   </span>ind &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb5-3"><a href="intro-grande-dim.html#cb5-3"></a><span class="op">+</span><span class="st">   </span>err &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">length</span>(K_cand))</span>
+<span id="cb5-4"><a href="intro-grande-dim.html#cb5-4"></a><span class="op">+</span><span class="st">   </span><span class="cf">for</span> (k <span class="cf">in</span> K_cand){</span>
+<span id="cb5-5"><a href="intro-grande-dim.html#cb5-5"></a><span class="op">+</span><span class="st">     </span>modkppv &lt;-<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train=</span>Xapp,<span class="dt">y=</span>Yapp,<span class="dt">k=</span>k)</span>
+<span id="cb5-6"><a href="intro-grande-dim.html#cb5-6"></a><span class="op">+</span><span class="st">     </span>err[ind] &lt;-<span class="st"> </span>modkppv<span class="op">$</span>PRESS<span class="op">/</span><span class="kw">max</span>(<span class="kw">c</span>(<span class="kw">nrow</span>(Xapp),<span class="dv">1</span>))</span>
+<span id="cb5-7"><a href="intro-grande-dim.html#cb5-7"></a><span class="op">+</span><span class="st">     </span>ind &lt;-<span class="st"> </span>ind<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb5-8"><a href="intro-grande-dim.html#cb5-8"></a><span class="op">+</span><span class="st">   </span>}</span>
+<span id="cb5-9"><a href="intro-grande-dim.html#cb5-9"></a><span class="op">+</span><span class="st">   </span><span class="kw">return</span>(K_cand[<span class="kw">which.min</span>(err)])</span>
+<span id="cb5-10"><a href="intro-grande-dim.html#cb5-10"></a><span class="op">+</span><span class="st"> </span>}</span></code></pre></div>
+<p>Une fois la fonction créée, on peut calculer l’erreur de l’estimateur sélectionné sur un échantillon test avec</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="intro-grande-dim.html#cb6-1"></a><span class="op">&gt;</span><span class="st"> </span>k.opt &lt;-<span class="st"> </span><span class="kw">sel.k</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">50</span>,<span class="dt">by=</span><span class="dv">5</span>),df<span class="op">$</span>Xapp,df<span class="op">$</span>Yapp)</span>
+<span id="cb6-2"><a href="intro-grande-dim.html#cb6-2"></a><span class="op">&gt;</span><span class="st"> </span>prev &lt;-<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train=</span>df<span class="op">$</span>Xapp,<span class="dt">y=</span>df<span class="op">$</span>Yapp,<span class="dt">test=</span>df<span class="op">$</span>Xtest,<span class="dt">k=</span>k.opt)<span class="op">$</span>pred</span>
+<span id="cb6-3"><a href="intro-grande-dim.html#cb6-3"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>((prev<span class="op">-</span>df<span class="op">$</span>Ytest)<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb6-4"><a href="intro-grande-dim.html#cb6-4"></a><span class="co">## [1] 0.283869</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>On souhaite comparer les erreurs des règles des <span class="math inline">\(k\)</span> plus proches voisins en fonction de la dimension. On considère les 4 dimensions et la grille de valeurs de <span class="math inline">\(k\)</span> suivantes :</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="intro-grande-dim.html#cb7-1"></a><span class="op">&gt;</span><span class="st"> </span>DIM &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">50</span>)</span>
+<span id="cb7-2"><a href="intro-grande-dim.html#cb7-2"></a><span class="op">&gt;</span><span class="st"> </span>K_cand &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">50</span>,<span class="dt">by=</span><span class="dv">5</span>)</span></code></pre></div>
+<p>Pour chaque valeur de dimension répéter <span class="math inline">\(B=100\)</span> fois :</p>
+<ul>
+<li>simuler un échantillon d’apprentissage de taille 300 et test de taille 500</li>
+<li>calculer la valeur optimale de <span class="math inline">\(k\)</span> dans <strong>K_cand</strong> grâce à <strong>sel.k</strong></li>
+<li>calculer l’erreur de l’estimateur sélectionné sur un échantillon test.</li>
+</ul>
+<p>On pourra stocker les résultats dans une matrice de dimension <span class="math inline">\(B\times 4\)</span>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="intro-grande-dim.html#cb8-1"></a><span class="op">&gt;</span><span class="st"> </span>B &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb8-2"><a href="intro-grande-dim.html#cb8-2"></a><span class="op">&gt;</span><span class="st"> </span>mat.err &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dt">ncol=</span><span class="kw">length</span>(DIM),<span class="dt">nrow=</span>B)</span>
+<span id="cb8-3"><a href="intro-grande-dim.html#cb8-3"></a><span class="op">&gt;</span><span class="st"> </span><span class="cf">for</span> (p <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(DIM)){</span>
+<span id="cb8-4"><a href="intro-grande-dim.html#cb8-4"></a><span class="op">+</span><span class="st">   </span><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>B){</span>
+<span id="cb8-5"><a href="intro-grande-dim.html#cb8-5"></a><span class="op">+</span><span class="st">     </span>df &lt;-<span class="st"> </span><span class="kw">simu</span>(<span class="dt">napp=</span><span class="dv">300</span>,<span class="dt">ntest=</span><span class="dv">500</span>,<span class="dt">p=</span>DIM[p],<span class="dt">graine=</span><span class="dv">1234</span><span class="op">*</span>p<span class="op">+</span><span class="dv">2</span><span class="op">*</span>i)</span>
+<span id="cb8-6"><a href="intro-grande-dim.html#cb8-6"></a><span class="op">+</span><span class="st">     </span>k.opt &lt;-<span class="st"> </span><span class="kw">sel.k</span>(K_cand,df<span class="op">$</span>Xapp,df<span class="op">$</span>Yapp)</span>
+<span id="cb8-7"><a href="intro-grande-dim.html#cb8-7"></a><span class="op">+</span><span class="st">     </span>prev &lt;-<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train=</span>df<span class="op">$</span>Xapp,<span class="dt">y=</span>df<span class="op">$</span>Yapp,<span class="dt">test=</span>df<span class="op">$</span>Xtest,<span class="dt">k=</span>k.opt)<span class="op">$</span>pred</span>
+<span id="cb8-8"><a href="intro-grande-dim.html#cb8-8"></a><span class="op">+</span><span class="st">     </span>mat.err[i,p] &lt;-<span class="st"> </span><span class="kw">mean</span>((prev<span class="op">-</span>df<span class="op">$</span>Ytest)<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb8-9"><a href="intro-grande-dim.html#cb8-9"></a><span class="op">+</span><span class="st">   </span>}</span>
+<span id="cb8-10"><a href="intro-grande-dim.html#cb8-10"></a><span class="op">+</span><span class="st"> </span>}</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>A l’aide d’indicateurs numériques et de boxplots, comparer la distribution des erreurs en fonction de la dimension.</li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="intro-grande-dim.html#cb9-1"></a><span class="op">&gt;</span><span class="st"> </span>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(mat.err)</span>
+<span id="cb9-2"><a href="intro-grande-dim.html#cb9-2"></a><span class="op">&gt;</span><span class="st"> </span>nom.dim &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;D&quot;</span>,DIM,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb9-3"><a href="intro-grande-dim.html#cb9-3"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">names</span>(df) &lt;-<span class="st"> </span>nom.dim</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="intro-grande-dim.html#cb10-1"></a><span class="op">&gt;</span><span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_all</span>(mean)</span>
+<span id="cb10-2"><a href="intro-grande-dim.html#cb10-2"></a><span class="co">##         D1        D5     D10      D50</span></span>
+<span id="cb10-3"><a href="intro-grande-dim.html#cb10-3"></a><span class="co">## 1 0.258003 0.3243574 0.52247 3.191055</span></span>
+<span id="cb10-4"><a href="intro-grande-dim.html#cb10-4"></a><span class="op">&gt;</span><span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_all</span>(var)</span>
+<span id="cb10-5"><a href="intro-grande-dim.html#cb10-5"></a><span class="co">##             D1           D5         D10        D50</span></span>
+<span id="cb10-6"><a href="intro-grande-dim.html#cb10-6"></a><span class="co">## 1 0.0002556399 0.0005417109 0.001857967 0.06749414</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="intro-grande-dim.html#cb11-1"></a><span class="op">&gt;</span><span class="st"> </span>df1 &lt;-<span class="st"> </span><span class="kw">gather</span>(df,<span class="dt">key=</span><span class="st">&quot;dim&quot;</span>,<span class="dt">value=</span><span class="st">&quot;erreur&quot;</span>)</span>
+<span id="cb11-2"><a href="intro-grande-dim.html#cb11-2"></a><span class="op">&gt;</span><span class="st"> </span>df1 &lt;-<span class="st"> </span>df1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">dim=</span><span class="kw">fct_relevel</span>(dim,nom.dim))</span>
+<span id="cb11-3"><a href="intro-grande-dim.html#cb11-3"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">ggplot</span>(df1)<span class="op">+</span><span class="kw">aes</span>(<span class="dt">x=</span>dim,<span class="dt">y=</span>erreur)<span class="op">+</span><span class="kw">geom_boxplot</span>()<span class="op">+</span><span class="kw">theme_classic</span>()</span></code></pre></div>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Conclure</li>
+</ol>
+<p>Les estimateurs sont moins précis lorsque la dimension augmente. C’est le <strong>fléau de la dimension</strong>.</p>
+</div>
+<div id="influence-de-la-dimension-dans-le-modèle-linéaire" class="section level2">
+<h2><span class="header-section-number">1.2</span> Influence de la dimension dans le modèle linéaire</h2>
+<p>En vous basant sur l’exercice précédent, proposer une illustration qui peut mettre en évidence la précision d’estimation dans le modèle linéaire en fonction de la dimension.</p>
+<p>On considère un modèle linéaire avec une variable explicative <span class="math inline">\(X_1\)</span> et <span class="math inline">\(p-1\)</span> variables de bruit <span class="math inline">\(X_2,\dots,X_p\)</span>. Par exemple
+<span class="math display">\[Y=X_1+0X_2+\dots+0X_p+\varepsilon.\]</span>
+On peut par exmple simuler des données issues de ce modèle avec la fonction suivante :</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="intro-grande-dim.html#cb12-1"></a><span class="op">&gt;</span><span class="st"> </span>n &lt;-<span class="st"> </span><span class="dv">250</span></span>
+<span id="cb12-2"><a href="intro-grande-dim.html#cb12-2"></a><span class="op">&gt;</span><span class="st"> </span>p &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb12-3"><a href="intro-grande-dim.html#cb12-3"></a><span class="op">&gt;</span><span class="st"> </span>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(n<span class="op">*</span>p),<span class="dt">ncol=</span>p)</span>
+<span id="cb12-4"><a href="intro-grande-dim.html#cb12-4"></a><span class="op">&gt;</span><span class="st"> </span>simu.lin &lt;-<span class="st"> </span><span class="cf">function</span>(X,graine){</span>
+<span id="cb12-5"><a href="intro-grande-dim.html#cb12-5"></a><span class="op">+</span><span class="st">   </span><span class="kw">set.seed</span>(graine)</span>
+<span id="cb12-6"><a href="intro-grande-dim.html#cb12-6"></a><span class="op">+</span><span class="st">   </span>Y &lt;-<span class="st"> </span>X[,<span class="dv">1</span>]<span class="op">+</span><span class="kw">rnorm</span>(<span class="kw">nrow</span>(X),<span class="dt">sd=</span><span class="fl">0.5</span>)</span>
+<span id="cb12-7"><a href="intro-grande-dim.html#cb12-7"></a><span class="op">+</span><span class="st">   </span>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Y,X)</span>
+<span id="cb12-8"><a href="intro-grande-dim.html#cb12-8"></a><span class="op">+</span><span class="st">   </span><span class="kw">return</span>(df)</span>
+<span id="cb12-9"><a href="intro-grande-dim.html#cb12-9"></a><span class="op">+</span><span class="st"> </span>}</span></code></pre></div>
+<p>On s’intéresse à la distribution de <span class="math inline">\(\widehat\beta_1\)</span> en fonction de la dimension. Pour ce faire, on calcule un grand nombre d’estimateurs de <span class="math inline">\(\widehat\beta_1\)</span> pour différentes valeus de <span class="math inline">\(p\)</span>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="intro-grande-dim.html#cb13-1"></a><span class="op">&gt;</span><span class="st"> </span>B &lt;-<span class="st"> </span><span class="dv">500</span></span>
+<span id="cb13-2"><a href="intro-grande-dim.html#cb13-2"></a><span class="op">&gt;</span><span class="st"> </span>DIM &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="dv">100</span>,<span class="dv">200</span>)</span>
+<span id="cb13-3"><a href="intro-grande-dim.html#cb13-3"></a><span class="op">&gt;</span><span class="st"> </span>matbeta1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dt">nrow=</span>B,<span class="dt">ncol=</span><span class="kw">length</span>(DIM))</span>
+<span id="cb13-4"><a href="intro-grande-dim.html#cb13-4"></a><span class="op">&gt;</span><span class="st"> </span><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>B){</span>
+<span id="cb13-5"><a href="intro-grande-dim.html#cb13-5"></a><span class="op">+</span><span class="st">   </span>dftot &lt;-<span class="st"> </span><span class="kw">simu.lin</span>(X,i<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb13-6"><a href="intro-grande-dim.html#cb13-6"></a><span class="op">+</span><span class="st">   </span><span class="cf">for</span> (p <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(DIM)){</span>
+<span id="cb13-7"><a href="intro-grande-dim.html#cb13-7"></a><span class="op">+</span><span class="st">     </span>dfp &lt;-<span class="st"> </span>dftot[,(<span class="dv">1</span><span class="op">:</span>(<span class="dv">2</span><span class="op">+</span>DIM[p]))]</span>
+<span id="cb13-8"><a href="intro-grande-dim.html#cb13-8"></a><span class="op">+</span><span class="st">     </span>mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Y<span class="op">~</span>.,<span class="dt">data=</span>dfp)</span>
+<span id="cb13-9"><a href="intro-grande-dim.html#cb13-9"></a><span class="op">+</span><span class="st">     </span>matbeta1[i,p] &lt;-<span class="st"> </span><span class="kw">coef</span>(mod)[<span class="dv">2</span>]</span>
+<span id="cb13-10"><a href="intro-grande-dim.html#cb13-10"></a><span class="op">+</span><span class="st">   </span>}</span>
+<span id="cb13-11"><a href="intro-grande-dim.html#cb13-11"></a><span class="op">+</span><span class="st"> </span>}</span></code></pre></div>
+<p>On compare, pour chaque dimension considérée, les distributions de <span class="math inline">\(\widehat\beta_1\)</span>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="intro-grande-dim.html#cb14-1"></a><span class="op">&gt;</span><span class="st"> </span>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(matbeta1)</span>
+<span id="cb14-2"><a href="intro-grande-dim.html#cb14-2"></a><span class="op">&gt;</span><span class="st"> </span>nom.dim &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;D&quot;</span>,DIM,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb14-3"><a href="intro-grande-dim.html#cb14-3"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">names</span>(df) &lt;-<span class="st"> </span>nom.dim</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="intro-grande-dim.html#cb15-1"></a><span class="op">&gt;</span><span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_all</span>(mean)</span>
+<span id="cb15-2"><a href="intro-grande-dim.html#cb15-2"></a><span class="co">##         D0       D50      D100    D200</span></span>
+<span id="cb15-3"><a href="intro-grande-dim.html#cb15-3"></a><span class="co">## 1 0.992891 0.9960811 0.9959025 0.98173</span></span>
+<span id="cb15-4"><a href="intro-grande-dim.html#cb15-4"></a><span class="op">&gt;</span><span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_all</span>(var)</span>
+<span id="cb15-5"><a href="intro-grande-dim.html#cb15-5"></a><span class="co">##           D0      D50       D100       D200</span></span>
+<span id="cb15-6"><a href="intro-grande-dim.html#cb15-6"></a><span class="co">## 1 0.01266578 0.016072 0.02023046 0.06939837</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="intro-grande-dim.html#cb16-1"></a><span class="op">&gt;</span><span class="st"> </span>df1 &lt;-<span class="st"> </span><span class="kw">gather</span>(df,<span class="dt">key=</span><span class="st">&quot;dim&quot;</span>,<span class="dt">value=</span><span class="st">&quot;erreur&quot;</span>)</span>
+<span id="cb16-2"><a href="intro-grande-dim.html#cb16-2"></a><span class="op">&gt;</span><span class="st"> </span>df1 &lt;-<span class="st"> </span>df1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">dim=</span><span class="kw">fct_relevel</span>(dim,nom.dim))</span>
+<span id="cb16-3"><a href="intro-grande-dim.html#cb16-3"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">ggplot</span>(df1)<span class="op">+</span><span class="kw">aes</span>(<span class="dt">x=</span>dim,<span class="dt">y=</span>erreur)<span class="op">+</span><span class="kw">geom_boxplot</span>()<span class="op">+</span><span class="kw">theme_classic</span>()</span></code></pre></div>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>On retrouve bien que la dimension impacte notamment la variance des estimateurs.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="literature.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["TUTO_GRANDE_DIM.pdf", "TUTO_GRANDE_DIM.epub"],
+"toc": {
+"collapse": "subsection",
+"fontsettings": {
+"theme": "white",
+"size": 2,
+"family": "sans"
+},
+"sharing": {
+"facebook": true,
+"github": true,
+"twitter": true
+}
+},
+"highlight": "default"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
