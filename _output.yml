@@ -1,0 +1,27 @@
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">Régression en grande dimension, L. Rouvière</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+      fontsettings:
+        theme: white #night sepia
+        size: 2
+        family: sans
+      sharing:
+        facebook: yes
+        github: yes
+        twitter: yes
+    highlight: default #tango  
+        
+    download: ["pdf", "epub"]
+bookdown::pdf_book:
+  includes:
+#    in_header: preamble.tex
+    in_header: ~/Dropbox/FICHIERS_STYLE/Latex/header_bdown.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+bookdown::epub_book: default
