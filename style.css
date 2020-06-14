@@ -12,3 +12,12 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+div.correction {
+  color: black;
+  background-color: #F0F0F0;
+}
+
+div.corR {
+  font-style: italic;
+}

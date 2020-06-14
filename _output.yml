@@ -21,7 +21,7 @@ bookdown::pdf_book:
   includes:
 #    in_header: preamble.tex
     in_header: ~/Dropbox/FICHIERS_STYLE/Latex/header_bdown.tex
-  latex_engine: xelatex
+  latex_engine: pdflatex #xelatex
   citation_package: natbib
   keep_tex: yes
 bookdown::epub_book: default

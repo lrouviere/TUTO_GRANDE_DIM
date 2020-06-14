@@ -9,3 +9,6 @@ dplyr
 stringr
 forcats
 FNN
+ISLR
+FactoMineR
+pls
