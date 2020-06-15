@@ -12,3 +12,5 @@ FNN
 ISLR
 FactoMineR
 pls
+Matrix
+glmnet

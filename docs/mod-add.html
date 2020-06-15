@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 4 Modèle additif | Régression en grande dimension</title>
+  <meta name="description" content="Chapitre 4 Modèle additif | Régression en grande dimension" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 4 Modèle additif | Régression en grande dimension" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 4 Modèle additif | Régression en grande dimension" />
+  
+  
+  
+
+<meta name="author" content="Laurent Rouvière" />
+
+
+<meta name="date" content="2020-06-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="reg-pen.html"/>
+<link rel="next" href="références.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Régression en grande dimension<br> <br> L. Rouvière</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Présentation</a></li>
+<li class="chapter" data-level="1" data-path="intro-grande-dim.html"><a href="intro-grande-dim.html"><i class="fa fa-check"></i><b>1</b> Introduction à la grande dimension</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro-grande-dim.html"><a href="intro-grande-dim.html#fléau-de-la-dimension-pour-les-plus-proches-voisins"><i class="fa fa-check"></i><b>1.1</b> Fléau de la dimension pour les plus proches voisins</a></li>
+<li class="chapter" data-level="1.2" data-path="intro-grande-dim.html"><a href="intro-grande-dim.html#influence-de-la-dimension-dans-le-modèle-linéaire"><i class="fa fa-check"></i><b>1.2</b> Influence de la dimension dans le modèle linéaire</a></li>
+<li class="chapter" data-level="1.3" data-path="intro-grande-dim.html"><a href="intro-grande-dim.html#exercices"><i class="fa fa-check"></i><b>1.3</b> Exercices</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="reg-comp.html"><a href="reg-comp.html"><i class="fa fa-check"></i><b>2</b> Régression sur composantes</a><ul>
+<li class="chapter" data-level="2.1" data-path="reg-comp.html"><a href="reg-comp.html#régression-sur-composantes-principales-méthodo"><i class="fa fa-check"></i><b>2.1</b> Régression sur composantes principales (méthodo)</a></li>
+<li class="chapter" data-level="2.2" data-path="reg-comp.html"><a href="reg-comp.html#régression-pls-méthodo"><i class="fa fa-check"></i><b>2.2</b> Régression PLS : méthodo</a></li>
+<li class="chapter" data-level="2.3" data-path="reg-comp.html"><a href="reg-comp.html#comparaison-pcr-vs-pls."><i class="fa fa-check"></i><b>2.3</b> Comparaison : PCR vs PLS.</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="reg-pen.html"><a href="reg-pen.html"><i class="fa fa-check"></i><b>3</b> Régressions pénalisées (ou sous contraintes)</a><ul>
+<li class="chapter" data-level="3.1" data-path="reg-pen.html"><a href="reg-pen.html#ridge-et-lasso-avec-glmnet"><i class="fa fa-check"></i><b>3.1</b> Ridge et lasso avec glmnet</a></li>
+<li class="chapter" data-level="3.2" data-path="reg-pen.html"><a href="reg-pen.html#reconstruction-dun-signal"><i class="fa fa-check"></i><b>3.2</b> Reconstruction d’un signal</a></li>
+<li class="chapter" data-level="3.3" data-path="reg-pen.html"><a href="reg-pen.html#régression-logistique-pénalisée"><i class="fa fa-check"></i><b>3.3</b> Régression logistique pénalisée</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="mod-add.html"><a href="mod-add.html"><i class="fa fa-check"></i><b>4</b> Modèle additif</a><ul>
+<li class="chapter" data-level="4.1" data-path="mod-add.html"><a href="mod-add.html#pseudo-backfitting"><i class="fa fa-check"></i><b>4.1</b> Pseudo backfitting</a></li>
+<li class="chapter" data-level="4.2" data-path="mod-add.html"><a href="mod-add.html#modèle-gam"><i class="fa fa-check"></i><b>4.2</b> Modèle GAM</a></li>
+<li class="chapter" data-level="4.3" data-path="mod-add.html"><a href="mod-add.html#régression-logistique-additive"><i class="fa fa-check"></i><b>4.3</b> Régression logistique additive</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i>Références</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Régression en grande dimension</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mod-add" class="section level1">
+<h1><span class="header-section-number">Chapitre 4</span> Modèle additif</h1>
+<p>Le modèle additif (modèle GAM) peut être vu comme un compromis entre une modélisation linéaire et non paramétrique de la fonction de régression. Il suppose que cette fonction s’écrit
+<span class="math display">\[m(x)=m(x_1,\dots,x_d)=\alpha+g_1(x_1)+\dots+g_d(x_d).\]</span></p>
+<div id="pseudo-backfitting" class="section level2">
+<h2><span class="header-section-number">4.1</span> Pseudo backfitting</h2>
+<p>L’algorithme du backfitting est souvent utilisé pour estimer les composantes du modèle additif. Etant donné un échantillon <span class="math inline">\((x_i,y_i),i=1,\dots,n\)</span> on note <span class="math inline">\(\bar{\mathbb Y}\)</span> le vecteur des <span class="math inline">\(y_i\)</span> et <span class="math inline">\(\mathbb X_k\)</span> le vecteur contenant les observations de la variable <span class="math inline">\(k\)</span> pour <span class="math inline">\(k=1,\dots,d\)</span>. L’algorithme se résume ainsi</p>
+<div class="correction">
+<ol style="list-style-type: decimal">
+<li>
+Initialisation : <span class="math inline"><span class="math inline">\(\widehat\alpha=\bar{\mathbb Y}\)</span></span>, <span class="math inline"><span class="math inline">\(\widehat g_k(x_k)=\bar{\mathbb X}_k\)</span></span>.
+</li>
+<li>
+Pour <span class="math inline"><span class="math inline">\(k=1,\dots,d\)</span></span> :
+<ul>
+<li>
+<span class="math inline"><span class="math inline">\(\mathbb Y^{(k)}=\mathbb Y-\widehat\alpha-\sum_{j\neq k}\widehat g_j(\mathbb X_j)\)</span></span> (résidus partiels)
+</li>
+<li>
+<span class="math inline"><span class="math inline">\(\widehat g_k\)</span></span> : lissage non paramétrique de <span class="math inline"><span class="math inline">\(\mathbb Y^{(k)}\)</span></span> sur <span class="math inline"><span class="math inline">\(\mathbb X_k\)</span></span>.
+</li>
+</ul>
+</li>
+<li>
+Répéter l’étape précédente tant que les <span class="math inline"><span class="math inline">\(\widehat g_k\)</span></span> changent.
+</li>
+</ol>
+</div>
+<p>On propose dans cette partie d’utiliser cet algorithme pour estimer les paramètres du modèle linéaire en remplaçant le lissage non paramétrique par un estimateur MCO. On considère le modèle de régression linéaire</p>
+<p><span class="math display">\[Y=\beta_0+\beta_1X_1+\beta_2X_2+\varepsilon\]</span>
+avec <span class="math inline">\(X_1\)</span> et <span class="math inline">\(X_2\)</span> de lois uniformes sur <span class="math inline">\([0,1]\)</span> et <span class="math inline">\(\varepsilon\)</span> de loi <span class="math inline">\(\mathcal N(0,1)\)</span> (<span class="math inline">\(\varepsilon\)</span> est indépendante de <span class="math inline">\((X_1,X_2)^\prime\)</span>).</p>
+<ol style="list-style-type: decimal">
+<li><p>Générer un échantillon <span class="math inline">\((x_i,y_i)\)</span> de taille <span class="math inline">\(n=300\)</span> selon le modèle ci-dessus pour <span class="math inline">\(\beta_0=1,\beta_1=3,\beta_2=5\)</span>.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="mod-add.html#cb90-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb90-2"><a href="mod-add.html#cb90-2"></a><span class="op">&gt;</span><span class="st"> </span>n &lt;-<span class="st"> </span><span class="dv">300</span></span>
+<span id="cb90-3"><a href="mod-add.html#cb90-3"></a><span class="op">&gt;</span><span class="st"> </span>X1&lt;-<span class="kw">runif</span>(n)</span>
+<span id="cb90-4"><a href="mod-add.html#cb90-4"></a><span class="op">&gt;</span><span class="st"> </span>X2&lt;-<span class="kw">runif</span>(n)</span>
+<span id="cb90-5"><a href="mod-add.html#cb90-5"></a><span class="op">&gt;</span><span class="st"> </span>bruit&lt;-<span class="kw">rnorm</span>(n)</span>
+<span id="cb90-6"><a href="mod-add.html#cb90-6"></a><span class="op">&gt;</span><span class="st"> </span>Y&lt;-<span class="dv">1</span><span class="op">+</span><span class="dv">3</span><span class="op">*</span>X1<span class="op">+</span><span class="dv">5</span><span class="op">*</span>X2<span class="op">+</span>bruit</span>
+<span id="cb90-7"><a href="mod-add.html#cb90-7"></a><span class="op">&gt;</span><span class="st"> </span>donnees&lt;-<span class="kw">data.frame</span>(Y,X1,X2)</span></code></pre></div></li>
+<li><p>Créer une fonction <strong>R</strong> qui admet en entrée un jeu de données et qui fournit en sortie les estimateurs par la méthode du backfitting.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="mod-add.html#cb91-1"></a><span class="op">&gt;</span><span class="st"> </span>pseudo_back &lt;-<span class="st"> </span><span class="cf">function</span>(df,<span class="dt">eps=</span><span class="fl">0.00001</span>){</span>
+<span id="cb91-2"><a href="mod-add.html#cb91-2"></a><span class="op">+</span><span class="st">   </span>mat.X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(Y<span class="op">~</span>.,<span class="dt">data=</span>df)</span>
+<span id="cb91-3"><a href="mod-add.html#cb91-3"></a><span class="op">+</span><span class="st">   </span>beta_i &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">ncol</span>(mat.X))</span>
+<span id="cb91-4"><a href="mod-add.html#cb91-4"></a><span class="op">+</span><span class="st">   </span>beta &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="kw">ncol</span>(mat.X))</span>
+<span id="cb91-5"><a href="mod-add.html#cb91-5"></a><span class="op">+</span><span class="st">   </span><span class="cf">while</span> (<span class="kw">min</span>(<span class="kw">abs</span>(beta_i<span class="op">-</span>beta))<span class="op">&gt;</span>eps){</span>
+<span id="cb91-6"><a href="mod-add.html#cb91-6"></a><span class="op">+</span><span class="st"> </span>beta_i &lt;-<span class="st"> </span>beta</span>
+<span id="cb91-7"><a href="mod-add.html#cb91-7"></a><span class="op">+</span><span class="st"> </span><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(mat.X)){</span>
+<span id="cb91-8"><a href="mod-add.html#cb91-8"></a><span class="op">+</span><span class="st">   </span>Yk &lt;-<span class="st"> </span>Y<span class="op">-</span>mat.X[,<span class="op">-</span>k]<span class="op">%*%</span>(beta[<span class="op">-</span>k])</span>
+<span id="cb91-9"><a href="mod-add.html#cb91-9"></a><span class="op">+</span><span class="st">   </span>dfk &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Yk=</span>Yk,<span class="dt">Xk=</span>mat.X[,k])</span>
+<span id="cb91-10"><a href="mod-add.html#cb91-10"></a><span class="op">+</span><span class="st">   </span>beta[k]&lt;-<span class="kw">coef</span>(<span class="kw">lm</span>(Yk<span class="op">~</span>Xk<span class="dv">-1</span>,<span class="dt">data=</span>dfk))</span>
+<span id="cb91-11"><a href="mod-add.html#cb91-11"></a><span class="op">+</span><span class="st"> </span>}</span>
+<span id="cb91-12"><a href="mod-add.html#cb91-12"></a><span class="op">+</span><span class="st">   </span>}</span>
+<span id="cb91-13"><a href="mod-add.html#cb91-13"></a><span class="op">+</span><span class="st">   </span><span class="kw">return</span>(beta)</span>
+<span id="cb91-14"><a href="mod-add.html#cb91-14"></a><span class="op">+</span><span class="st"> </span>}</span></code></pre></div></li>
+<li><p>En déduire les estimateurs backfitting pour le problème considéré.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="mod-add.html#cb92-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">pseudo_back</span>(donnees)</span>
+<span id="cb92-2"><a href="mod-add.html#cb92-2"></a><span class="co">## [1] 1.021341 2.864543 4.980367</span></span></code></pre></div></li>
+<li><p>Comparer aux estimateurs <strong>MCO</strong>.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="mod-add.html#cb93-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">lm</span>(Y<span class="op">~</span>.,<span class="dt">data=</span>donnees)</span>
+<span id="cb93-2"><a href="mod-add.html#cb93-2"></a><span class="co">## </span></span>
+<span id="cb93-3"><a href="mod-add.html#cb93-3"></a><span class="co">## Call:</span></span>
+<span id="cb93-4"><a href="mod-add.html#cb93-4"></a><span class="co">## lm(formula = Y ~ ., data = donnees)</span></span>
+<span id="cb93-5"><a href="mod-add.html#cb93-5"></a><span class="co">## </span></span>
+<span id="cb93-6"><a href="mod-add.html#cb93-6"></a><span class="co">## Coefficients:</span></span>
+<span id="cb93-7"><a href="mod-add.html#cb93-7"></a><span class="co">## (Intercept)           X1           X2  </span></span>
+<span id="cb93-8"><a href="mod-add.html#cb93-8"></a><span class="co">##       1.021        2.865        4.981</span></span></code></pre></div>
+<div class="corR">
+<p>
+On obtient les mêmes estimateurs.
+</p>
+</div></li>
+</ol>
+</div>
+<div id="modèle-gam" class="section level2">
+<h2><span class="header-section-number">4.2</span> Modèle GAM</h2>
+<p>On considère les données générées selon</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="mod-add.html#cb94-1"></a><span class="op">&gt;</span><span class="st"> </span>n &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb94-2"><a href="mod-add.html#cb94-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">set.seed</span>(<span class="dv">1465</span>)</span>
+<span id="cb94-3"><a href="mod-add.html#cb94-3"></a><span class="op">&gt;</span><span class="st"> </span>X1 &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span><span class="kw">runif</span>(n)</span>
+<span id="cb94-4"><a href="mod-add.html#cb94-4"></a><span class="op">&gt;</span><span class="st"> </span>X2 &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span><span class="kw">runif</span>(n)</span>
+<span id="cb94-5"><a href="mod-add.html#cb94-5"></a><span class="op">&gt;</span><span class="st"> </span>bruit &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n)</span>
+<span id="cb94-6"><a href="mod-add.html#cb94-6"></a><span class="op">&gt;</span><span class="st"> </span>Y &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>X1<span class="op">+</span><span class="kw">sin</span>(<span class="dv">8</span><span class="op">*</span>pi<span class="op">*</span>X2)<span class="op">+</span>bruit</span>
+<span id="cb94-7"><a href="mod-add.html#cb94-7"></a><span class="op">&gt;</span><span class="st"> </span>donnees&lt;-<span class="kw">data.frame</span>(Y,X1,X2)</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li><p>Écrire le modèle</p>
+<div class="corR">
+<p>
+Il s’agit d’un modèle additif
+</p>
+<p>
+<span class="math display"><span class="math display">\[Y=2X_1+\sin(8\pi X_2)+\varepsilon\]</span></span> où <span class="math inline"><span class="math inline">\(X_1\)</span></span> et <span class="math inline"><span class="math inline">\(X_2\)</span></span> sont uniformes sur <span class="math inline"><span class="math inline">\([0,1]\)</span></span> et <span class="math inline"><span class="math inline">\(\varepsilon\)</span></span> suit une <span class="math inline"><span class="math inline">\(\mathcal N(0,1)\)</span></span>.
+</p>
+</div></li>
+<li><p>A l’aide du package <strong>gam</strong> visualiser les estimateurs des composantes additives du modèle. On utilisera tout d’abord un lissage par <strong>spline</strong> avec 1 ddl pour la première composante et 24.579 ddl pour la seconde.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="mod-add.html#cb95-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(gam)</span>
+<span id="cb95-2"><a href="mod-add.html#cb95-2"></a><span class="op">&gt;</span><span class="st"> </span>model1 &lt;-<span class="st"> </span><span class="kw">gam</span>(Y<span class="op">~</span><span class="kw">s</span>(X1,<span class="dt">df=</span><span class="dv">1</span>)<span class="op">+</span><span class="kw">s</span>(X2,<span class="dt">df=</span><span class="fl">24.579</span>)<span class="op">-</span><span class="dv">1</span>,<span class="dt">data=</span>donnees)</span>
+<span id="cb95-3"><a href="mod-add.html#cb95-3"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">plot</span>(model1)</span></code></pre></div>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-144-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-144-2.png" width="672" style="display: block; margin: auto;" /></p></li>
+<li><p>Faire varier les degrés de liberté, interpréter.</p>
+<div class="corR">
+<p>
+On prend d’abord peu de degrés de liberté.
+</p>
+</div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="mod-add.html#cb96-1"></a><span class="op">&gt;</span><span class="st"> </span>model2 &lt;-<span class="st"> </span><span class="kw">gam</span>(Y<span class="op">~</span><span class="kw">s</span>(X1,<span class="dt">df=</span><span class="fl">0.001</span>)<span class="op">+</span><span class="kw">s</span>(X2,<span class="dt">df=</span><span class="fl">0.001</span>)<span class="op">-</span><span class="dv">1</span>,<span class="dt">data=</span>donnees)</span>
+<span id="cb96-2"><a href="mod-add.html#cb96-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">plot</span>(model2)</span></code></pre></div>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-146-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-146-2.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="corR">
+<p>
+Le sinus n’est pas bien estimé. On prend maintenant un grand nombre de degrés de liberté.
+</p>
+</div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="mod-add.html#cb97-1"></a><span class="op">&gt;</span><span class="st"> </span>model2 &lt;-<span class="st"> </span><span class="kw">gam</span>(Y<span class="op">~</span><span class="kw">s</span>(X1,<span class="dt">df=</span><span class="dv">100</span>)<span class="op">+</span><span class="kw">s</span>(X2,<span class="dt">df=</span><span class="dv">100</span>)<span class="op">-</span><span class="dv">1</span>,<span class="dt">data=</span>donnees)</span>
+<span id="cb97-2"><a href="mod-add.html#cb97-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">plot</span>(model2)</span></code></pre></div>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-148-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-148-2.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="corR">
+<p>
+Le modèle est trop flexible, risque de sur-ajustement.
+</p>
+</div></li>
+<li><p>Faire le même travail avec le lisseur <strong>loess</strong>. On commencera avec <code>degree=2</code> et <code>span=0.15</code> puis on fera varier le paramètre <code>span</code>.</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="mod-add.html#cb98-1"></a><span class="op">&gt;</span><span class="st"> </span>model4 &lt;-<span class="st"> </span><span class="kw">gam</span>(Y<span class="op">~</span><span class="kw">lo</span>(X1,<span class="dt">span=</span><span class="dv">3</span>)<span class="op">+</span><span class="kw">lo</span>(X2,<span class="dt">span=</span><span class="fl">0.15</span>,<span class="dt">degree=</span><span class="dv">2</span>)<span class="op">-</span><span class="dv">1</span>,<span class="dt">data=</span>donnees)</span>
+<span id="cb98-2"><a href="mod-add.html#cb98-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">plot</span>(model4)</span></code></pre></div>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-150-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-150-2.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="corR">
+<p>
+On fait varier <code>span</code> :
+</p>
+</div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="mod-add.html#cb99-1"></a><span class="op">&gt;</span><span class="st"> </span>model5 &lt;-<span class="st"> </span><span class="kw">gam</span>(Y<span class="op">~</span><span class="kw">lo</span>(X1,<span class="dt">span=</span><span class="dv">5</span>)<span class="op">+</span><span class="kw">lo</span>(X2,<span class="dt">span=</span><span class="dv">5</span>,<span class="dt">degree=</span><span class="dv">2</span>)<span class="op">-</span><span class="dv">1</span>,<span class="dt">data=</span>donnees)</span>
+<span id="cb99-2"><a href="mod-add.html#cb99-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">plot</span>(model5)</span></code></pre></div>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-152-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-152-2.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="mod-add.html#cb100-1"></a><span class="op">&gt;</span><span class="st"> </span>model6 &lt;-<span class="st"> </span><span class="kw">gam</span>(Y<span class="op">~</span><span class="kw">lo</span>(X1,<span class="dt">span=</span><span class="fl">0.01</span>)<span class="op">+</span><span class="kw">lo</span>(X2,<span class="dt">span=</span><span class="fl">0.01</span>,<span class="dt">degree=</span><span class="dv">2</span>)<span class="op">-</span><span class="dv">1</span>,<span class="dt">data=</span>donnees)</span>
+<span id="cb100-2"><a href="mod-add.html#cb100-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">plot</span>(model6)</span></code></pre></div>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-153-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-153-2.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="corR">
+<p>
+On a les mêmes remarques que pour les splines.
+</p>
+</div></li>
+<li><p>Estimer le degrés de liberté avec la fonction <code>gam</code> du package <strong>mgcv</strong> (Il n’est pas nécessaire de charger le package pour éviter les conflits).</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="mod-add.html#cb101-1"></a><span class="op">&gt;</span><span class="st"> </span>mod.mgcv &lt;-<span class="st"> </span>mgcv<span class="op">::</span><span class="kw">gam</span>(Y<span class="op">~</span><span class="kw">s</span>(X1)<span class="op">+</span><span class="kw">s</span>(X2),<span class="dt">data=</span>donnees)</span>
+<span id="cb101-2"><a href="mod-add.html#cb101-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">plot</span>(mod.mgcv)</span></code></pre></div>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-155-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-155-2.png" width="672" style="display: block; margin: auto;" /></p></li>
+</ol>
+</div>
+<div id="régression-logistique-additive" class="section level2">
+<h2><span class="header-section-number">4.3</span> Régression logistique additive</h2>
+<p>On considère le jeu de données <strong>panne.txt</strong> qui recense des pannes de machine (<code>etat=1</code>) en fonction de leur âge et de leur marque.</p>
+<ol style="list-style-type: decimal">
+<li><p>Faire une régression logistique permettant d’expliquer la variable <code>etat</code> par la variable <code>age</code> uniquement. Critiquer le modèle.</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="mod-add.html#cb102-1"></a><span class="op">&gt;</span><span class="st"> </span>panne &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/panne.txt&quot;</span>,<span class="dt">header=</span><span class="ot">TRUE</span>)</span>
+<span id="cb102-2"><a href="mod-add.html#cb102-2"></a><span class="op">&gt;</span><span class="st"> </span>mod1 &lt;-<span class="st"> </span><span class="kw">glm</span>(etat<span class="op">~</span>age,<span class="dt">data=</span>panne,<span class="dt">family=</span>binomial)</span>
+<span id="cb102-3"><a href="mod-add.html#cb102-3"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">summary</span>(mod1)</span>
+<span id="cb102-4"><a href="mod-add.html#cb102-4"></a><span class="co">## </span></span>
+<span id="cb102-5"><a href="mod-add.html#cb102-5"></a><span class="co">## Call:</span></span>
+<span id="cb102-6"><a href="mod-add.html#cb102-6"></a><span class="co">## glm(formula = etat ~ age, family = binomial, data = panne)</span></span>
+<span id="cb102-7"><a href="mod-add.html#cb102-7"></a><span class="co">## </span></span>
+<span id="cb102-8"><a href="mod-add.html#cb102-8"></a><span class="co">## Deviance Residuals: </span></span>
+<span id="cb102-9"><a href="mod-add.html#cb102-9"></a><span class="co">##    Min      1Q  Median      3Q     Max  </span></span>
+<span id="cb102-10"><a href="mod-add.html#cb102-10"></a><span class="co">## -1.253  -1.199   1.015   1.183   1.210  </span></span>
+<span id="cb102-11"><a href="mod-add.html#cb102-11"></a><span class="co">## </span></span>
+<span id="cb102-12"><a href="mod-add.html#cb102-12"></a><span class="co">## Coefficients:</span></span>
+<span id="cb102-13"><a href="mod-add.html#cb102-13"></a><span class="co">##             Estimate Std. Error z value Pr(&gt;|z|)</span></span>
+<span id="cb102-14"><a href="mod-add.html#cb102-14"></a><span class="co">## (Intercept) -0.10748    0.59864  -0.180    0.858</span></span>
+<span id="cb102-15"><a href="mod-add.html#cb102-15"></a><span class="co">## age          0.03141    0.09117   0.345    0.730</span></span>
+<span id="cb102-16"><a href="mod-add.html#cb102-16"></a><span class="co">## </span></span>
+<span id="cb102-17"><a href="mod-add.html#cb102-17"></a><span class="co">## (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb102-18"><a href="mod-add.html#cb102-18"></a><span class="co">## </span></span>
+<span id="cb102-19"><a href="mod-add.html#cb102-19"></a><span class="co">##     Null deviance: 45.717  on 32  degrees of freedom</span></span>
+<span id="cb102-20"><a href="mod-add.html#cb102-20"></a><span class="co">## Residual deviance: 45.598  on 31  degrees of freedom</span></span>
+<span id="cb102-21"><a href="mod-add.html#cb102-21"></a><span class="co">## AIC: 49.598</span></span>
+<span id="cb102-22"><a href="mod-add.html#cb102-22"></a><span class="co">## </span></span>
+<span id="cb102-23"><a href="mod-add.html#cb102-23"></a><span class="co">## Number of Fisher Scoring iterations: 3</span></span></code></pre></div>
+<div class="corR">
+<p>
+Le modèle n’est pas pertinent. On accepte la nullité du coefficient <code>age</code>, ce qui signifie que le modèle constant est meilleur que le modèle avec la variable <code>age</code>.
+</p>
+</div></li>
+<li><p>Ajuster un modèle additif, toujours avec uniquement la variable <code>age</code>.</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="mod-add.html#cb103-1"></a><span class="op">&gt;</span><span class="st"> </span>mod.panne &lt;-<span class="st"> </span>mgcv<span class="op">::</span><span class="kw">gam</span>(etat<span class="op">~</span><span class="kw">s</span>(age),<span class="dt">data=</span>panne)</span>
+<span id="cb103-2"><a href="mod-add.html#cb103-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">plot</span>(mod.panne)</span></code></pre></div>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-158-1.png" width="672" style="display: block; margin: auto;" /></p></li>
+<li><p>En utilisant le modèle additif, proposer un nouveau modèle logistique plus pertinent.</p>
+<div class="corR">
+<p>
+Il semble que l’âge agisse de façon quadratique. Cela peut s’expliquer par le fait que les pannes interviennent souvent au début (phase de rodage) et à la fin (vieillissement de la machine).
+</p>
+</div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="mod-add.html#cb104-1"></a><span class="op">&gt;</span><span class="st"> </span>mod2 &lt;-<span class="st"> </span><span class="kw">glm</span>(etat<span class="op">~</span>age<span class="op">+</span><span class="kw">I</span>(age<span class="op">^</span><span class="dv">2</span>),<span class="dt">data=</span>panne,<span class="dt">family=</span>binomial)</span>
+<span id="cb104-2"><a href="mod-add.html#cb104-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">summary</span>(mod2)</span>
+<span id="cb104-3"><a href="mod-add.html#cb104-3"></a><span class="co">## </span></span>
+<span id="cb104-4"><a href="mod-add.html#cb104-4"></a><span class="co">## Call:</span></span>
+<span id="cb104-5"><a href="mod-add.html#cb104-5"></a><span class="co">## glm(formula = etat ~ age + I(age^2), family = binomial, data = panne)</span></span>
+<span id="cb104-6"><a href="mod-add.html#cb104-6"></a><span class="co">## </span></span>
+<span id="cb104-7"><a href="mod-add.html#cb104-7"></a><span class="co">## Deviance Residuals: </span></span>
+<span id="cb104-8"><a href="mod-add.html#cb104-8"></a><span class="co">##      Min        1Q    Median        3Q       Max  </span></span>
+<span id="cb104-9"><a href="mod-add.html#cb104-9"></a><span class="co">## -1.54043  -0.74739   0.00033   0.64877   1.88091  </span></span>
+<span id="cb104-10"><a href="mod-add.html#cb104-10"></a><span class="co">## </span></span>
+<span id="cb104-11"><a href="mod-add.html#cb104-11"></a><span class="co">## Coefficients:</span></span>
+<span id="cb104-12"><a href="mod-add.html#cb104-12"></a><span class="co">##             Estimate Std. Error z value Pr(&gt;|z|)   </span></span>
+<span id="cb104-13"><a href="mod-add.html#cb104-13"></a><span class="co">## (Intercept)  4.18501    1.73860   2.407  0.01608 * </span></span>
+<span id="cb104-14"><a href="mod-add.html#cb104-14"></a><span class="co">## age         -2.03343    0.77401  -2.627  0.00861 **</span></span>
+<span id="cb104-15"><a href="mod-add.html#cb104-15"></a><span class="co">## I(age^2)     0.17601    0.07044   2.499  0.01247 * </span></span>
+<span id="cb104-16"><a href="mod-add.html#cb104-16"></a><span class="co">## ---</span></span>
+<span id="cb104-17"><a href="mod-add.html#cb104-17"></a><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb104-18"><a href="mod-add.html#cb104-18"></a><span class="co">## </span></span>
+<span id="cb104-19"><a href="mod-add.html#cb104-19"></a><span class="co">## (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb104-20"><a href="mod-add.html#cb104-20"></a><span class="co">## </span></span>
+<span id="cb104-21"><a href="mod-add.html#cb104-21"></a><span class="co">##     Null deviance: 45.717  on 32  degrees of freedom</span></span>
+<span id="cb104-22"><a href="mod-add.html#cb104-22"></a><span class="co">## Residual deviance: 31.279  on 30  degrees of freedom</span></span>
+<span id="cb104-23"><a href="mod-add.html#cb104-23"></a><span class="co">## AIC: 37.279</span></span>
+<span id="cb104-24"><a href="mod-add.html#cb104-24"></a><span class="co">## </span></span>
+<span id="cb104-25"><a href="mod-add.html#cb104-25"></a><span class="co">## Number of Fisher Scoring iterations: 6</span></span></code></pre></div>
+<div class="corR">
+<p>
+On remarque ici que l’âge devient “significatif” !
+</p>
+</div></li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="reg-pen.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="références.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["TUTO_GRANDE_DIM.pdf", "TUTO_GRANDE_DIM.epub"],
+"toc": {
+"collapse": "subsection",
+"fontsettings": {
+"theme": "white",
+"size": 2,
+"family": "sans"
+},
+"sharing": {
+"facebook": true,
+"github": true,
+"twitter": true
+}
+},
+"highlight": "default"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
