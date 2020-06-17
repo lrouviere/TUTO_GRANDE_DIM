@@ -24,7 +24,7 @@
 <meta name="author" content="Laurent Rouvière" />
 
 
-<meta name="date" content="2020-06-15" />
+<meta name="date" content="2020-06-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,9 +140,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3" data-path="intro-grande-dim.html"><a href="intro-grande-dim.html#exercices"><i class="fa fa-check"></i><b>1.3</b> Exercices</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="reg-comp.html"><a href="reg-comp.html"><i class="fa fa-check"></i><b>2</b> Régression sur composantes</a><ul>
-<li class="chapter" data-level="2.1" data-path="reg-comp.html"><a href="reg-comp.html#régression-sur-composantes-principales-méthodo"><i class="fa fa-check"></i><b>2.1</b> Régression sur composantes principales (méthodo)</a></li>
-<li class="chapter" data-level="2.2" data-path="reg-comp.html"><a href="reg-comp.html#régression-pls-méthodo"><i class="fa fa-check"></i><b>2.2</b> Régression PLS : méthodo</a></li>
-<li class="chapter" data-level="2.3" data-path="reg-comp.html"><a href="reg-comp.html#comparaison-pcr-vs-pls."><i class="fa fa-check"></i><b>2.3</b> Comparaison : PCR vs PLS.</a></li>
+<li class="chapter" data-level="2.1" data-path="reg-comp.html"><a href="reg-comp.html#sélection-de-variables"><i class="fa fa-check"></i><b>2.1</b> Sélection de variables</a></li>
+<li class="chapter" data-level="2.2" data-path="reg-comp.html"><a href="reg-comp.html#régression-sur-composantes-principales-méthodo"><i class="fa fa-check"></i><b>2.2</b> Régression sur composantes principales (méthodo)</a></li>
+<li class="chapter" data-level="2.3" data-path="reg-comp.html"><a href="reg-comp.html#régression-pls-méthodo"><i class="fa fa-check"></i><b>2.3</b> Régression PLS : méthodo</a></li>
+<li class="chapter" data-level="2.4" data-path="reg-comp.html"><a href="reg-comp.html#comparaison-pcr-vs-pls."><i class="fa fa-check"></i><b>2.4</b> Comparaison : PCR vs PLS.</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="reg-pen.html"><a href="reg-pen.html"><i class="fa fa-check"></i><b>3</b> Régressions pénalisées (ou sous contraintes)</a><ul>
 <li class="chapter" data-level="3.1" data-path="reg-pen.html"><a href="reg-pen.html#ridge-et-lasso-avec-glmnet"><i class="fa fa-check"></i><b>3.1</b> Ridge et lasso avec glmnet</a></li>
@@ -200,10 +201,10 @@ où les <span class="math inline">\(X_j\)</span> sont uniformes i.i.d de loi uni
 <span id="cb2-2"><a href="intro-grande-dim.html#cb2-2"></a><span class="op">&gt;</span><span class="st"> </span>mod3ppv &lt;-<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train=</span>df<span class="op">$</span>Xapp,<span class="dt">y=</span>df<span class="op">$</span>Yapp,<span class="dt">k=</span><span class="dv">3</span>)</span></code></pre></div>
 <p>Parmi toutes les sorties proposées par cette fonction on a notamment</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="intro-grande-dim.html#cb3-1"></a><span class="op">&gt;</span><span class="st"> </span>mod3ppv<span class="op">$</span>PRESS</span>
-<span id="cb3-2"><a href="intro-grande-dim.html#cb3-2"></a><span class="co">## [1] 98.98178</span></span></code></pre></div>
+<span id="cb3-2"><a href="intro-grande-dim.html#cb3-2"></a>[<span class="dv">1</span>] <span class="fl">98.98178</span></span></code></pre></div>
 <p>qui renvoie la somme des carrés des erreurs de prévision par validation croisée Leave-One-Out (LOO). On peut ainsi obtenir l’erreur quadratique moyenne par LOO</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="intro-grande-dim.html#cb4-1"></a><span class="op">&gt;</span><span class="st"> </span>mod3ppv<span class="op">$</span>PRESS<span class="op">/</span><span class="kw">max</span>(<span class="kw">c</span>(<span class="kw">nrow</span>(df<span class="op">$</span>Xapp),<span class="dv">1</span>))</span>
-<span id="cb4-2"><a href="intro-grande-dim.html#cb4-2"></a><span class="co">## [1] 0.3299393</span></span></code></pre></div>
+<span id="cb4-2"><a href="intro-grande-dim.html#cb4-2"></a>[<span class="dv">1</span>] <span class="fl">0.3299393</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li><p>Construire la fonction <strong>sel.k</strong> qui admet en entrée :</p>
 <ul>
@@ -226,7 +227,7 @@ où les <span class="math inline">\(X_j\)</span> sont uniformes i.i.d de loi uni
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="intro-grande-dim.html#cb6-1"></a><span class="op">&gt;</span><span class="st"> </span>k.opt &lt;-<span class="st"> </span><span class="kw">sel.k</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">50</span>,<span class="dt">by=</span><span class="dv">5</span>),df<span class="op">$</span>Xapp,df<span class="op">$</span>Yapp)</span>
 <span id="cb6-2"><a href="intro-grande-dim.html#cb6-2"></a><span class="op">&gt;</span><span class="st"> </span>prev &lt;-<span class="st"> </span><span class="kw">knn.reg</span>(<span class="dt">train=</span>df<span class="op">$</span>Xapp,<span class="dt">y=</span>df<span class="op">$</span>Yapp,<span class="dt">test=</span>df<span class="op">$</span>Xtest,<span class="dt">k=</span>k.opt)<span class="op">$</span>pred</span>
 <span id="cb6-3"><a href="intro-grande-dim.html#cb6-3"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>((prev<span class="op">-</span>df<span class="op">$</span>Ytest)<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb6-4"><a href="intro-grande-dim.html#cb6-4"></a><span class="co">## [1] 0.283869</span></span></code></pre></div></li>
+<span id="cb6-4"><a href="intro-grande-dim.html#cb6-4"></a>[<span class="dv">1</span>] <span class="fl">0.283869</span></span></code></pre></div></li>
 <li><p>On souhaite comparer les erreurs des règles des <span class="math inline">\(k\)</span> plus proches voisins en fonction de la dimension. On considère 4 dimensions collectées dans le vecteur <code>DIM</code> et la grille de valeurs de <span class="math inline">\(k\)</span> suivantes :</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="intro-grande-dim.html#cb7-1"></a><span class="op">&gt;</span><span class="st"> </span>DIM &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">50</span>)</span>
 <span id="cb7-2"><a href="intro-grande-dim.html#cb7-2"></a><span class="op">&gt;</span><span class="st"> </span>K_cand &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">50</span>,<span class="dt">by=</span><span class="dv">5</span>)</span></code></pre></div>
@@ -252,11 +253,11 @@ où les <span class="math inline">\(X_j\)</span> sont uniformes i.i.d de loi uni
 <span id="cb9-2"><a href="intro-grande-dim.html#cb9-2"></a><span class="op">&gt;</span><span class="st"> </span>nom.dim &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;D&quot;</span>,DIM,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</span>
 <span id="cb9-3"><a href="intro-grande-dim.html#cb9-3"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">names</span>(df) &lt;-<span class="st"> </span>nom.dim</span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="intro-grande-dim.html#cb10-1"></a><span class="op">&gt;</span><span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_all</span>(mean)</span>
-<span id="cb10-2"><a href="intro-grande-dim.html#cb10-2"></a><span class="co">##         D1        D5     D10      D50</span></span>
-<span id="cb10-3"><a href="intro-grande-dim.html#cb10-3"></a><span class="co">## 1 0.258003 0.3243574 0.52247 3.191055</span></span>
+<span id="cb10-2"><a href="intro-grande-dim.html#cb10-2"></a>        D1        D5     D10      D50</span>
+<span id="cb10-3"><a href="intro-grande-dim.html#cb10-3"></a><span class="dv">1</span> <span class="fl">0.258003</span> <span class="fl">0.3243574</span> <span class="fl">0.52247</span> <span class="fl">3.191055</span></span>
 <span id="cb10-4"><a href="intro-grande-dim.html#cb10-4"></a><span class="op">&gt;</span><span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_all</span>(var)</span>
-<span id="cb10-5"><a href="intro-grande-dim.html#cb10-5"></a><span class="co">##             D1           D5         D10        D50</span></span>
-<span id="cb10-6"><a href="intro-grande-dim.html#cb10-6"></a><span class="co">## 1 0.0002556399 0.0005417109 0.001857967 0.06749414</span></span></code></pre></div></li>
+<span id="cb10-5"><a href="intro-grande-dim.html#cb10-5"></a>            D1           D5         D10        D50</span>
+<span id="cb10-6"><a href="intro-grande-dim.html#cb10-6"></a><span class="dv">1</span> <span class="fl">0.0002556399</span> <span class="fl">0.0005417109</span> <span class="fl">0.001857967</span> <span class="fl">0.06749414</span></span></code></pre></div></li>
 </ol>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="intro-grande-dim.html#cb11-1"></a><span class="op">&gt;</span><span class="st"> </span>df1 &lt;-<span class="st"> </span><span class="kw">pivot_longer</span>(df,<span class="dt">cols=</span><span class="kw">everything</span>(),<span class="dt">names_to=</span><span class="st">&quot;dim&quot;</span>,<span class="dt">values_to=</span><span class="st">&quot;erreur&quot;</span>)</span>
 <span id="cb11-2"><a href="intro-grande-dim.html#cb11-2"></a><span class="op">&gt;</span><span class="st"> </span>df1 &lt;-<span class="st"> </span>df1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">dim=</span><span class="kw">fct_relevel</span>(dim,nom.dim))</span>
@@ -301,11 +302,11 @@ et étudier la performance de l’estimateur MCO du coefficient de <span class="
 <ul>
 <li><p>en étudiant le biais et la variance</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="intro-grande-dim.html#cb16-1"></a><span class="op">&gt;</span><span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_all</span>(mean)</span>
-<span id="cb16-2"><a href="intro-grande-dim.html#cb16-2"></a><span class="co">##         D0       D50      D100    D200</span></span>
-<span id="cb16-3"><a href="intro-grande-dim.html#cb16-3"></a><span class="co">## 1 0.992891 0.9960811 0.9959025 0.98173</span></span>
+<span id="cb16-2"><a href="intro-grande-dim.html#cb16-2"></a>        D0       D50      D100    D200</span>
+<span id="cb16-3"><a href="intro-grande-dim.html#cb16-3"></a><span class="dv">1</span> <span class="fl">0.992891</span> <span class="fl">0.9960811</span> <span class="fl">0.9959025</span> <span class="fl">0.98173</span></span>
 <span id="cb16-4"><a href="intro-grande-dim.html#cb16-4"></a><span class="op">&gt;</span><span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_all</span>(var)</span>
-<span id="cb16-5"><a href="intro-grande-dim.html#cb16-5"></a><span class="co">##           D0      D50       D100       D200</span></span>
-<span id="cb16-6"><a href="intro-grande-dim.html#cb16-6"></a><span class="co">## 1 0.01266578 0.016072 0.02023046 0.06939837</span></span></code></pre></div></li>
+<span id="cb16-5"><a href="intro-grande-dim.html#cb16-5"></a>          D0      D50       D100       D200</span>
+<span id="cb16-6"><a href="intro-grande-dim.html#cb16-6"></a><span class="dv">1</span> <span class="fl">0.01266578</span> <span class="fl">0.016072</span> <span class="fl">0.02023046</span> <span class="fl">0.06939837</span></span></code></pre></div></li>
 <li><p>en visualisant la distribution avec un boxplot</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="intro-grande-dim.html#cb17-1"></a><span class="op">&gt;</span><span class="st"> </span>df1 &lt;-<span class="st"> </span><span class="kw">gather</span>(df,<span class="dt">key=</span><span class="st">&quot;dim&quot;</span>,<span class="dt">value=</span><span class="st">&quot;erreur&quot;</span>)</span>
 <span id="cb17-2"><a href="intro-grande-dim.html#cb17-2"></a><span class="op">&gt;</span><span class="st"> </span>df1 &lt;-<span class="st"> </span>df1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">dim=</span><span class="kw">fct_relevel</span>(dim,nom.dim))</span>
