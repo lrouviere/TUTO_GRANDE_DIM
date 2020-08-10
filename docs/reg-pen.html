@@ -686,19 +686,21 @@ On admettra que les minima d’une fonction convexe <span class="math inline">\(
 <span class="math display">\[x^\star\in\mathop{\mathrm{argmin}}_{x\in\mathbb R^n}F(x)\Longleftrightarrow 0\in \partial F(x^\star)\]</span>
 et que <span class="math inline">\(\partial F(x)=\{\nabla F(x)\}\)</span> lorsque <span class="math inline">\(F\)</span> est différentiable en <span class="math inline">\(x\)</span>.</p>
 <ol style="list-style-type: decimal">
-<li>Montrer que pour <span class="math inline">\(x\in\mathbb R\)</span>
-<span class="math display">\[\partial |x|=\left\{
-  \begin{array}{ll}
- \textrm{signe}(x)   &amp; \textrm{si } x\neq 0 \\
+<li><p>Montrer que pour <span class="math inline">\(x\in\mathbb R\)</span>
+<span class="math display">\[
+\partial |x|=\left\{
+\begin{array}{ll}
+\textrm{signe}(x)   &amp; \textrm{si } x\neq 0 \\
 \left[-1;1\right] &amp; \textrm{sinon,}
-  \end{array}\right.\]</span>
-où <span class="math inline">\(\text{signe}(x)=\mathbf 1_{x&gt;0}-\mathbf 1_{x\leq 0}\)</span>.
+\end{array}\right.
+\]</span>
+où <span class="math inline">\(\text{signe}(x)=\mathbf 1_{x&gt;0}-\mathbf 1_{x\leq 0}\)</span>.</p>
 <div class="correction">
 <p>
 <span class="math inline"><span class="math inline">\(x\mapsto|x|\)</span></span> est dérivable partout sauf en 0 donc <span class="math inline"><span class="math inline">\(\partial |x|=\textrm{signe}(x)1\)</span></span> si <span class="math inline"><span class="math inline">\(x\neq 0\)</span></span>. De plus, si <span class="math inline"><span class="math inline">\(x=0\)</span></span> <span class="math display"><span class="math display">\[\partial|x|=\{w\in\mathbb R:|y|\geq \langle w,y\rangle\ \forall y\in\mathbb R\}=\{w\in\mathbb R:|y|\geq wy\ \forall y\in\mathbb R\}=[-1,1].\]</span></span>
 </p>
 </div></li>
-<li>Soit <span class="math inline">\(x\in\mathbb R^n\)</span>.
+<li><p>Soit <span class="math inline">\(x\in\mathbb R^n\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Montrer que
 <span class="math display">\[\partial\|x\|_1=\{w\in\mathbb R^n:\langle w,x\rangle=\|x\|_1\text{ et }\|w\|_\infty\leq 1\}.\]</span>
@@ -723,7 +725,7 @@ On a <span class="math display"><span class="math display">\[\begin{align*}
 </p>
 </div></li>
 </ol></li>
-<li>Étant données <span class="math inline">\(n\)</span> observations <span class="math inline">\((x_i,y_i),i=1,\dots,n\)</span> telles que <span class="math inline">\(x_i\in\mathbb R^p\)</span> et <span class="math inline">\(y_i\in\mathbb R\)</span> on rappelle que l’estimateur lasso <span class="math inline">\(\hat\beta(\lambda)\)</span> est construit en minimisant
+<li><p>Étant données <span class="math inline">\(n\)</span> observations <span class="math inline">\((x_i,y_i),i=1,\dots,n\)</span> telles que <span class="math inline">\(x_i\in\mathbb R^p\)</span> et <span class="math inline">\(y_i\in\mathbb R\)</span> on rappelle que l’estimateur lasso <span class="math inline">\(\hat\beta(\lambda)\)</span> est construit en minimisant
 <span class="math display" id="eq:critL1">\[\begin{equation}
   \mathcal L(\beta)=\|Y-\mathbb X\beta\|_2^2+\lambda\|\beta\|_1.  
   \tag{3.2}
@@ -737,13 +739,13 @@ où <span class="math inline">\(\hat z\in\mathbb R^p\)</span> vérifie
   \begin{array}{ll}
  =\textrm{signe}(\hat\beta_j(\lambda))   &amp; \textrm{si } \hat\beta_j(\lambda)\neq 0 \\
 \in\left[-1;1\right] &amp; \textrm{sinon.}
-  \end{array}\right.\]</span>
+  \end{array}\right.\]</span></p>
 <div class="correction">
 <p>
 D’après les indications, on a <span class="math inline"><span class="math inline">\(0\in\partial \mathcal L(\hat\beta(\lambda))\)</span></span>. Donc il existe <span class="math inline"><span class="math inline">\(\hat z\in\partial\|\hat\beta(\lambda)\|_1\)</span></span> tel que <span class="math display"><span class="math display">\[-2\mathbb X^t(Y-\mathbb X\hat\beta(\lambda))+\lambda \hat z=0\quad\Longleftrightarrow\quad \mathbb X^t\mathbb X\hat\beta(\lambda)=\mathbb X^tY-\frac{\lambda}{2}\hat z.\]</span></span>
 </p>
 </div></li>
-<li>On suppose maintenant que la matrice <span class="math inline">\(\mathbb X\)</span> est orthogonale.
+<li><p>On suppose maintenant que la matrice <span class="math inline">\(\mathbb X\)</span> est orthogonale.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Montrer que
 <span class="math display">\[\textrm{signe}(\hat\beta_j(\lambda))=\textrm{signe}(\mathbb X_j^tY)\quad\textrm{lorsque }\hat\beta_j(\lambda)\neq 0\]</span>
