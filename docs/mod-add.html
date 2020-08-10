@@ -24,7 +24,7 @@
 <meta name="author" content="Laurent Rouvière" />
 
 
-<meta name="date" content="2020-07-05" />
+<meta name="date" content="2020-08-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -150,6 +150,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1" data-path="reg-pen.html"><a href="reg-pen.html#ridge-et-lasso-avec-glmnet"><i class="fa fa-check"></i><b>3.1</b> Ridge et lasso avec glmnet</a></li>
 <li class="chapter" data-level="3.2" data-path="reg-pen.html"><a href="reg-pen.html#reconstruction-dun-signal"><i class="fa fa-check"></i><b>3.2</b> Reconstruction d’un signal</a></li>
 <li class="chapter" data-level="3.3" data-path="reg-pen.html"><a href="reg-pen.html#régression-logistique-pénalisée"><i class="fa fa-check"></i><b>3.3</b> Régression logistique pénalisée</a></li>
+<li class="chapter" data-level="3.4" data-path="reg-pen.html"><a href="reg-pen.html#exo-ridgelasso"><i class="fa fa-check"></i><b>3.4</b> Exercices</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mod-add.html"><a href="mod-add.html"><i class="fa fa-check"></i><b>4</b> Modèle additif</a><ul>
 <li class="chapter" data-level="4.1" data-path="mod-add.html"><a href="mod-add.html#pseudo-backfitting"><i class="fa fa-check"></i><b>4.1</b> Pseudo backfitting</a></li>
@@ -275,7 +276,7 @@ Il s’agit d’un modèle additif
 <div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="mod-add.html#cb103-1"></a><span class="kw">library</span>(gam)</span>
 <span id="cb103-2"><a href="mod-add.html#cb103-2"></a>model1 &lt;-<span class="st"> </span><span class="kw">gam</span>(Y<span class="op">~</span><span class="kw">s</span>(X1,<span class="dt">df=</span><span class="dv">1</span>)<span class="op">+</span><span class="kw">s</span>(X2,<span class="dt">df=</span><span class="fl">24.579</span>)<span class="op">-</span><span class="dv">1</span>,<span class="dt">data=</span>donnees)</span>
 <span id="cb103-3"><a href="mod-add.html#cb103-3"></a><span class="kw">plot</span>(model1)</span></code></pre></div>
-<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-161-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-161-2.png" width="672" style="display: block; margin: auto;" /></p></li>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-172-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-172-2.png" width="672" style="display: block; margin: auto;" /></p></li>
 <li><p>Faire varier les degrés de liberté, interpréter.</p>
 <div class="corR">
 <p>
@@ -284,7 +285,7 @@ On prend d’abord peu de degrés de liberté.
 </div>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="mod-add.html#cb104-1"></a>model2 &lt;-<span class="st"> </span><span class="kw">gam</span>(Y<span class="op">~</span><span class="kw">s</span>(X1,<span class="dt">df=</span><span class="fl">0.001</span>)<span class="op">+</span><span class="kw">s</span>(X2,<span class="dt">df=</span><span class="fl">0.001</span>)<span class="op">-</span><span class="dv">1</span>,<span class="dt">data=</span>donnees)</span>
 <span id="cb104-2"><a href="mod-add.html#cb104-2"></a><span class="kw">plot</span>(model2)</span></code></pre></div>
-<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-163-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-163-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-174-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-174-2.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="corR">
 <p>
 Le sinus n’est pas bien estimé. On prend maintenant un grand nombre de degrés de liberté.
@@ -292,7 +293,7 @@ Le sinus n’est pas bien estimé. On prend maintenant un grand nombre de degré
 </div>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="mod-add.html#cb105-1"></a>model2 &lt;-<span class="st"> </span><span class="kw">gam</span>(Y<span class="op">~</span><span class="kw">s</span>(X1,<span class="dt">df=</span><span class="dv">100</span>)<span class="op">+</span><span class="kw">s</span>(X2,<span class="dt">df=</span><span class="dv">100</span>)<span class="op">-</span><span class="dv">1</span>,<span class="dt">data=</span>donnees)</span>
 <span id="cb105-2"><a href="mod-add.html#cb105-2"></a><span class="kw">plot</span>(model2)</span></code></pre></div>
-<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-165-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-165-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-176-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-176-2.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="corR">
 <p>
 Le modèle est trop flexible, risque de sur-ajustement.
@@ -301,7 +302,7 @@ Le modèle est trop flexible, risque de sur-ajustement.
 <li><p>Faire le même travail avec le lisseur <strong>loess</strong>. On commencera avec <code>degree=2</code> et <code>span=0.15</code> puis on fera varier le paramètre <code>span</code>.</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="mod-add.html#cb106-1"></a>model4 &lt;-<span class="st"> </span><span class="kw">gam</span>(Y<span class="op">~</span><span class="kw">lo</span>(X1,<span class="dt">span=</span><span class="dv">3</span>)<span class="op">+</span><span class="kw">lo</span>(X2,<span class="dt">span=</span><span class="fl">0.15</span>,<span class="dt">degree=</span><span class="dv">2</span>)<span class="op">-</span><span class="dv">1</span>,<span class="dt">data=</span>donnees)</span>
 <span id="cb106-2"><a href="mod-add.html#cb106-2"></a><span class="kw">plot</span>(model4)</span></code></pre></div>
-<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-167-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-167-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-178-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-178-2.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="corR">
 <p>
 On fait varier <code>span</code> :
@@ -309,10 +310,10 @@ On fait varier <code>span</code> :
 </div>
 <div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="mod-add.html#cb107-1"></a>model5 &lt;-<span class="st"> </span><span class="kw">gam</span>(Y<span class="op">~</span><span class="kw">lo</span>(X1,<span class="dt">span=</span><span class="dv">5</span>)<span class="op">+</span><span class="kw">lo</span>(X2,<span class="dt">span=</span><span class="dv">5</span>,<span class="dt">degree=</span><span class="dv">2</span>)<span class="op">-</span><span class="dv">1</span>,<span class="dt">data=</span>donnees)</span>
 <span id="cb107-2"><a href="mod-add.html#cb107-2"></a><span class="kw">plot</span>(model5)</span></code></pre></div>
-<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-169-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-169-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-180-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-180-2.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="mod-add.html#cb108-1"></a>model6 &lt;-<span class="st"> </span><span class="kw">gam</span>(Y<span class="op">~</span><span class="kw">lo</span>(X1,<span class="dt">span=</span><span class="fl">0.01</span>)<span class="op">+</span><span class="kw">lo</span>(X2,<span class="dt">span=</span><span class="fl">0.01</span>,<span class="dt">degree=</span><span class="dv">2</span>)<span class="op">-</span><span class="dv">1</span>,<span class="dt">data=</span>donnees)</span>
 <span id="cb108-2"><a href="mod-add.html#cb108-2"></a><span class="kw">plot</span>(model6)</span></code></pre></div>
-<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-170-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-170-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-181-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-181-2.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="corR">
 <p>
 On a les mêmes remarques que pour les splines.
@@ -321,7 +322,7 @@ On a les mêmes remarques que pour les splines.
 <li><p>Estimer le degrés de liberté avec la fonction <code>gam</code> du package <strong>mgcv</strong> (Il n’est pas nécessaire de charger le package pour éviter les conflits).</p>
 <div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="mod-add.html#cb109-1"></a>mod.mgcv &lt;-<span class="st"> </span>mgcv<span class="op">::</span><span class="kw">gam</span>(Y<span class="op">~</span><span class="kw">s</span>(X1)<span class="op">+</span><span class="kw">s</span>(X2),<span class="dt">data=</span>donnees)</span>
 <span id="cb109-2"><a href="mod-add.html#cb109-2"></a><span class="kw">plot</span>(mod.mgcv)</span></code></pre></div>
-<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-172-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-172-2.png" width="672" style="display: block; margin: auto;" /></p></li>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-183-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-183-2.png" width="672" style="display: block; margin: auto;" /></p></li>
 </ol>
 </div>
 <div id="régression-logistique-additive" class="section level2">
@@ -360,7 +361,7 @@ Le modèle n’est pas pertinent. On accepte la nullité du coefficient <code>ag
 <li><p>Ajuster un modèle additif, toujours avec uniquement la variable <code>age</code>.</p>
 <div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="mod-add.html#cb111-1"></a>mod.panne &lt;-<span class="st"> </span>mgcv<span class="op">::</span><span class="kw">gam</span>(etat<span class="op">~</span><span class="kw">s</span>(age),<span class="dt">data=</span>panne)</span>
 <span id="cb111-2"><a href="mod-add.html#cb111-2"></a><span class="kw">plot</span>(mod.panne)</span></code></pre></div>
-<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-175-1.png" width="672" style="display: block; margin: auto;" /></p></li>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-186-1.png" width="672" style="display: block; margin: auto;" /></p></li>
 <li><p>En utilisant le modèle additif, proposer un nouveau modèle logistique plus pertinent.</p>
 <div class="corR">
 <p>

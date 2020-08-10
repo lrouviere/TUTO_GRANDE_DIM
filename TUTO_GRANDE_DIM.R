@@ -71,18 +71,6 @@ mean((prev-df$Ytest)^2)
 DIM <- c(1,5,10,50)
 K_cand <- seq(1,50,by=5)
 
-## ----simu-err-kppv,cache=TRUE,teacher=cor-----------------
-B <- 100
-mat.err <- matrix(0,ncol=length(DIM),nrow=B)
-for (p in 1:length(DIM)){
-  for (i in 1:B){
-df <- simu(napp=300,ntest=500,p=DIM[p],graine=1234*p+2*i)
-k.opt <- sel.k(K_cand,df$Xapp,df$Yapp)
-prev <- knn.reg(train=df$Xapp,y=df$Yapp,test=df$Xtest,k=k.opt)$pred
-mat.err[i,p] <- mean((prev-df$Ytest)^2)
-  }
-}
-
 ## ----teacher=cor------------------------------------------
 df <- data.frame(mat.err)
 nom.dim <- paste("D",DIM,sep="")
@@ -109,18 +97,6 @@ simu.lin <- function(X,graine){
   Y <- X[,1]+rnorm(nrow(X),sd=0.5)
   df <- data.frame(Y,X)
   return(df)
-}
-
-## ----simu-err-mod-lin,cache=TRUE,teacher=cor--------------
-B <- 500
-matbeta1 <- matrix(0,nrow=B,ncol=length(DIM))
-for (i in 1:B){
-  dftot <- simu.lin(X,i+1)
-  for (p in 1:length(DIM)){
-    dfp <- dftot[,(1:(2+DIM[p]))]
-    mod <- lm(Y~.,data=dfp)
-    matbeta1[i,p] <- coef(mod)[2]
-  }
 }
 
 ## ----teacher=cor------------------------------------------
@@ -161,13 +137,6 @@ plot(mod.sel,scale="Cp")
 ## ----echo=cor,eval=cor,indent='        '------------------
 mod.step <- step(lin.complet,direction="backward",trace=0)
 mod.step
-
-## ----chunk-bestglm,echo=cor,eval=cor,cache=TRUE,indent='        '----
-ozone1 <- ozone %>% mutate(vent=as.factor(vent),pluie=as.factor(pluie)) %>%
-  select(-maxO3,everything())
-library(bestglm)
-model.bglm <- bestglm(ozone1,IC="BIC")
-model.bglm$BestModel %>% summary()
 
 ## ---------------------------------------------------------
 library(ISLR)
@@ -321,26 +290,6 @@ prev %>% mutate(obs=Hitters$Salary) %>% summarize_at(1:3,~(mean((.-obs)^2))) %>%
 ## ----echo=cor,eval=cor------------------------------------
 var(Hitters$Salary) %>% sqrt()
 
-## ----CV-Hitters,message=FALSE, warning=FALSE,echo=cor,eval=cor,cache=TRUE----
-set.seed(54321)
-prev1 <- data.frame(matrix(0,nrow=nrow(Hitters),ncol=3))
-names(prev1) <- c("lin","PCR","PLS")
-for (k in 1:10){
-#  print(k)
-  ind.test <- bloc==k
-  dapp <- Hitters[!ind.test,]
-  dtest <- Hitters[ind.test,]
-  choix.pcr <- pcr(Salary~.^2,data=dapp,validation="CV")
-  ncomp.pcr <- which.min(choix.pcr$validation$PRESS)
-  choix.pls <- plsr(Salary~.^2,data=dapp,validation="CV")
-  ncomp.pls <- which.min(choix.pls$validation$PRESS)
-  mod.lin <- lm(Salary~.^2,data=dapp)
-  prev1[ind.test,] <- data.frame(
-lin=predict(mod.lin,newdata=dtest),
-PCR=as.vector(predict(choix.pcr,newdata = dtest,ncomp=ncomp.pcr)),
-PLS=as.vector(predict(choix.pls,newdata = dtest,ncomp=ncomp.pls)))
-}
-
 ## ----echo=cor,eval=cor------------------------------------
 prev1 %>% mutate(obs=Hitters$Salary) %>% summarize_at(1:3,~(mean((.-obs)^2))) %>% sqrt()
 
@@ -419,12 +368,6 @@ prev[blocs[[k]],] <- tibble(lin=predict(lin,newdata=test),
   err <- prev %>% mutate(obs=data$maxO3) %>% summarise_at(1:3,~mean((obs-.)^2))
   return(err)
 }
-
-## ----cv-ozone-RL,echo=cor,eval=cor,cache=TRUE-------------
-cv.ridge.lasso(ozone1,form=formula(maxO3~.))
-
-## ----cv-ozone-RL-inter,echo=cor,eval=cor,cache=TRUE-------
-cv.ridge.lasso(ozone1,form=formula(maxO3~.^2))
 
 ## ----echo=cor,eval=cor------------------------------------
 ozone2.X <- model.matrix(maxO3~.^2,data=ozone1)[,-1]
@@ -528,11 +471,6 @@ sum(is.na(ad.data1))
 ## ----echo=cor,eval=cor------------------------------------
 X.ad <- model.matrix(Y~.,data=ad.data1)[,-1]
 Y.ad <- ad.data1$Y
-
-## ----lasso-ad,echo=cor,eval=cor,cache=TRUE----------------
-set.seed(1234)
-lasso.cv <- cv.glmnet(X.ad,Y.ad,family="binomial",alpha=1)
-plot(lasso.cv)
 
 ## ----cv-ad,echo=cor,eval=FALSE----------------------------
 #  set.seed(5678)

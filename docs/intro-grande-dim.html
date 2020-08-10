@@ -24,7 +24,7 @@
 <meta name="author" content="Laurent Rouvière" />
 
 
-<meta name="date" content="2020-07-05" />
+<meta name="date" content="2020-08-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -150,6 +150,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1" data-path="reg-pen.html"><a href="reg-pen.html#ridge-et-lasso-avec-glmnet"><i class="fa fa-check"></i><b>3.1</b> Ridge et lasso avec glmnet</a></li>
 <li class="chapter" data-level="3.2" data-path="reg-pen.html"><a href="reg-pen.html#reconstruction-dun-signal"><i class="fa fa-check"></i><b>3.2</b> Reconstruction d’un signal</a></li>
 <li class="chapter" data-level="3.3" data-path="reg-pen.html"><a href="reg-pen.html#régression-logistique-pénalisée"><i class="fa fa-check"></i><b>3.3</b> Régression logistique pénalisée</a></li>
+<li class="chapter" data-level="3.4" data-path="reg-pen.html"><a href="reg-pen.html#exo-ridgelasso"><i class="fa fa-check"></i><b>3.4</b> Exercices</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mod-add.html"><a href="mod-add.html"><i class="fa fa-check"></i><b>4</b> Modèle additif</a><ul>
 <li class="chapter" data-level="4.1" data-path="mod-add.html"><a href="mod-add.html#pseudo-backfitting"><i class="fa fa-check"></i><b>4.1</b> Pseudo backfitting</a></li>
@@ -370,7 +371,7 @@ où <span class="math inline">\(B_h=\{u\in\mathbb R^d:\|u\|\leq h\}\)</span> est
 où <span class="math inline">\(C_2\)</span> est une constante dépendant de <span class="math inline">\(C_1\)</span> et <span class="math inline">\(d\)</span> à préciser.</p>
 <div class="correction">
 <p>
-On a <span class="math display"><span class="math display">\[\mathbf V[\hat m(x)]= \frac{\sigma^2}{\sum_{i=1}^nK\left(\frac{\|x_i-x\|}{h}\right)}=\frac{\sigma^2}{\sum_{i=1}^n\mathbf 1_{B_h}(x_i-x)}.\]</span></span> Or <span class="math display"><span class="math display">\[\sum_{i=1}^n\mathbf 1_{B_h}(x_i-x)\geq C_1n\textrm{Vol}(B_h)\geq C_1\gamma_dnh^d\]</span></span> où <span class="math inline"><span class="math inline">\(\gamma_d\)</span></span> désigne le volume e la boule unité en dimension <span class="math inline"><span class="math inline">\(d\)</span></span>. On a donc <span class="math display"><span class="math display">\[\mathbf V[\hat m(x)]\leq \frac{\sigma^2}{C_1\gamma_dnh^d}.\]</span></span>
+On a <span class="math display"><span class="math display">\[\mathbf V[\hat m(x)]= \frac{\sigma^2}{\sum_{i=1}^nK\left(\frac{\|x_i-x\|}{h}\right)}=\frac{\sigma^2}{\sum_{i=1}^n\mathbf 1_{B_h}(x_i-x)}.\]</span></span> Or <span class="math display"><span class="math display">\[\sum_{i=1}^n\mathbf 1_{B_h}(x_i-x)\geq C_1n\textrm{Vol}(B_h)\geq C_1\gamma_dnh^d\]</span></span> où <span class="math inline"><span class="math inline">\(\gamma_d\)</span></span> désigne le volume de la boule unité en dimension <span class="math inline"><span class="math inline">\(d\)</span></span>. On a donc <span class="math display"><span class="math display">\[\mathbf V[\hat m(x)]\leq \frac{\sigma^2}{C_1\gamma_dnh^d}.\]</span></span>
 </p>
 </div></li>
 <li><p>Déduire des questions précédentes un majorant de l’erreur quadratique moyenne de <span class="math inline">\(\hat m(x)\)</span>.</p>
