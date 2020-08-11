@@ -24,7 +24,7 @@
 <meta name="author" content="Laurent Rouvière" />
 
 
-<meta name="date" content="2020-08-10" />
+<meta name="date" content="2020-08-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -752,18 +752,7 @@ D’après les indications, on a <span class="math inline"><span class="math inl
 et <span class="math inline">\(\hat\beta_j(\lambda)=0\)</span> si et seulement si <span class="math inline">\(|\mathbb X_j^tY|\leq \lambda/2\)</span>.
 <div class="correction">
 <p>
-<span class="math inline"><span class="math inline">\(\mathbb X\)</span></span> étant orthogonale, on a pour <span class="math inline"><span class="math inline">\(\hat\beta_j(\lambda)\neq 0\)</span></span> <span class="math display"><span class="math display">\[\hat\beta_j(\lambda)+\frac{\lambda}{2}\textrm{signe}(\hat\beta_j(\lambda))=\hat\beta_j(\lambda)\left(1+\frac{\lambda}{2|\hat\beta_j(\lambda)|}\right)=\mathbb X_j^tY,\]</span></span> donc <span class="math inline"><span class="math inline">\(\hat\beta_j(\lambda)\)</span></span> est du signe de <span class="math inline"><span class="math inline">\(\mathbb X_j^tY\)</span></span>. De plus :
-</p>
-<ul>
-<li>
-si <span class="math inline"><span class="math inline">\(\hat\beta_j(\lambda)=0\)</span></span> alors <span class="math inline"><span class="math inline">\(\mathbb X^t_jY=\frac{\lambda}{2}\hat z_j\)</span></span> avec <span class="math inline"><span class="math inline">\(\hat z_j\in[-1,1]\)</span></span>. Donc <span class="math display"><span class="math display">\[|\mathbb X^t_jY|=\left|\frac{\lambda}{2}\hat z_j\right|\leq\frac{\lambda}{2}.\]</span></span>
-</li>
-<li>
-si <span class="math inline"><span class="math inline">\(|\mathbb X_j^tY|\leq \lambda/2\)</span></span> et si <span class="math inline"><span class="math inline">\(\hat\beta_j(\lambda)\neq 0\)</span></span> alors <span class="math display"><span class="math display">\[\left|\hat\beta_j(\lambda)\left(1+\frac{\lambda}{2|\hat\beta_j(\lambda)|}\right)\right|=|\hat\beta_j(\lambda)|+\frac{\lambda}{2}=|\mathbb X^t_jY|\leq\frac{\lambda}{2}.\]</span></span>
-</li>
-</ul>
-<p>
-Donc <span class="math inline"><span class="math inline">\(\hat\beta_j(\lambda)=0\)</span></span>.
+<span class="math inline"><span class="math inline">\(\mathbb X\)</span></span> étant orthogonale, on a pour <span class="math inline"><span class="math inline">\(\hat\beta_j(\lambda)\neq 0\)</span></span> <span class="math display"><span class="math display">\[\hat\beta_j(\lambda)+\frac{\lambda}{2}\textrm{signe}(\hat\beta_j(\lambda))=\hat\beta_j(\lambda)\left(1+\frac{\lambda}{2|\hat\beta_j(\lambda)|}\right)=\mathbb X_j^tY,\]</span></span> donc <span class="math inline"><span class="math inline">\(\hat\beta_j(\lambda)\)</span></span> est du signe de <span class="math inline"><span class="math inline">\(\mathbb X_j^tY\)</span></span>. De plus si <span class="math inline"><span class="math inline">\(\hat\beta_j(\lambda)=0\)</span></span> alors <span class="math inline"><span class="math inline">\(\mathbb X^t_jY=\frac{\lambda}{2}\hat z_j\)</span></span> avec <span class="math inline"><span class="math inline">\(\hat z_j\in[-1,1]\)</span></span>. Donc <span class="math display"><span class="math display">\[|\mathbb X^t_jY|=\left|\frac{\lambda}{2}\hat z_j\right|\leq\frac{\lambda}{2}.\]</span></span> A l’inverse si <span class="math inline"><span class="math inline">\(|\mathbb X_j^tY|\leq \lambda/2\)</span></span> et si <span class="math inline"><span class="math inline">\(\hat\beta_j(\lambda)\neq 0\)</span></span> alors <span class="math display"><span class="math display">\[\left|\hat\beta_j(\lambda)\left(1+\frac{\lambda}{2|\hat\beta_j(\lambda)|}\right)\right|=|\hat\beta_j(\lambda)|+\frac{\lambda}{2}=|\mathbb X^t_jY|\leq\frac{\lambda}{2}.\]</span></span> Donc <span class="math inline"><span class="math inline">\(\hat\beta_j(\lambda)=0\)</span></span>.
 </p>
 </div></li>
 <li>En déduire
