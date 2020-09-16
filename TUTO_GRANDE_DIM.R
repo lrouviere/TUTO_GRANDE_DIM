@@ -1,4 +1,4 @@
-## ----setup, include=FALSE-----------------------------------------------------
+## ----setup, include=FALSE---------------------------------
 #knitr::opts_chunk$set(echo = TRUE,warning = FALSE, message = FALSE, size = "script",fig.height=3.5, fig.width=5,prompt=TRUE,collapse=TRUE,fig.align='center',cache=TRUE)
 knitr::opts_chunk$set(echo = TRUE,warning = FALSE, message = FALSE, size = "script",prompt=FALSE,collapse=TRUE,fig.align='center',cache=FALSE,comment=NA)
 knitr::knit_hooks$set(purl = knitr::hook_purl)
@@ -81,13 +81,6 @@ head(ozone)
 library(leaps)
 mod.sel <- regsubsets(maxO3~.,data=ozone,nvmax=14)
 summary(mod.sel)
-
-## ----chunk-bestglm,echo=cor,eval=cor,cache=TRUE,indent='        '----
-#  ozone1 <- ozone %>% mutate(vent=as.factor(vent),pluie=as.factor(pluie)) %>%
-#    select(-maxO3,everything())
-#  library(bestglm)
-#  model.bglm <- bestglm(ozone1,IC="BIC")
-#  model.bglm$BestModel %>% summary()
 
 ## ---------------------------------------------------------
 library(ISLR)

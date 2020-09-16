@@ -16,7 +16,7 @@ bookdown::gitbook:
         twitter: yes
     highlight: default #tango  
         
-    download: ["pdf", "epub"]
+    download: ["pdf"] #["pdf", "epub"]
 bookdown::pdf_book:
   includes:
 #    in_header: preamble.tex
@@ -24,4 +24,4 @@ bookdown::pdf_book:
   latex_engine: pdflatex #xelatex
   citation_package: natbib
   keep_tex: yes
-bookdown::epub_book: default
+#bookdown::epub_book: default
