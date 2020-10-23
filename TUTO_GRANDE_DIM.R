@@ -1,4 +1,4 @@
-## ----setup, include=FALSE---------------------------------
+## ----setup, include=FALSE-----------------------------------------------------
 #knitr::opts_chunk$set(echo = TRUE,warning = FALSE, message = FALSE, size = "script",fig.height=3.5, fig.width=5,prompt=TRUE,collapse=TRUE,fig.align='center',cache=TRUE)
 knitr::opts_chunk$set(echo = TRUE,warning = FALSE, message = FALSE, size = "script",prompt=FALSE,collapse=TRUE,fig.align='center',cache=FALSE,comment=NA)
 knitr::knit_hooks$set(purl = knitr::hook_purl)
@@ -50,14 +50,52 @@ mod3ppv$PRESS
 ## ---------------------------------------------------------
 mod3ppv$PRESS/max(c(nrow(df$Xapp),1))
 
+## ----teacher=correct--------------------------------------
+sel.k <- function(K_cand=seq(1,50,by=5),Xapp,Yapp){
+  ind <- 1
+  err <- rep(0,length(K_cand))
+  for (k in K_cand){
+modkppv <- knn.reg(train=Xapp,y=Yapp,k=k)
+err[ind] <- modkppv$PRESS/max(c(nrow(Xapp),1))
+ind <- ind+1
+  }
+  return(K_cand[which.min(err)])
+}
+
 ## ----eval=cor,echo=TRUE-----------------------------------
-#  k.opt <- sel.k(seq(1,50,by=5),df$Xapp,df$Yapp)
-#  prev <- knn.reg(train=df$Xapp,y=df$Yapp,test=df$Xtest,k=k.opt)$pred
-#  mean((prev-df$Ytest)^2)
+k.opt <- sel.k(seq(1,50,by=5),df$Xapp,df$Yapp)
+prev <- knn.reg(train=df$Xapp,y=df$Yapp,test=df$Xtest,k=k.opt)$pred
+mean((prev-df$Ytest)^2)
 
 ## ---------------------------------------------------------
 DIM <- c(1,5,10,50)
 K_cand <- seq(1,50,by=5)
+
+## ----simu-err-kppv,cache=TRUE,teacher=correct-------------
+B <- 100
+mat.err <- matrix(0,ncol=length(DIM),nrow=B)
+for (p in 1:length(DIM)){
+  for (i in 1:B){
+df <- simu(napp=300,ntest=500,p=DIM[p],graine=1234*p+2*i)
+k.opt <- sel.k(K_cand,df$Xapp,df$Yapp)
+prev <- knn.reg(train=df$Xapp,y=df$Yapp,test=df$Xtest,k=k.opt)$pred
+mat.err[i,p] <- mean((prev-df$Ytest)^2)
+  }
+}
+
+## ----teacher=correct--------------------------------------
+df <- data.frame(mat.err)
+nom.dim <- paste("D",DIM,sep="")
+names(df) <- nom.dim
+
+## ----teacher=correct--------------------------------------
+df %>% summarise_all(mean)
+df %>% summarise_all(var)
+
+## ----teacher=correct--------------------------------------
+df1 <- pivot_longer(df,cols=everything(),names_to="dim",values_to="erreur")
+df1 <- df1 %>% mutate(dim=fct_relevel(dim,nom.dim))
+ggplot(df1)+aes(x=dim,y=erreur)+geom_boxplot()
 
 ## ---------------------------------------------------------
 DIM <- c(0,50,100,200)
@@ -72,6 +110,36 @@ simu.lin <- function(X,graine){
   df <- data.frame(Y,X)
   return(df)
 }
+
+## ----simu-err-mod-lin,cache=TRUE,teacher=correct----------
+B <- 500
+matbeta1 <- matrix(0,nrow=B,ncol=length(DIM))
+for (i in 1:B){
+  dftot <- simu.lin(X,i+1)
+  for (p in 1:length(DIM)){
+    dfp <- dftot[,(1:(2+DIM[p]))]
+    mod <- lm(Y~.,data=dfp)
+    matbeta1[i,p] <- coef(mod)[2]
+  }
+}
+
+## ----teacher=correct--------------------------------------
+df <- data.frame(matbeta1)
+nom.dim <- paste("D",DIM,sep="")
+names(df) <- nom.dim
+
+## ----teacher=correct--------------------------------------
+df %>% summarise_all(mean)
+df %>% summarise_all(var)
+
+## ----teacher=correct--------------------------------------
+df1 <- gather(df,key="dim",value="erreur")
+df1 <- df1 %>% mutate(dim=fct_relevel(dim,nom.dim))
+ggplot(df1)+aes(x=dim,y=erreur)+geom_boxplot()+theme_classic()
+
+## ----echo=FALSE,eval=TRUE---------------------------------
+correct <- FALSE
+cor <- correct
 
 ## ---------------------------------------------------------
 ozone <- read.table("data/ozone.txt")
