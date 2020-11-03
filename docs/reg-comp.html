@@ -303,12 +303,7 @@ peuvent se dégrader lorsque la dimension <span class="math inline">\(d\)</span>
 Cela revient à cherche la combinaison linéaire des colonnes de <span class="math inline">\(\mathbb X^{(1)}\)</span> la plus corrélée à <span class="math inline">\(\mathbb Y^{(1)}\)</span>. Calculer cette première composante.</p></li>
 <li><p>On pose <span class="math inline">\(Z_1=w_1^tX^{(1)}\)</span> et <span class="math inline">\(\mathbb Z_1=\mathbb X^{(1)}w_1\)</span>. On considère le modèle de régression linéaire
 <span class="math display">\[Y^{(1)}=\alpha_0+\alpha_1Z_1+\varepsilon.\]</span>
-Exprimer les estimateurs MCO de <span class="math inline">\(\alpha=(\alpha_0,\alpha_1)\)</span> en fonction de <span class="math inline">\(\mathbb Z^{(1)}\)</span> et <span class="math inline">\(\mathbb Y^{(1)}\)</span>.</p>
-<div class="correction">
-<p>
-On déduit <span class="math display"><span class="math display">\[\widehat \alpha_0=\bar{\mathbb Y}^{(1)}-\widehat \alpha_1\bar{\mathbb Z}_1=\bar{\mathbb Y}^{(1)}\]</span></span> car <span class="math inline"><span class="math inline">\(\bar{\mathbb Z}_1=0\)</span></span> puisque <span class="math inline"><span class="math inline">\(\mathbb X^{(1)}\)</span></span> est centrée. Le second estimateur s’obtient par <span class="math display"><span class="math display">\[\widehat \alpha_1=\frac{\langle \mathbb Z_1,\mathbb Y^{(1)}\rangle}{\langle \mathbb Z_1,\mathbb Z_1\rangle}.\]</span></span>
-</p>
-</div></li>
+Exprimer les estimateurs MCO de <span class="math inline">\(\alpha=(\alpha_0,\alpha_1)\)</span> en fonction de <span class="math inline">\(\mathbb Z^{(1)}\)</span> et <span class="math inline">\(\mathbb Y^{(1)}\)</span>.</p></li>
 <li><p>On passe maintenant à la deuxième composante. On cherche à expliquer la partie résiduelle
 <span class="math display">\[\mathbb Y^{(2)}=P_{Z_1^\perp}(\mathbb Y^{(1)})=\widehat\varepsilon_1=\mathbb Y^{(1)}-\widehat{\mathbb Y}^{(1)}\]</span>
 par la “meilleure” combinaison linéaire orthogonale à <span class="math inline">\(Z_1\)</span>. On orthogonalise chaque <span class="math inline">\(\tilde{\mathbb X}_j^{(1)}\)</span> par rapport à <span class="math inline">\(\mathbb Z_1\)</span> :
