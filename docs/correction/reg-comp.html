@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 2 Régression sur composantes | Régression en grande dimension</title>
   <meta name="description" content="Chapitre 2 Régression sur composantes | Régression en grande dimension" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 2 Régression sur composantes | Régression en grande dimension" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Laurent Rouvière" />
 
 
-<meta name="date" content="2020-10-23" />
+<meta name="date" content="2020-11-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -288,9 +290,34 @@ peuvent se dégrader lorsque la dimension <span class="math inline">\(d\)</span>
 </div>
 <div id="régression-pls-méthodo" class="section level2">
 <h2><span class="header-section-number">2.3</span> Régression PLS : méthodo</h2>
+<p>La régression <strong>PLS</strong> propose de construire également de nouvelles composantes comme des combinaisons linéaires des variables explicatives. Comme pour l’algorithme <strong>PCR</strong>, les composantes sont calculées les unes après les autres et orthogonales entre elles. La principale différence et qu’on ne cherche pas les composantes qui maximisent la variabilités des observations projetées, mais les composantes qui maximisent la colinéarité avec la cible. L’algorithme est expliqué dans l’exercice suivant.</p>
+
+<div class="exercise">
+<span id="exr:exo-calc-comp-pls" class="exercise"><strong>Exercice 2.1  (Calcul des composantes PLS)  </strong></span>
+</div>
+
+<p>On reprend les notations du cours : <span class="math inline">\(\mathbb Y\)</span> désigne le vecteur de la variable à expliquer et <span class="math inline">\(\mathbb X\)</span> la matrice qui contient les observations des variables explicatives. On la supposera centrée réduite.</p>
+<ol style="list-style-type: decimal">
+<li><p>On pose <span class="math inline">\(\mathbb Y^{(1)}=\mathbb Y\)</span> et <span class="math inline">\(\mathbb X^{(1)}=\mathbb X\)</span>. On cherche <span class="math inline">\(Z_1=w_1^tX^{(1)}\)</span> qui maximise
+<span class="math display">\[\langle \mathbb X^{(1)}w_1,\mathbb Y^{(1)}\rangle\quad\text{sous la contrainte}\quad\|w\|^2=1.\]</span>
+Cela revient à cherche la combinaison linéaire des colonnes de <span class="math inline">\(\mathbb X^{(1)}\)</span> la plus corrélée à <span class="math inline">\(\mathbb Y^{(1)}\)</span>. Calculer cette première composante.</p></li>
+<li><p>On pose <span class="math inline">\(Z_1=w_1^tX^{(1)}\)</span> et <span class="math inline">\(\mathbb Z_1=\mathbb X^{(1)}w_1\)</span>. On considère le modèle de régression linéaire
+<span class="math display">\[Y^{(1)}=\alpha_0+\alpha_1Z_1+\varepsilon.\]</span>
+Exprimer les estimateurs MCO de <span class="math inline">\(\alpha=(\alpha_0,\alpha_1)\)</span> en fonction de <span class="math inline">\(\mathbb Z^{(1)}\)</span> et <span class="math inline">\(\mathbb Y^{(1)}\)</span>.</p></li>
+<li><p>On passe maintenant à la deuxième composante. On cherche à expliquer la partie résiduelle
+<span class="math display">\[\mathbb Y^{(2)}=P_{Z_1^\perp}(\mathbb Y^{(1)})=\widehat\varepsilon_1=\mathbb Y^{(1)}-\widehat{\mathbb Y}^{(1)}\]</span>
+par la “meilleure” combinaison linéaire orthogonale à <span class="math inline">\(Z_1\)</span>. On orthogonalise chaque <span class="math inline">\(\tilde{\mathbb X}_j^{(1)}\)</span> par rapport à <span class="math inline">\(\mathbb Z_1\)</span> :
+<span class="math display">\[{\mathbb X}_j^{(2)}=P_{\mathbb Z_1^\perp}({\mathbb X}_j^{(1)})=(\text{Id}-P_{\mathbb Z_1})({\mathbb X}_j^{(1)})={\mathbb X}_j^{(1)}-\frac{\langle \mathbb Z_1,{\mathbb X}_j^{(1)}\rangle}{\langle \mathbb Z_1,\mathbb Z_1\rangle}\mathbb Z_1.\]</span>
+et on déduit <span class="math inline">\(w_2\)</span> comme <span class="math inline">\(w_1\)</span> : <span class="math inline">\(w_2=\tilde{\mathbb X}^{(2)&#39;}\mathbb Y^{(2)}\)</span>. On considère ensuite le modèle <span class="math inline">\(Y^{(2)}=\alpha_2Z_2+\varepsilon\)</span>. Exprimer l’estimateur des MCO de <span class="math inline">\(\alpha_2\)</span> en fonction de <span class="math inline">\(\mathbb Z_2=\mathbb X^{(2)}w_2\)</span> et <span class="math inline">\(\mathbb Y\)</span>.</p></li>
+</ol>
+
+<div class="exercise">
+<span id="exr:exo-methodo-pls" class="exercise"><strong>Exercice 2.2  (Régression PLS sur R)  </strong></span>
+</div>
+
 <p>On considère les mêmes données que précédemment.</p>
 <ol style="list-style-type: decimal">
-<li><p>A l’aide du vecteur <span class="math inline">\(Y\)</span> (<em>Salary</em>) et de la matrice des <span class="math inline">\(X\)</span> centrées réduites calculées dans l’exercice précédent, calculer la première composante <strong>PLS</strong> <span class="math inline">\(Z_1\)</span>.</p></li>
+<li><p>A l’aide du vecteur <span class="math inline">\(\mathbb Y\)</span> (<em>Salary</em>) et de la matrice des <span class="math inline">\(\mathbb X\)</span> centrées réduites calculées dans l’exercice précédent, calculer la première composante <strong>PLS</strong> <span class="math inline">\(\mathbb Z_1\)</span>.</p></li>
 <li><p>En déduire le coefficient associé à cette première composante en considérant le modèle
 <span class="math display">\[Y=\alpha_1 Z_1+\varepsilon.\]</span></p></li>
 <li><p>En déduire les coefficients en fonction des variables initiales (centrées réduites) de la régression PLS à une composante

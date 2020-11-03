@@ -71,18 +71,6 @@ mean((prev-df$Ytest)^2)
 DIM <- c(1,5,10,50)
 K_cand <- seq(1,50,by=5)
 
-## ----simu-err-kppv,cache=TRUE,teacher=correct-------------
-B <- 100
-mat.err <- matrix(0,ncol=length(DIM),nrow=B)
-for (p in 1:length(DIM)){
-  for (i in 1:B){
-df <- simu(napp=300,ntest=500,p=DIM[p],graine=1234*p+2*i)
-k.opt <- sel.k(K_cand,df$Xapp,df$Yapp)
-prev <- knn.reg(train=df$Xapp,y=df$Yapp,test=df$Xtest,k=k.opt)$pred
-mat.err[i,p] <- mean((prev-df$Ytest)^2)
-  }
-}
-
 ## ----teacher=correct--------------------------------------
 df <- data.frame(mat.err)
 nom.dim <- paste("D",DIM,sep="")
@@ -111,18 +99,6 @@ simu.lin <- function(X,graine){
   return(df)
 }
 
-## ----simu-err-mod-lin,cache=TRUE,teacher=correct----------
-B <- 500
-matbeta1 <- matrix(0,nrow=B,ncol=length(DIM))
-for (i in 1:B){
-  dftot <- simu.lin(X,i+1)
-  for (p in 1:length(DIM)){
-    dfp <- dftot[,(1:(2+DIM[p]))]
-    mod <- lm(Y~.,data=dfp)
-    matbeta1[i,p] <- coef(mod)[2]
-  }
-}
-
 ## ----teacher=correct--------------------------------------
 df <- data.frame(matbeta1)
 nom.dim <- paste("D",DIM,sep="")
@@ -138,8 +114,8 @@ df1 <- df1 %>% mutate(dim=fct_relevel(dim,nom.dim))
 ggplot(df1)+aes(x=dim,y=erreur)+geom_boxplot()+theme_classic()
 
 ## ----echo=FALSE,eval=TRUE---------------------------------
+cor <- FALSE
 correct <- FALSE
-cor <- correct
 
 ## ---------------------------------------------------------
 ozone <- read.table("data/ozone.txt")

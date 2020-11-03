@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 3 Régressions pénalisées (ou sous contraintes) | Régression en grande dimension</title>
   <meta name="description" content="Chapitre 3 Régressions pénalisées (ou sous contraintes) | Régression en grande dimension" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 3 Régressions pénalisées (ou sous contraintes) | Régression en grande dimension" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Laurent Rouvière" />
 
 
-<meta name="date" content="2020-09-22" />
+<meta name="date" content="2020-11-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -227,14 +229,14 @@ Les estimateurs obtenus sont les estimateurs <strong>ridge</strong>. Les estimat
 <p>Le fichier <code>signal.csv</code> contient un signal que l’on peut représenter par une fonction <span class="math inline">\(m:\mathbb R\to\mathbb R\)</span>. On le visualise</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="reg-pen.html#cb16-1"></a>signal &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/signal.csv&quot;</span>)</span>
 <span id="cb16-2"><a href="reg-pen.html#cb16-2"></a><span class="kw">ggplot</span>(signal)<span class="op">+</span><span class="kw">aes</span>(<span class="dt">x=</span>x,<span class="dt">y=</span>y)<span class="op">+</span><span class="kw">geom_line</span>()</span></code></pre></div>
-<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-116-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-120-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Plaçons nous dans le cas où on ne dispose que d’une version bruitée de ce signal. La courbe n’est pas observée mais on dispose d’un échantillon <span class="math inline">\((x_i,y_i),i=1,\dots,n\)</span> généré selon le modèle</p>
 <p><span class="math display">\[y_i=m(x_i)+\varepsilon_i.\]</span></p>
 <p>Le fichier <code>ech_signal.csv</code> contient <span class="math inline">\(n=60\)</span> observations issues de ce modèle. On représente les données et la courbe</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="reg-pen.html#cb17-1"></a>donnees &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/ech_signal.csv&quot;</span>)</span>
 <span id="cb17-2"><a href="reg-pen.html#cb17-2"></a><span class="kw">ggplot</span>(signal)<span class="op">+</span><span class="kw">aes</span>(<span class="dt">x=</span>x,<span class="dt">y=</span>y)<span class="op">+</span><span class="kw">geom_line</span>()<span class="op">+</span></span>
 <span id="cb17-3"><a href="reg-pen.html#cb17-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>donnees,<span class="kw">aes</span>(<span class="dt">x=</span>X,<span class="dt">y=</span>Y))</span></code></pre></div>
-<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-117-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-121-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Nous cherchons dans cette partie à reconstruire le signal à partir de l’échantillon. Bien entendu, vu la forme du signal, un modèle linéaire de la forme
 <span class="math display">\[y_i=\beta_0+\beta_1x_i+\varepsilon_i\]</span>
 n’est pas approprié. De nombreuses approches en <strong>traitement du signal</strong> proposent d’utiliser une <code>base</code> ou <code>dictionnaire</code> représentée par une collection de fonctions <span class="math inline">\(\{\psi_j(x)\}_{j=1,\dots,K}\)</span> et de décomposer le signal dans cette base :</p>
