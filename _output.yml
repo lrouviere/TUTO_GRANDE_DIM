@@ -18,6 +18,7 @@ bookdown::gitbook:
         
     download: ["pdf"] #["pdf", "epub"]
 bookdown::pdf_book:
+  highlight: kate #kate
   includes:
 #    in_header: preamble.tex
     in_header: ~/Dropbox/FICHIERS_STYLE/Latex/header_bdown.tex

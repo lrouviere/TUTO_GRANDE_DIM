@@ -82,13 +82,6 @@ library(leaps)
 mod.sel <- regsubsets(maxO3~.,data=ozone,nvmax=14)
 summary(mod.sel)
 
-## ----chunk-bestglm,echo=cor,eval=cor,cache=TRUE,indent='        '----
-#  ozone1 <- ozone %>% mutate(vent=as.factor(vent),pluie=as.factor(pluie)) %>%
-#    select(-maxO3,everything())
-#  library(bestglm)
-#  model.bglm <- bestglm(ozone1,IC="BIC")
-#  model.bglm$BestModel %>% summary()
-
 ## ---------------------------------------------------------
 library(ISLR)
 Hitters <- na.omit(Hitters)
@@ -138,7 +131,8 @@ ggplot(signal)+aes(x=x,y=y)+geom_line()+
   geom_point(data=donnees,aes(x=X,y=Y))
 
 ## ---------------------------------------------------------
-ad.data <- read.table("data/ad_data.txt",header=FALSE,sep=",",dec=".",na.strings = "?",strip.white = TRUE)
+ad.data <- read.table("data/ad_data.txt",header=FALSE,sep=",",dec=".",
+                      na.strings = "?",strip.white = TRUE)
 names(ad.data)[ncol(ad.data)] <- "Y"
 ad.data$Y <- as.factor(ad.data$Y)
 
