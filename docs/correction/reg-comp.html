@@ -24,7 +24,7 @@
 <meta name="author" content="Laurent Rouvière" />
 
 
-<meta name="date" content="2020-12-02" />
+<meta name="date" content="2021-09-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="intro-grande-dim.html"/>
 <link rel="next" href="reg-pen.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,24 +51,21 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +85,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -137,24 +135,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Présentation</a></li>
-<li class="chapter" data-level="1" data-path="intro-grande-dim.html"><a href="intro-grande-dim.html"><i class="fa fa-check"></i><b>1</b> Introduction à la grande dimension</a><ul>
+<li class="chapter" data-level="1" data-path="intro-grande-dim.html"><a href="intro-grande-dim.html"><i class="fa fa-check"></i><b>1</b> Introduction à la grande dimension</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="intro-grande-dim.html"><a href="intro-grande-dim.html#fléau-de-la-dimension-pour-les-plus-proches-voisins"><i class="fa fa-check"></i><b>1.1</b> Fléau de la dimension pour les plus proches voisins</a></li>
 <li class="chapter" data-level="1.2" data-path="intro-grande-dim.html"><a href="intro-grande-dim.html#influence-de-la-dimension-dans-le-modèle-linéaire"><i class="fa fa-check"></i><b>1.2</b> Influence de la dimension dans le modèle linéaire</a></li>
 <li class="chapter" data-level="1.3" data-path="intro-grande-dim.html"><a href="intro-grande-dim.html#exercices"><i class="fa fa-check"></i><b>1.3</b> Exercices</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="reg-comp.html"><a href="reg-comp.html"><i class="fa fa-check"></i><b>2</b> Régression sur composantes</a><ul>
+<li class="chapter" data-level="2" data-path="reg-comp.html"><a href="reg-comp.html"><i class="fa fa-check"></i><b>2</b> Régression sur composantes</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="reg-comp.html"><a href="reg-comp.html#sélection-de-variables"><i class="fa fa-check"></i><b>2.1</b> Sélection de variables</a></li>
 <li class="chapter" data-level="2.2" data-path="reg-comp.html"><a href="reg-comp.html#régression-sur-composantes-principales-méthodo"><i class="fa fa-check"></i><b>2.2</b> Régression sur composantes principales (méthodo)</a></li>
 <li class="chapter" data-level="2.3" data-path="reg-comp.html"><a href="reg-comp.html#régression-pls-méthodo"><i class="fa fa-check"></i><b>2.3</b> Régression PLS : méthodo</a></li>
 <li class="chapter" data-level="2.4" data-path="reg-comp.html"><a href="reg-comp.html#comparaison-pcr-vs-pls."><i class="fa fa-check"></i><b>2.4</b> Comparaison : PCR vs PLS.</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="reg-pen.html"><a href="reg-pen.html"><i class="fa fa-check"></i><b>3</b> Régressions pénalisées (ou sous contraintes)</a><ul>
+<li class="chapter" data-level="3" data-path="reg-pen.html"><a href="reg-pen.html"><i class="fa fa-check"></i><b>3</b> Régressions pénalisées (ou sous contraintes)</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="reg-pen.html"><a href="reg-pen.html#ridge-et-lasso-avec-glmnet"><i class="fa fa-check"></i><b>3.1</b> Ridge et lasso avec glmnet</a></li>
 <li class="chapter" data-level="3.2" data-path="reg-pen.html"><a href="reg-pen.html#reconstruction-dun-signal"><i class="fa fa-check"></i><b>3.2</b> Reconstruction d’un signal</a></li>
 <li class="chapter" data-level="3.3" data-path="reg-pen.html"><a href="reg-pen.html#régression-logistique-pénalisée"><i class="fa fa-check"></i><b>3.3</b> Régression logistique pénalisée</a></li>
 <li class="chapter" data-level="3.4" data-path="reg-pen.html"><a href="reg-pen.html#exo-ridgelasso"><i class="fa fa-check"></i><b>3.4</b> Exercices</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="mod-add.html"><a href="mod-add.html"><i class="fa fa-check"></i><b>4</b> Modèle additif</a><ul>
+<li class="chapter" data-level="4" data-path="mod-add.html"><a href="mod-add.html"><i class="fa fa-check"></i><b>4</b> Modèle additif</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="mod-add.html"><a href="mod-add.html#pseudo-backfitting"><i class="fa fa-check"></i><b>4.1</b> Pseudo backfitting</a></li>
 <li class="chapter" data-level="4.2" data-path="mod-add.html"><a href="mod-add.html#modèle-gam"><i class="fa fa-check"></i><b>4.2</b> Modèle GAM</a></li>
 <li class="chapter" data-level="4.3" data-path="mod-add.html"><a href="mod-add.html#régression-logistique-additive"><i class="fa fa-check"></i><b>4.3</b> Régression logistique additive</a></li>
@@ -180,7 +182,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="reg-comp" class="section level1">
+<div id="reg-comp" class="section level1" number="2">
 <h1><span class="header-section-number">Chapitre 2</span> Régression sur composantes</h1>
 <p>Les performances des estimateurs classiques (MCO) des paramètres du modèle linéaire</p>
 <p><span class="math display">\[Y=\beta_0+\beta_1X_1+\dots+\beta_dX_d+\varepsilon\]</span>
@@ -190,688 +192,180 @@ peuvent se dégrader lorsque la dimension <span class="math inline">\(d\)</span>
 <li>la <strong>régression partial least square (PLS)</strong> qui fait intervenir la variable cible dans la construction des composantes.</li>
 </ul>
 <p>Nous commençons par un bref rappel sur la sélection de variables.</p>
-<div id="sélection-de-variables" class="section level2">
+<div id="sélection-de-variables" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Sélection de variables</h2>
 <p>On considère le jeu de données <code>ozone.txt</code> où on cherche à expliquer la concentration maximale en ozone relevée sur une journée (variable <code>maxO3</code>) par d’autres variables essentiellement météorologiques.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="reg-comp.html#cb18-1"></a>ozone &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/ozone.txt&quot;</span>)</span>
-<span id="cb18-2"><a href="reg-comp.html#cb18-2"></a><span class="kw">head</span>(ozone)</span>
-<span id="cb18-3"><a href="reg-comp.html#cb18-3"></a>         maxO3   T9  T12  T15 Ne9 Ne12 Ne15     Vx9    Vx12</span>
-<span id="cb18-4"><a href="reg-comp.html#cb18-4"></a><span class="dv">20010601</span>    <span class="dv">87</span> <span class="fl">15.6</span> <span class="fl">18.5</span> <span class="fl">18.4</span>   <span class="dv">4</span>    <span class="dv">4</span>    <span class="dv">8</span>  <span class="fl">0.6946</span> <span class="fl">-1.7101</span></span>
-<span id="cb18-5"><a href="reg-comp.html#cb18-5"></a><span class="dv">20010602</span>    <span class="dv">82</span> <span class="fl">17.0</span> <span class="fl">18.4</span> <span class="fl">17.7</span>   <span class="dv">5</span>    <span class="dv">5</span>    <span class="dv">7</span> <span class="fl">-4.3301</span> <span class="fl">-4.0000</span></span>
-<span id="cb18-6"><a href="reg-comp.html#cb18-6"></a><span class="dv">20010603</span>    <span class="dv">92</span> <span class="fl">15.3</span> <span class="fl">17.6</span> <span class="fl">19.5</span>   <span class="dv">2</span>    <span class="dv">5</span>    <span class="dv">4</span>  <span class="fl">2.9544</span>  <span class="fl">1.8794</span></span>
-<span id="cb18-7"><a href="reg-comp.html#cb18-7"></a><span class="dv">20010604</span>   <span class="dv">114</span> <span class="fl">16.2</span> <span class="fl">19.7</span> <span class="fl">22.5</span>   <span class="dv">1</span>    <span class="dv">1</span>    <span class="dv">0</span>  <span class="fl">0.9848</span>  <span class="fl">0.3473</span></span>
-<span id="cb18-8"><a href="reg-comp.html#cb18-8"></a><span class="dv">20010605</span>    <span class="dv">94</span> <span class="fl">17.4</span> <span class="fl">20.5</span> <span class="fl">20.4</span>   <span class="dv">8</span>    <span class="dv">8</span>    <span class="dv">7</span> <span class="fl">-0.5000</span> <span class="fl">-2.9544</span></span>
-<span id="cb18-9"><a href="reg-comp.html#cb18-9"></a><span class="dv">20010606</span>    <span class="dv">80</span> <span class="fl">17.7</span> <span class="fl">19.8</span> <span class="fl">18.3</span>   <span class="dv">6</span>    <span class="dv">6</span>    <span class="dv">7</span> <span class="fl">-5.6382</span> <span class="fl">-5.0000</span></span>
-<span id="cb18-10"><a href="reg-comp.html#cb18-10"></a>            Vx15 maxO3v  vent pluie</span>
-<span id="cb18-11"><a href="reg-comp.html#cb18-11"></a><span class="dv">20010601</span> <span class="fl">-0.6946</span>     <span class="dv">84</span>  Nord   Sec</span>
-<span id="cb18-12"><a href="reg-comp.html#cb18-12"></a><span class="dv">20010602</span> <span class="fl">-3.0000</span>     <span class="dv">87</span>  Nord   Sec</span>
-<span id="cb18-13"><a href="reg-comp.html#cb18-13"></a><span class="dv">20010603</span>  <span class="fl">0.5209</span>     <span class="dv">82</span>   Est   Sec</span>
-<span id="cb18-14"><a href="reg-comp.html#cb18-14"></a><span class="dv">20010604</span> <span class="fl">-0.1736</span>     <span class="dv">92</span>  Nord   Sec</span>
-<span id="cb18-15"><a href="reg-comp.html#cb18-15"></a><span class="dv">20010605</span> <span class="fl">-4.3301</span>    <span class="dv">114</span> Ouest   Sec</span>
-<span id="cb18-16"><a href="reg-comp.html#cb18-16"></a><span class="dv">20010606</span> <span class="fl">-6.0000</span>     <span class="dv">94</span> Ouest Pluie</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="reg-comp.html#cb9-1" aria-hidden="true" tabindex="-1"></a>ozone <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;data/ozone.txt&quot;</span>)</span>
+<span id="cb9-2"><a href="reg-comp.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ozone)</span>
+<span id="cb9-3"><a href="reg-comp.html#cb9-3" aria-hidden="true" tabindex="-1"></a>         maxO3   T9  T12  T15 Ne9 Ne12 Ne15     Vx9    Vx12</span>
+<span id="cb9-4"><a href="reg-comp.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="dv">20010601</span>    <span class="dv">87</span> <span class="fl">15.6</span> <span class="fl">18.5</span> <span class="fl">18.4</span>   <span class="dv">4</span>    <span class="dv">4</span>    <span class="dv">8</span>  <span class="fl">0.6946</span> <span class="sc">-</span><span class="fl">1.7101</span></span>
+<span id="cb9-5"><a href="reg-comp.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="dv">20010602</span>    <span class="dv">82</span> <span class="fl">17.0</span> <span class="fl">18.4</span> <span class="fl">17.7</span>   <span class="dv">5</span>    <span class="dv">5</span>    <span class="dv">7</span> <span class="sc">-</span><span class="fl">4.3301</span> <span class="sc">-</span><span class="fl">4.0000</span></span>
+<span id="cb9-6"><a href="reg-comp.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="dv">20010603</span>    <span class="dv">92</span> <span class="fl">15.3</span> <span class="fl">17.6</span> <span class="fl">19.5</span>   <span class="dv">2</span>    <span class="dv">5</span>    <span class="dv">4</span>  <span class="fl">2.9544</span>  <span class="fl">1.8794</span></span>
+<span id="cb9-7"><a href="reg-comp.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="dv">20010604</span>   <span class="dv">114</span> <span class="fl">16.2</span> <span class="fl">19.7</span> <span class="fl">22.5</span>   <span class="dv">1</span>    <span class="dv">1</span>    <span class="dv">0</span>  <span class="fl">0.9848</span>  <span class="fl">0.3473</span></span>
+<span id="cb9-8"><a href="reg-comp.html#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="dv">20010605</span>    <span class="dv">94</span> <span class="fl">17.4</span> <span class="fl">20.5</span> <span class="fl">20.4</span>   <span class="dv">8</span>    <span class="dv">8</span>    <span class="dv">7</span> <span class="sc">-</span><span class="fl">0.5000</span> <span class="sc">-</span><span class="fl">2.9544</span></span>
+<span id="cb9-9"><a href="reg-comp.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="dv">20010606</span>    <span class="dv">80</span> <span class="fl">17.7</span> <span class="fl">19.8</span> <span class="fl">18.3</span>   <span class="dv">6</span>    <span class="dv">6</span>    <span class="dv">7</span> <span class="sc">-</span><span class="fl">5.6382</span> <span class="sc">-</span><span class="fl">5.0000</span></span>
+<span id="cb9-10"><a href="reg-comp.html#cb9-10" aria-hidden="true" tabindex="-1"></a>            Vx15 maxO3v  vent pluie</span>
+<span id="cb9-11"><a href="reg-comp.html#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="dv">20010601</span> <span class="sc">-</span><span class="fl">0.6946</span>     <span class="dv">84</span>  Nord   Sec</span>
+<span id="cb9-12"><a href="reg-comp.html#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="dv">20010602</span> <span class="sc">-</span><span class="fl">3.0000</span>     <span class="dv">87</span>  Nord   Sec</span>
+<span id="cb9-13"><a href="reg-comp.html#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="dv">20010603</span>  <span class="fl">0.5209</span>     <span class="dv">82</span>   Est   Sec</span>
+<span id="cb9-14"><a href="reg-comp.html#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="dv">20010604</span> <span class="sc">-</span><span class="fl">0.1736</span>     <span class="dv">92</span>  Nord   Sec</span>
+<span id="cb9-15"><a href="reg-comp.html#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="dv">20010605</span> <span class="sc">-</span><span class="fl">4.3301</span>    <span class="dv">114</span> Ouest   Sec</span>
+<span id="cb9-16"><a href="reg-comp.html#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="dv">20010606</span> <span class="sc">-</span><span class="fl">6.0000</span>     <span class="dv">94</span> Ouest Pluie</span></code></pre></div>
 <ol style="list-style-type: decimal">
-<li><p>Ajuster un modèle linéaire avec <code>lm</code> et analyser la pertinence des variables explicatives dans le modèle.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="reg-comp.html#cb19-1"></a>lin.complet &lt;-<span class="st"> </span><span class="kw">lm</span>(maxO3<span class="op">~</span>.,<span class="dt">data=</span>ozone)</span>
-<span id="cb19-2"><a href="reg-comp.html#cb19-2"></a><span class="kw">summary</span>(lin.complet)</span>
-<span id="cb19-3"><a href="reg-comp.html#cb19-3"></a></span>
-<span id="cb19-4"><a href="reg-comp.html#cb19-4"></a>Call<span class="op">:</span></span>
-<span id="cb19-5"><a href="reg-comp.html#cb19-5"></a><span class="kw">lm</span>(<span class="dt">formula =</span> maxO3 <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> ozone)</span>
-<span id="cb19-6"><a href="reg-comp.html#cb19-6"></a></span>
-<span id="cb19-7"><a href="reg-comp.html#cb19-7"></a>Residuals<span class="op">:</span></span>
-<span id="cb19-8"><a href="reg-comp.html#cb19-8"></a><span class="st">    </span>Min      1Q  Median      3Q     Max </span>
-<span id="cb19-9"><a href="reg-comp.html#cb19-9"></a><span class="fl">-51.814</span>  <span class="fl">-8.695</span>  <span class="fl">-1.020</span>   <span class="fl">7.891</span>  <span class="fl">40.046</span> </span>
-<span id="cb19-10"><a href="reg-comp.html#cb19-10"></a></span>
-<span id="cb19-11"><a href="reg-comp.html#cb19-11"></a>Coefficients<span class="op">:</span></span>
-<span id="cb19-12"><a href="reg-comp.html#cb19-12"></a><span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </span>
-<span id="cb19-13"><a href="reg-comp.html#cb19-13"></a>(Intercept) <span class="fl">16.26536</span>   <span class="fl">15.94398</span>   <span class="fl">1.020</span>   <span class="fl">0.3102</span>    </span>
-<span id="cb19-14"><a href="reg-comp.html#cb19-14"></a>T9           <span class="fl">0.03917</span>    <span class="fl">1.16496</span>   <span class="fl">0.034</span>   <span class="fl">0.9732</span>    </span>
-<span id="cb19-15"><a href="reg-comp.html#cb19-15"></a>T12          <span class="fl">1.97257</span>    <span class="fl">1.47570</span>   <span class="fl">1.337</span>   <span class="fl">0.1844</span>    </span>
-<span id="cb19-16"><a href="reg-comp.html#cb19-16"></a>T15          <span class="fl">0.45031</span>    <span class="fl">1.18707</span>   <span class="fl">0.379</span>   <span class="fl">0.7053</span>    </span>
-<span id="cb19-17"><a href="reg-comp.html#cb19-17"></a>Ne9         <span class="fl">-2.10975</span>    <span class="fl">0.95985</span>  <span class="fl">-2.198</span>   <span class="fl">0.0303</span> <span class="op">*</span><span class="st">  </span></span>
-<span id="cb19-18"><a href="reg-comp.html#cb19-18"></a>Ne12        <span class="fl">-0.60559</span>    <span class="fl">1.42634</span>  <span class="fl">-0.425</span>   <span class="fl">0.6721</span>    </span>
-<span id="cb19-19"><a href="reg-comp.html#cb19-19"></a>Ne15        <span class="fl">-0.01718</span>    <span class="fl">1.03589</span>  <span class="fl">-0.017</span>   <span class="fl">0.9868</span>    </span>
-<span id="cb19-20"><a href="reg-comp.html#cb19-20"></a>Vx9          <span class="fl">0.48261</span>    <span class="fl">0.98762</span>   <span class="fl">0.489</span>   <span class="fl">0.6262</span>    </span>
-<span id="cb19-21"><a href="reg-comp.html#cb19-21"></a>Vx12         <span class="fl">0.51379</span>    <span class="fl">1.24717</span>   <span class="fl">0.412</span>   <span class="fl">0.6813</span>    </span>
-<span id="cb19-22"><a href="reg-comp.html#cb19-22"></a>Vx15         <span class="fl">0.72662</span>    <span class="fl">0.95198</span>   <span class="fl">0.763</span>   <span class="fl">0.4471</span>    </span>
-<span id="cb19-23"><a href="reg-comp.html#cb19-23"></a>maxO3v       <span class="fl">0.34438</span>    <span class="fl">0.06699</span>   <span class="fl">5.141</span> <span class="fl">1.42e-06</span> <span class="op">**</span><span class="er">*</span></span>
-<span id="cb19-24"><a href="reg-comp.html#cb19-24"></a>ventNord     <span class="fl">0.53956</span>    <span class="fl">6.69459</span>   <span class="fl">0.081</span>   <span class="fl">0.9359</span>    </span>
-<span id="cb19-25"><a href="reg-comp.html#cb19-25"></a>ventOuest    <span class="fl">5.53632</span>    <span class="fl">8.24792</span>   <span class="fl">0.671</span>   <span class="fl">0.5037</span>    </span>
-<span id="cb19-26"><a href="reg-comp.html#cb19-26"></a>ventSud      <span class="fl">5.42028</span>    <span class="fl">7.16180</span>   <span class="fl">0.757</span>   <span class="fl">0.4510</span>    </span>
-<span id="cb19-27"><a href="reg-comp.html#cb19-27"></a>pluieSec     <span class="fl">3.24713</span>    <span class="fl">3.48251</span>   <span class="fl">0.932</span>   <span class="fl">0.3534</span>    </span>
-<span id="cb19-28"><a href="reg-comp.html#cb19-28"></a><span class="op">---</span></span>
-<span id="cb19-29"><a href="reg-comp.html#cb19-29"></a>Signif. codes<span class="op">:</span><span class="st">  </span></span>
-<span id="cb19-30"><a href="reg-comp.html#cb19-30"></a><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></span>
-<span id="cb19-31"><a href="reg-comp.html#cb19-31"></a></span>
-<span id="cb19-32"><a href="reg-comp.html#cb19-32"></a>Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">14.51</span> on <span class="dv">97</span> degrees of freedom</span>
-<span id="cb19-33"><a href="reg-comp.html#cb19-33"></a>Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7686</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7352</span> </span>
-<span id="cb19-34"><a href="reg-comp.html#cb19-34"></a>F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">23.01</span> on <span class="dv">14</span> and <span class="dv">97</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="er">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span></span>
-<span id="cb19-35"><a href="reg-comp.html#cb19-35"></a><span class="kw">anova</span>(lin.complet)</span>
-<span id="cb19-36"><a href="reg-comp.html#cb19-36"></a>Analysis of Variance Table</span>
-<span id="cb19-37"><a href="reg-comp.html#cb19-37"></a></span>
-<span id="cb19-38"><a href="reg-comp.html#cb19-38"></a>Response<span class="op">:</span><span class="st"> </span>maxO3</span>
-<span id="cb19-39"><a href="reg-comp.html#cb19-39"></a>          Df Sum Sq Mean Sq  F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    </span>
-<span id="cb19-40"><a href="reg-comp.html#cb19-40"></a>T9         <span class="dv">1</span>  <span class="dv">43138</span>   <span class="dv">43138</span> <span class="fl">205.0160</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span></span>
-<span id="cb19-41"><a href="reg-comp.html#cb19-41"></a>T12        <span class="dv">1</span>  <span class="dv">11125</span>   <span class="dv">11125</span>  <span class="fl">52.8706</span> <span class="fl">9.165e-11</span> <span class="op">**</span><span class="er">*</span></span>
-<span id="cb19-42"><a href="reg-comp.html#cb19-42"></a>T15        <span class="dv">1</span>    <span class="dv">876</span>     <span class="dv">876</span>   <span class="fl">4.1619</span> <span class="fl">0.0440614</span> <span class="op">*</span><span class="st">  </span></span>
-<span id="cb19-43"><a href="reg-comp.html#cb19-43"></a>Ne9        <span class="dv">1</span>   <span class="dv">3244</span>    <span class="dv">3244</span>  <span class="fl">15.4170</span> <span class="fl">0.0001613</span> <span class="op">**</span><span class="er">*</span></span>
-<span id="cb19-44"><a href="reg-comp.html#cb19-44"></a>Ne12       <span class="dv">1</span>    <span class="dv">232</span>     <span class="dv">232</span>   <span class="fl">1.1035</span> <span class="fl">0.2961089</span>    </span>
-<span id="cb19-45"><a href="reg-comp.html#cb19-45"></a>Ne15       <span class="dv">1</span>      <span class="dv">5</span>       <span class="dv">5</span>   <span class="fl">0.0248</span> <span class="fl">0.8752847</span>    </span>
-<span id="cb19-46"><a href="reg-comp.html#cb19-46"></a>Vx9        <span class="dv">1</span>   <span class="dv">2217</span>    <span class="dv">2217</span>  <span class="fl">10.5355</span> <span class="fl">0.0016079</span> <span class="op">**</span><span class="st"> </span></span>
-<span id="cb19-47"><a href="reg-comp.html#cb19-47"></a>Vx12       <span class="dv">1</span>      <span class="dv">1</span>       <span class="dv">1</span>   <span class="fl">0.0049</span> <span class="fl">0.9443039</span>    </span>
-<span id="cb19-48"><a href="reg-comp.html#cb19-48"></a>Vx15       <span class="dv">1</span>     <span class="dv">67</span>      <span class="dv">67</span>   <span class="fl">0.3186</span> <span class="fl">0.5737491</span>    </span>
-<span id="cb19-49"><a href="reg-comp.html#cb19-49"></a>maxO3v     <span class="dv">1</span>   <span class="dv">6460</span>    <span class="dv">6460</span>  <span class="fl">30.6993</span> <span class="fl">2.584e-07</span> <span class="op">**</span><span class="er">*</span></span>
-<span id="cb19-50"><a href="reg-comp.html#cb19-50"></a>vent       <span class="dv">3</span>    <span class="dv">234</span>      <span class="dv">78</span>   <span class="fl">0.3709</span> <span class="fl">0.7741473</span>    </span>
-<span id="cb19-51"><a href="reg-comp.html#cb19-51"></a>pluie      <span class="dv">1</span>    <span class="dv">183</span>     <span class="dv">183</span>   <span class="fl">0.8694</span> <span class="fl">0.3534399</span>    </span>
-<span id="cb19-52"><a href="reg-comp.html#cb19-52"></a>Residuals <span class="dv">97</span>  <span class="dv">20410</span>     <span class="dv">210</span>                       </span>
-<span id="cb19-53"><a href="reg-comp.html#cb19-53"></a><span class="op">---</span></span>
-<span id="cb19-54"><a href="reg-comp.html#cb19-54"></a>Signif. codes<span class="op">:</span><span class="st">  </span></span>
-<span id="cb19-55"><a href="reg-comp.html#cb19-55"></a><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></span></code></pre></div>
-<div class="corR">
-<p>
-Il semble que quelques variables ne sont pas nécessaires dans le modèle.
-</p>
-</div></li>
+<li><p>Ajuster un modèle linéaire avec <code>lm</code> et analyser la pertinence des variables explicatives dans le modèle.</p></li>
 <li><p>Expliquer les sorties de la commande</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="reg-comp.html#cb20-1"></a><span class="kw">library</span>(leaps)</span>
-<span id="cb20-2"><a href="reg-comp.html#cb20-2"></a>mod.sel &lt;-<span class="st"> </span><span class="kw">regsubsets</span>(maxO3<span class="op">~</span>.,<span class="dt">data=</span>ozone,<span class="dt">nvmax=</span><span class="dv">14</span>)</span>
-<span id="cb20-3"><a href="reg-comp.html#cb20-3"></a><span class="kw">summary</span>(mod.sel)</span>
-<span id="cb20-4"><a href="reg-comp.html#cb20-4"></a>Subset selection object</span>
-<span id="cb20-5"><a href="reg-comp.html#cb20-5"></a>Call<span class="op">:</span><span class="st"> </span><span class="kw">regsubsets.formula</span>(maxO3 <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> ozone, <span class="dt">nvmax =</span> <span class="dv">14</span>)</span>
-<span id="cb20-6"><a href="reg-comp.html#cb20-6"></a><span class="dv">14</span> <span class="kw">Variables</span>  (and intercept)</span>
-<span id="cb20-7"><a href="reg-comp.html#cb20-7"></a>          Forced <span class="cf">in</span> Forced out</span>
-<span id="cb20-8"><a href="reg-comp.html#cb20-8"></a>T9            <span class="ot">FALSE</span>      <span class="ot">FALSE</span></span>
-<span id="cb20-9"><a href="reg-comp.html#cb20-9"></a>T12           <span class="ot">FALSE</span>      <span class="ot">FALSE</span></span>
-<span id="cb20-10"><a href="reg-comp.html#cb20-10"></a>T15           <span class="ot">FALSE</span>      <span class="ot">FALSE</span></span>
-<span id="cb20-11"><a href="reg-comp.html#cb20-11"></a>Ne9           <span class="ot">FALSE</span>      <span class="ot">FALSE</span></span>
-<span id="cb20-12"><a href="reg-comp.html#cb20-12"></a>Ne12          <span class="ot">FALSE</span>      <span class="ot">FALSE</span></span>
-<span id="cb20-13"><a href="reg-comp.html#cb20-13"></a>Ne15          <span class="ot">FALSE</span>      <span class="ot">FALSE</span></span>
-<span id="cb20-14"><a href="reg-comp.html#cb20-14"></a>Vx9           <span class="ot">FALSE</span>      <span class="ot">FALSE</span></span>
-<span id="cb20-15"><a href="reg-comp.html#cb20-15"></a>Vx12          <span class="ot">FALSE</span>      <span class="ot">FALSE</span></span>
-<span id="cb20-16"><a href="reg-comp.html#cb20-16"></a>Vx15          <span class="ot">FALSE</span>      <span class="ot">FALSE</span></span>
-<span id="cb20-17"><a href="reg-comp.html#cb20-17"></a>maxO3v        <span class="ot">FALSE</span>      <span class="ot">FALSE</span></span>
-<span id="cb20-18"><a href="reg-comp.html#cb20-18"></a>ventNord      <span class="ot">FALSE</span>      <span class="ot">FALSE</span></span>
-<span id="cb20-19"><a href="reg-comp.html#cb20-19"></a>ventOuest     <span class="ot">FALSE</span>      <span class="ot">FALSE</span></span>
-<span id="cb20-20"><a href="reg-comp.html#cb20-20"></a>ventSud       <span class="ot">FALSE</span>      <span class="ot">FALSE</span></span>
-<span id="cb20-21"><a href="reg-comp.html#cb20-21"></a>pluieSec      <span class="ot">FALSE</span>      <span class="ot">FALSE</span></span>
-<span id="cb20-22"><a href="reg-comp.html#cb20-22"></a><span class="dv">1</span> subsets of each size up to <span class="dv">14</span></span>
-<span id="cb20-23"><a href="reg-comp.html#cb20-23"></a>Selection Algorithm<span class="op">:</span><span class="st"> </span>exhaustive</span>
-<span id="cb20-24"><a href="reg-comp.html#cb20-24"></a>          T9  T12 T15 Ne9 Ne12 Ne15 Vx9 Vx12 Vx15 maxO3v</span>
-<span id="cb20-25"><a href="reg-comp.html#cb20-25"></a><span class="dv">1</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>   </span>
-<span id="cb20-26"><a href="reg-comp.html#cb20-26"></a><span class="dv">2</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
-<span id="cb20-27"><a href="reg-comp.html#cb20-27"></a><span class="dv">3</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
-<span id="cb20-28"><a href="reg-comp.html#cb20-28"></a><span class="dv">4</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
-<span id="cb20-29"><a href="reg-comp.html#cb20-29"></a><span class="dv">5</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
-<span id="cb20-30"><a href="reg-comp.html#cb20-30"></a><span class="dv">6</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
-<span id="cb20-31"><a href="reg-comp.html#cb20-31"></a><span class="dv">7</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
-<span id="cb20-32"><a href="reg-comp.html#cb20-32"></a><span class="dv">8</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
-<span id="cb20-33"><a href="reg-comp.html#cb20-33"></a><span class="dv">9</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
-<span id="cb20-34"><a href="reg-comp.html#cb20-34"></a><span class="dv">10</span>  ( <span class="dv">1</span> ) <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
-<span id="cb20-35"><a href="reg-comp.html#cb20-35"></a><span class="dv">11</span>  ( <span class="dv">1</span> ) <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
-<span id="cb20-36"><a href="reg-comp.html#cb20-36"></a><span class="dv">12</span>  ( <span class="dv">1</span> ) <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
-<span id="cb20-37"><a href="reg-comp.html#cb20-37"></a><span class="dv">13</span>  ( <span class="dv">1</span> ) <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
-<span id="cb20-38"><a href="reg-comp.html#cb20-38"></a><span class="dv">14</span>  ( <span class="dv">1</span> ) <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
-<span id="cb20-39"><a href="reg-comp.html#cb20-39"></a>          ventNord ventOuest ventSud pluieSec</span>
-<span id="cb20-40"><a href="reg-comp.html#cb20-40"></a><span class="dv">1</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span>      <span class="st">&quot; &quot;</span>       <span class="st">&quot; &quot;</span>     <span class="st">&quot; &quot;</span>     </span>
-<span id="cb20-41"><a href="reg-comp.html#cb20-41"></a><span class="dv">2</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span>      <span class="st">&quot; &quot;</span>       <span class="st">&quot; &quot;</span>     <span class="st">&quot; &quot;</span>     </span>
-<span id="cb20-42"><a href="reg-comp.html#cb20-42"></a><span class="dv">3</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span>      <span class="st">&quot; &quot;</span>       <span class="st">&quot; &quot;</span>     <span class="st">&quot; &quot;</span>     </span>
-<span id="cb20-43"><a href="reg-comp.html#cb20-43"></a><span class="dv">4</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span>      <span class="st">&quot; &quot;</span>       <span class="st">&quot; &quot;</span>     <span class="st">&quot; &quot;</span>     </span>
-<span id="cb20-44"><a href="reg-comp.html#cb20-44"></a><span class="dv">5</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span>      <span class="st">&quot; &quot;</span>       <span class="st">&quot; &quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
-<span id="cb20-45"><a href="reg-comp.html#cb20-45"></a><span class="dv">6</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span>      <span class="st">&quot; &quot;</span>       <span class="st">&quot; &quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
-<span id="cb20-46"><a href="reg-comp.html#cb20-46"></a><span class="dv">7</span>  ( <span class="dv">1</span> )  <span class="st">&quot;*&quot;</span>      <span class="st">&quot; &quot;</span>       <span class="st">&quot; &quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
-<span id="cb20-47"><a href="reg-comp.html#cb20-47"></a><span class="dv">8</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span>      <span class="st">&quot;*&quot;</span>       <span class="st">&quot;*&quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
-<span id="cb20-48"><a href="reg-comp.html#cb20-48"></a><span class="dv">9</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span>      <span class="st">&quot;*&quot;</span>       <span class="st">&quot;*&quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
-<span id="cb20-49"><a href="reg-comp.html#cb20-49"></a><span class="dv">10</span>  ( <span class="dv">1</span> ) <span class="st">&quot; &quot;</span>      <span class="st">&quot;*&quot;</span>       <span class="st">&quot;*&quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
-<span id="cb20-50"><a href="reg-comp.html#cb20-50"></a><span class="dv">11</span>  ( <span class="dv">1</span> ) <span class="st">&quot; &quot;</span>      <span class="st">&quot;*&quot;</span>       <span class="st">&quot;*&quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
-<span id="cb20-51"><a href="reg-comp.html#cb20-51"></a><span class="dv">12</span>  ( <span class="dv">1</span> ) <span class="st">&quot;*&quot;</span>      <span class="st">&quot;*&quot;</span>       <span class="st">&quot;*&quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
-<span id="cb20-52"><a href="reg-comp.html#cb20-52"></a><span class="dv">13</span>  ( <span class="dv">1</span> ) <span class="st">&quot;*&quot;</span>      <span class="st">&quot;*&quot;</span>       <span class="st">&quot;*&quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
-<span id="cb20-53"><a href="reg-comp.html#cb20-53"></a><span class="dv">14</span>  ( <span class="dv">1</span> ) <span class="st">&quot;*&quot;</span>      <span class="st">&quot;*&quot;</span>       <span class="st">&quot;*&quot;</span>     <span class="st">&quot;*&quot;</span>     </span></code></pre></div>
-<div class="corR">
-<p>
-On obtient une table avec des étoiles qui permettent de visualiser les meilleurs modèles à <span class="math inline"><span class="math inline">\(1,2,\dots,8\)</span></span> variables au sens du <span class="math inline"><span class="math inline">\(R^2\)</span></span>.
-</p>
-</div></li>
-<li><p>Sélectionner le meilleur modèle au sens du <span class="math inline">\(R^2\)</span>. Que remarquez-vous ?</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="reg-comp.html#cb21-1"></a><span class="kw">plot</span>(mod.sel,<span class="dt">scale=</span><span class="st">&quot;r2&quot;</span>)</span></code></pre></div>
-<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-40-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="corR">
-<p>
-Le meilleur modèle est le modèle complet. C’est logique puisque le <span class="math inline"><span class="math inline">\(R^2\)</span></span> va toujours privilégier le modèle le plus complexe, c’est un critère <code>d’ajustement</code>.
-</p>
-</div></li>
-<li><p>Faire de même pour le <span class="math inline">\(C_p\)</span> et le <span class="math inline">\(BIC\)</span>. Que remarquez-vous pour les variables explicatives qualitatives ?</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="reg-comp.html#cb22-1"></a><span class="kw">plot</span>(mod.sel,<span class="dt">scale=</span><span class="st">&quot;bic&quot;</span>)</span></code></pre></div>
-<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-42-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="reg-comp.html#cb23-1"></a><span class="kw">plot</span>(mod.sel,<span class="dt">scale=</span><span class="st">&quot;Cp&quot;</span>)</span></code></pre></div>
-<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-42-2.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="corR">
-<p>
-Ces critères choisissent ici le même modèle, avec 4 variables. On remarque que les variables qualitatives ne sont <code>pas réellement traitées comme des variables</code> : une modalité est égale à une variable. Par conséquent, cette procédure ne permet pas vraiment de sélectionner des variables qualitatives.
-</p>
-</div></li>
-<li><p>Comparer cette méthode avec des modèles sélectionnées par la fonction <code>step</code> ou la fonction <code>bestglm</code> du package <code>bestglm</code>.</p>
-<div class="corR">
-<ul>
-<li>
-<p>La fonction <code>step</code> permet de faire de la sélection <strong>pas à pas</strong>. Par exemple, pour une procédure <code>descendante</code> avec le critère <span class="math inline"><span class="math inline">\(AIC\)</span></span> on utilisera :</p>
-</li>
-</ul>
-</div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="reg-comp.html#cb24-1"></a> mod.step &lt;-<span class="st"> </span><span class="kw">step</span>(lin.complet,<span class="dt">direction=</span><span class="st">&quot;backward&quot;</span>,<span class="dt">trace=</span><span class="dv">0</span>)</span>
-<span id="cb24-2"><a href="reg-comp.html#cb24-2"></a> mod.step</span>
-<span id="cb24-3"><a href="reg-comp.html#cb24-3"></a></span>
-<span id="cb24-4"><a href="reg-comp.html#cb24-4"></a> Call<span class="op">:</span></span>
-<span id="cb24-5"><a href="reg-comp.html#cb24-5"></a><span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> maxO3 <span class="op">~</span><span class="st"> </span>T12 <span class="op">+</span><span class="st"> </span>Ne9 <span class="op">+</span><span class="st"> </span>Vx9 <span class="op">+</span><span class="st"> </span>maxO3v, <span class="dt">data =</span> ozone)</span>
-<span id="cb24-6"><a href="reg-comp.html#cb24-6"></a></span>
-<span id="cb24-7"><a href="reg-comp.html#cb24-7"></a> Coefficients<span class="op">:</span></span>
-<span id="cb24-8"><a href="reg-comp.html#cb24-8"></a><span class="st"> </span>(Intercept)          T12          Ne9          Vx9  </span>
-<span id="cb24-9"><a href="reg-comp.html#cb24-9"></a>     <span class="fl">12.6313</span>       <span class="fl">2.7641</span>      <span class="fl">-2.5154</span>       <span class="fl">1.2929</span>  </span>
-<span id="cb24-10"><a href="reg-comp.html#cb24-10"></a>      maxO3v  </span>
-<span id="cb24-11"><a href="reg-comp.html#cb24-11"></a>      <span class="fl">0.3548</span>  </span></code></pre></div>
-<div class="corR">
-<ul>
-<li>
-<p>La fonction <code>bestglm</code> permet quant à elle de faire des sélections exhaustive ou pas à pas, on peut l’utiliser pour tous les <strong>glm</strong>. Attention les variables qualitatives doivent être des facteurs et la variable à expliquer doit être positionnée en dernière colonne pour cette fonction.</p>
-</li>
-</ul>
-</div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="reg-comp.html#cb25-1"></a> ozone1 &lt;-<span class="st"> </span>ozone <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">vent=</span><span class="kw">as.factor</span>(vent),<span class="dt">pluie=</span><span class="kw">as.factor</span>(pluie)) <span class="op">%&gt;%</span></span>
-<span id="cb25-2"><a href="reg-comp.html#cb25-2"></a><span class="st">   </span><span class="kw">select</span>(<span class="op">-</span>maxO3,<span class="kw">everything</span>())</span>
-<span id="cb25-3"><a href="reg-comp.html#cb25-3"></a> <span class="kw">library</span>(bestglm)</span>
-<span id="cb25-4"><a href="reg-comp.html#cb25-4"></a> model.bglm &lt;-<span class="st"> </span><span class="kw">bestglm</span>(ozone1,<span class="dt">IC=</span><span class="st">&quot;BIC&quot;</span>)</span>
-<span id="cb25-5"><a href="reg-comp.html#cb25-5"></a> model.bglm<span class="op">$</span>BestModel <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</span>
-<span id="cb25-6"><a href="reg-comp.html#cb25-6"></a></span>
-<span id="cb25-7"><a href="reg-comp.html#cb25-7"></a> Call<span class="op">:</span></span>
-<span id="cb25-8"><a href="reg-comp.html#cb25-8"></a><span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> <span class="kw">data.frame</span>(Xy[, <span class="kw">c</span>(bestset[<span class="op">-</span><span class="dv">1</span>], <span class="ot">FALSE</span>), </span>
-<span id="cb25-9"><a href="reg-comp.html#cb25-9"></a>     <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">y =</span> y))</span>
-<span id="cb25-10"><a href="reg-comp.html#cb25-10"></a></span>
-<span id="cb25-11"><a href="reg-comp.html#cb25-11"></a> Residuals<span class="op">:</span></span>
-<span id="cb25-12"><a href="reg-comp.html#cb25-12"></a><span class="st">     </span>Min      1Q  Median      3Q     Max </span>
-<span id="cb25-13"><a href="reg-comp.html#cb25-13"></a> <span class="fl">-52.396</span>  <span class="fl">-8.377</span>  <span class="fl">-1.086</span>   <span class="fl">7.951</span>  <span class="fl">40.933</span> </span>
-<span id="cb25-14"><a href="reg-comp.html#cb25-14"></a></span>
-<span id="cb25-15"><a href="reg-comp.html#cb25-15"></a> Coefficients<span class="op">:</span></span>
-<span id="cb25-16"><a href="reg-comp.html#cb25-16"></a><span class="st">             </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </span>
-<span id="cb25-17"><a href="reg-comp.html#cb25-17"></a> (Intercept) <span class="fl">12.63131</span>   <span class="fl">11.00088</span>   <span class="fl">1.148</span> <span class="fl">0.253443</span>    </span>
-<span id="cb25-18"><a href="reg-comp.html#cb25-18"></a> T12          <span class="fl">2.76409</span>    <span class="fl">0.47450</span>   <span class="fl">5.825</span> <span class="fl">6.07e-08</span> <span class="op">**</span><span class="er">*</span></span>
-<span id="cb25-19"><a href="reg-comp.html#cb25-19"></a><span class="st"> </span>Ne9         <span class="fl">-2.51540</span>    <span class="fl">0.67585</span>  <span class="fl">-3.722</span> <span class="fl">0.000317</span> <span class="op">**</span><span class="er">*</span></span>
-<span id="cb25-20"><a href="reg-comp.html#cb25-20"></a><span class="st"> </span>Vx9          <span class="fl">1.29286</span>    <span class="fl">0.60218</span>   <span class="fl">2.147</span> <span class="fl">0.034055</span> <span class="op">*</span><span class="st">  </span></span>
-<span id="cb25-21"><a href="reg-comp.html#cb25-21"></a><span class="st"> </span>maxO3v       <span class="fl">0.35483</span>    <span class="fl">0.05789</span>   <span class="fl">6.130</span> <span class="fl">1.50e-08</span> <span class="op">**</span><span class="er">*</span></span>
-<span id="cb25-22"><a href="reg-comp.html#cb25-22"></a><span class="st"> </span><span class="op">---</span></span>
-<span id="cb25-23"><a href="reg-comp.html#cb25-23"></a><span class="st"> </span>Signif. codes<span class="op">:</span><span class="st">  </span></span>
-<span id="cb25-24"><a href="reg-comp.html#cb25-24"></a><span class="st"> </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></span>
-<span id="cb25-25"><a href="reg-comp.html#cb25-25"></a></span>
-<span id="cb25-26"><a href="reg-comp.html#cb25-26"></a> Residual standard error<span class="op">:</span><span class="st"> </span><span class="dv">14</span> on <span class="dv">107</span> degrees of freedom</span>
-<span id="cb25-27"><a href="reg-comp.html#cb25-27"></a> Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7622</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7533</span> </span>
-<span id="cb25-28"><a href="reg-comp.html#cb25-28"></a> F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">85.75</span> on <span class="dv">4</span> and <span class="dv">107</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="er">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="reg-comp.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaps)</span>
+<span id="cb10-2"><a href="reg-comp.html#cb10-2" aria-hidden="true" tabindex="-1"></a>mod.sel <span class="ot">&lt;-</span> <span class="fu">regsubsets</span>(maxO3<span class="sc">~</span>.,<span class="at">data=</span>ozone,<span class="at">nvmax=</span><span class="dv">14</span>)</span>
+<span id="cb10-3"><a href="reg-comp.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod.sel)</span>
+<span id="cb10-4"><a href="reg-comp.html#cb10-4" aria-hidden="true" tabindex="-1"></a>Subset selection object</span>
+<span id="cb10-5"><a href="reg-comp.html#cb10-5" aria-hidden="true" tabindex="-1"></a>Call<span class="sc">:</span> <span class="fu">regsubsets.formula</span>(maxO3 <span class="sc">~</span> ., <span class="at">data =</span> ozone, <span class="at">nvmax =</span> <span class="dv">14</span>)</span>
+<span id="cb10-6"><a href="reg-comp.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="dv">14</span> <span class="fu">Variables</span>  (and intercept)</span>
+<span id="cb10-7"><a href="reg-comp.html#cb10-7" aria-hidden="true" tabindex="-1"></a>          Forced <span class="cf">in</span> Forced out</span>
+<span id="cb10-8"><a href="reg-comp.html#cb10-8" aria-hidden="true" tabindex="-1"></a>T9            <span class="cn">FALSE</span>      <span class="cn">FALSE</span></span>
+<span id="cb10-9"><a href="reg-comp.html#cb10-9" aria-hidden="true" tabindex="-1"></a>T12           <span class="cn">FALSE</span>      <span class="cn">FALSE</span></span>
+<span id="cb10-10"><a href="reg-comp.html#cb10-10" aria-hidden="true" tabindex="-1"></a>T15           <span class="cn">FALSE</span>      <span class="cn">FALSE</span></span>
+<span id="cb10-11"><a href="reg-comp.html#cb10-11" aria-hidden="true" tabindex="-1"></a>Ne9           <span class="cn">FALSE</span>      <span class="cn">FALSE</span></span>
+<span id="cb10-12"><a href="reg-comp.html#cb10-12" aria-hidden="true" tabindex="-1"></a>Ne12          <span class="cn">FALSE</span>      <span class="cn">FALSE</span></span>
+<span id="cb10-13"><a href="reg-comp.html#cb10-13" aria-hidden="true" tabindex="-1"></a>Ne15          <span class="cn">FALSE</span>      <span class="cn">FALSE</span></span>
+<span id="cb10-14"><a href="reg-comp.html#cb10-14" aria-hidden="true" tabindex="-1"></a>Vx9           <span class="cn">FALSE</span>      <span class="cn">FALSE</span></span>
+<span id="cb10-15"><a href="reg-comp.html#cb10-15" aria-hidden="true" tabindex="-1"></a>Vx12          <span class="cn">FALSE</span>      <span class="cn">FALSE</span></span>
+<span id="cb10-16"><a href="reg-comp.html#cb10-16" aria-hidden="true" tabindex="-1"></a>Vx15          <span class="cn">FALSE</span>      <span class="cn">FALSE</span></span>
+<span id="cb10-17"><a href="reg-comp.html#cb10-17" aria-hidden="true" tabindex="-1"></a>maxO3v        <span class="cn">FALSE</span>      <span class="cn">FALSE</span></span>
+<span id="cb10-18"><a href="reg-comp.html#cb10-18" aria-hidden="true" tabindex="-1"></a>ventNord      <span class="cn">FALSE</span>      <span class="cn">FALSE</span></span>
+<span id="cb10-19"><a href="reg-comp.html#cb10-19" aria-hidden="true" tabindex="-1"></a>ventOuest     <span class="cn">FALSE</span>      <span class="cn">FALSE</span></span>
+<span id="cb10-20"><a href="reg-comp.html#cb10-20" aria-hidden="true" tabindex="-1"></a>ventSud       <span class="cn">FALSE</span>      <span class="cn">FALSE</span></span>
+<span id="cb10-21"><a href="reg-comp.html#cb10-21" aria-hidden="true" tabindex="-1"></a>pluieSec      <span class="cn">FALSE</span>      <span class="cn">FALSE</span></span>
+<span id="cb10-22"><a href="reg-comp.html#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> subsets of each size up to <span class="dv">14</span></span>
+<span id="cb10-23"><a href="reg-comp.html#cb10-23" aria-hidden="true" tabindex="-1"></a>Selection Algorithm<span class="sc">:</span> exhaustive</span>
+<span id="cb10-24"><a href="reg-comp.html#cb10-24" aria-hidden="true" tabindex="-1"></a>          T9  T12 T15 Ne9 Ne12 Ne15 Vx9 Vx12 Vx15 maxO3v</span>
+<span id="cb10-25"><a href="reg-comp.html#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>   </span>
+<span id="cb10-26"><a href="reg-comp.html#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
+<span id="cb10-27"><a href="reg-comp.html#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
+<span id="cb10-28"><a href="reg-comp.html#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
+<span id="cb10-29"><a href="reg-comp.html#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
+<span id="cb10-30"><a href="reg-comp.html#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
+<span id="cb10-31"><a href="reg-comp.html#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
+<span id="cb10-32"><a href="reg-comp.html#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
+<span id="cb10-33"><a href="reg-comp.html#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
+<span id="cb10-34"><a href="reg-comp.html#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>  ( <span class="dv">1</span> ) <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
+<span id="cb10-35"><a href="reg-comp.html#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span>  ( <span class="dv">1</span> ) <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
+<span id="cb10-36"><a href="reg-comp.html#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span>  ( <span class="dv">1</span> ) <span class="st">&quot; &quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
+<span id="cb10-37"><a href="reg-comp.html#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span>  ( <span class="dv">1</span> ) <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot; &quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
+<span id="cb10-38"><a href="reg-comp.html#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="dv">14</span>  ( <span class="dv">1</span> ) <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span> <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>  <span class="st">&quot;*&quot;</span>   </span>
+<span id="cb10-39"><a href="reg-comp.html#cb10-39" aria-hidden="true" tabindex="-1"></a>          ventNord ventOuest ventSud pluieSec</span>
+<span id="cb10-40"><a href="reg-comp.html#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span>      <span class="st">&quot; &quot;</span>       <span class="st">&quot; &quot;</span>     <span class="st">&quot; &quot;</span>     </span>
+<span id="cb10-41"><a href="reg-comp.html#cb10-41" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span>      <span class="st">&quot; &quot;</span>       <span class="st">&quot; &quot;</span>     <span class="st">&quot; &quot;</span>     </span>
+<span id="cb10-42"><a href="reg-comp.html#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span>      <span class="st">&quot; &quot;</span>       <span class="st">&quot; &quot;</span>     <span class="st">&quot; &quot;</span>     </span>
+<span id="cb10-43"><a href="reg-comp.html#cb10-43" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span>      <span class="st">&quot; &quot;</span>       <span class="st">&quot; &quot;</span>     <span class="st">&quot; &quot;</span>     </span>
+<span id="cb10-44"><a href="reg-comp.html#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span>      <span class="st">&quot; &quot;</span>       <span class="st">&quot; &quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
+<span id="cb10-45"><a href="reg-comp.html#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span>      <span class="st">&quot; &quot;</span>       <span class="st">&quot; &quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
+<span id="cb10-46"><a href="reg-comp.html#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span>  ( <span class="dv">1</span> )  <span class="st">&quot;*&quot;</span>      <span class="st">&quot; &quot;</span>       <span class="st">&quot; &quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
+<span id="cb10-47"><a href="reg-comp.html#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span>      <span class="st">&quot;*&quot;</span>       <span class="st">&quot;*&quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
+<span id="cb10-48"><a href="reg-comp.html#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span>  ( <span class="dv">1</span> )  <span class="st">&quot; &quot;</span>      <span class="st">&quot;*&quot;</span>       <span class="st">&quot;*&quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
+<span id="cb10-49"><a href="reg-comp.html#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>  ( <span class="dv">1</span> ) <span class="st">&quot; &quot;</span>      <span class="st">&quot;*&quot;</span>       <span class="st">&quot;*&quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
+<span id="cb10-50"><a href="reg-comp.html#cb10-50" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span>  ( <span class="dv">1</span> ) <span class="st">&quot; &quot;</span>      <span class="st">&quot;*&quot;</span>       <span class="st">&quot;*&quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
+<span id="cb10-51"><a href="reg-comp.html#cb10-51" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span>  ( <span class="dv">1</span> ) <span class="st">&quot;*&quot;</span>      <span class="st">&quot;*&quot;</span>       <span class="st">&quot;*&quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
+<span id="cb10-52"><a href="reg-comp.html#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span>  ( <span class="dv">1</span> ) <span class="st">&quot;*&quot;</span>      <span class="st">&quot;*&quot;</span>       <span class="st">&quot;*&quot;</span>     <span class="st">&quot;*&quot;</span>     </span>
+<span id="cb10-53"><a href="reg-comp.html#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="dv">14</span>  ( <span class="dv">1</span> ) <span class="st">&quot;*&quot;</span>      <span class="st">&quot;*&quot;</span>       <span class="st">&quot;*&quot;</span>     <span class="st">&quot;*&quot;</span>     </span></code></pre></div></li>
+<li><p>Sélectionner le meilleur modèle au sens du <span class="math inline">\(R^2\)</span>. Que remarquez-vous ?</p></li>
+<li><p>Faire de même pour le <span class="math inline">\(C_p\)</span> et le <span class="math inline">\(BIC\)</span>. Que remarquez-vous pour les variables explicatives qualitatives ?</p></li>
+<li><p>Comparer cette méthode avec des modèles sélectionnées par la fonction <code>step</code> ou la fonction <code>bestglm</code> du package <code>bestglm</code>.</p></li>
 </ol>
 </div>
-<div id="régression-sur-composantes-principales-méthodo" class="section level2">
+<div id="régression-sur-composantes-principales-méthodo" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Régression sur composantes principales (méthodo)</h2>
 <p>L’algorithme <strong>PCP</strong> est une méthode de réduction de dimension, elle consiste à faire un modèle linéaire <strong>MCO</strong> sur les premiers axes de l’<strong>ACP</strong>. On désigne par</p>
 <ul>
-<li><span class="math inline">\(\mathbb X\)</span> la matrice qui contient les valeurs des variables explicatives ;</li>
-<li><span class="math inline">\(\tilde X\)</span> sa version centrée réduite ;</li>
-<li><span class="math inline">\(Z_1,\dots,Z_p\)</span> les axes de l’ACP qui s’écrivent comme des combinaisons linéaires des variables explicatives : <span class="math inline">\(Z_j=u_j^t\tilde X\)</span>.</li>
+<li><span class="math inline">\(\mathbb X\)</span> la matrice qui contient les valeurs des variables explicatives que l’on suppose centrée réduite.</li>
+<li><span class="math inline">\(Z_1,\dots,Z_p\)</span> les axes de l’ACP qui s’écrivent comme des combinaisons linéaires des variables explicatives : <span class="math inline">\(Z_j=w_j^t X\)</span>.</li>
 </ul>
-<p>L’algorithme <strong>PCR</strong> consiste à choisir un nombre de composantes <span class="math inline">\(M\)</span> et à faire une régression MCO sur les <span class="math inline">\(M\)</span> premiers axes de l’ACP :
-<span class="math display">\[Y=\theta_0+\theta_1 Z_1+\dots+\theta_MZ_M+\varepsilon\]</span>.</p>
+<p>L’algorithme <strong>PCR</strong> consiste à choisir un nombre de composantes <span class="math inline">\(m\)</span> et à faire une régression MCO sur les <span class="math inline">\(m\)</span> premiers axes de l’ACP :
+<span class="math display">\[Y=\alpha_0+\alpha_1 Z_1+\dots+\alpha_mZ_m+\varepsilon\]</span>.</p>
 <p>Si on désigne par</p>
 <ul>
-<li><span class="math inline">\(x\in\mathbb R^d\)</span> une nouvelle observation ;</li>
-<li><span class="math inline">\(\tilde x\)</span> sa version centrée réduite ;</li>
-<li><span class="math inline">\(z_1,\dots,z_M\)</span> les coordonnées de <span class="math inline">\(x\)</span> dans la base définie par les <span class="math inline">\(M\)</span> premiers axes de l’ACP (<span class="math inline">\(z_j=u_j^t\tilde x\)</span>)</li>
+<li><span class="math inline">\(x\in\mathbb R^d\)</span> une nouvelle observation que l’on a centrée réduite également;</li>
+<li><span class="math inline">\(z_1,\dots,z_M\)</span> les coordonnées de <span class="math inline">\(x\)</span> dans la base définie par les <span class="math inline">\(m\)</span> premiers axes de l’ACP (<span class="math inline">\(z_j=w_j^tx\)</span>)</li>
 </ul>
 <p>l’algorithme <strong>PCR</strong> reverra la prévision
-<span class="math display">\[\widehat m_{\text{PCR}}(x)=\widehat \theta_0+\widehat \theta_1 z_1+\dots+\widehat \theta_Mz_M.\]</span>
+<span class="math display">\[\widehat m_{\text{PCR}}(x)=\widehat \alpha_0+\widehat \alpha_1 z_1+\dots+\widehat \alpha_mz_m.\]</span>
 Cette prévision peut s’écrire également comme une combinaison linéaire des variables explicatives (centrées réduites ou non) :
-<span class="math display">\[\widehat m_{\text{PCR}}(x)=\widehat \gamma_0+\widehat \gamma_1 \tilde x_1+\dots+\widehat \gamma_p x_p=\widehat \beta_0+\widehat \beta_1 x_1+\dots+\widehat \beta_p x_p.\]</span></p>
+<span class="math display">\[\widehat m_{\text{PCR}}(x)=\widehat \gamma_0+\widehat \gamma_1 \tilde x_1+\dots+\widehat \gamma_p \tilde x_p=\widehat \beta_0+\widehat \beta_1 x_1+\dots+\widehat \beta_p x_p,\]</span>
+<span class="math inline">\(\tilde x_j\)</span> désignant l’observation brute (non centrée réduite).</p>
 <p>L’exercice suivant revient sur cet algorithme et notamment sur le lien entre ces différents paramètres.</p>
 
 <div class="exercise">
 <span id="exr:exo-methodo-pcr" class="exercise"><strong>Exercice 2.1  (Régression PCR avec R)  </strong></span>
 </div>
-
 <p>On considère le jeu de données <strong>Hitters</strong> dans lequel on souhaite expliquer la variable <strong>Salary</strong> par les autres variables du jeu de données. Pour simplifier le problème, on supprime les individus qui possèdent des données manquantes (il ne faut pas faire ça normalement !).</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="reg-comp.html#cb26-1"></a><span class="kw">library</span>(ISLR)</span>
-<span id="cb26-2"><a href="reg-comp.html#cb26-2"></a>Hitters &lt;-<span class="st"> </span><span class="kw">na.omit</span>(Hitters)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="reg-comp.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span>
+<span id="cb11-2"><a href="reg-comp.html#cb11-2" aria-hidden="true" tabindex="-1"></a>Hitters <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(Hitters)</span></code></pre></div>
 <ol style="list-style-type: decimal">
-<li><p>Parmi les variables explicatives, certaines sont qualitatives. Expliquer comment, à l’aide de la fonction <strong>model.matrix</strong> on peut utiliser ces variables dans un modèle linéaire. On appellera <strong>X</strong> la matrice des variables explicatives construites avec cette variable.</p>
-<div class="corR">
-<p>
-Comme pour le modèle linéaire, on utilise des contraintes identifiantes. Cela revient à prendre une modalité de référence et à coder les autres modalités par 0-1.
-</p>
-</div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="reg-comp.html#cb27-1"></a>X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(Salary<span class="op">~</span>.,<span class="dt">data=</span>Hitters)[,<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div></li>
-<li><p>Calculer la matrice <strong>Xcr</strong> qui correspond à la matrice <strong>X</strong> centrée réduite. On pourra utiliser la fonction <code>scale</code>.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="reg-comp.html#cb28-1"></a>Xcr &lt;-<span class="st"> </span><span class="kw">scale</span>(X)</span>
-<span id="cb28-2"><a href="reg-comp.html#cb28-2"></a>Xbar  &lt;-<span class="st"> </span><span class="kw">apply</span>(X,<span class="dv">2</span>,mean)</span>
-<span id="cb28-3"><a href="reg-comp.html#cb28-3"></a>stdX &lt;-<span class="st"> </span><span class="kw">apply</span>(X,<span class="dv">2</span>,sd)</span></code></pre></div></li>
-<li><p>A l’aide de la fonction <code>PCA</code> du package <strong>FactoMineR</strong>, effectuer l’ACP du tableau <strong>Xcr</strong> avec l’option <code>scale.unit=FALSE</code>.</p>
-<div class="corR">
-<p>
-On utilise ici <code>scale.unit=FALSE</code> car les données sont déjà centrées-réduites. Ça nous permet de contrôler cette étape.
-</p>
-</div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="reg-comp.html#cb29-1"></a><span class="kw">library</span>(FactoMineR)</span>
-<span id="cb29-2"><a href="reg-comp.html#cb29-2"></a>acp.hit &lt;-<span class="st"> </span><span class="kw">PCA</span>(Xcr,<span class="dt">scale.unit=</span><span class="ot">FALSE</span>,<span class="dt">graph=</span><span class="ot">TRUE</span>)</span></code></pre></div>
-<p><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto;" /><img src="TUTO_GRANDE_DIM_files/figure-html/unnamed-chunk-52-2.png" width="672" style="display: block; margin: auto;" /></p></li>
-<li><p>Récupérer les coordonnées des individus sur les 5 premiers axes de l’ACP (variables <span class="math inline">\(Z\)</span> dans le cours).</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="reg-comp.html#cb30-1"></a>CC &lt;-<span class="st"> </span>acp.hit<span class="op">$</span>ind<span class="op">$</span>coord</span></code></pre></div></li>
-<li><p>Effectuer la régression linéaire sur les 5 premières composantes principales et calculer les estimateurs des MCO (<span class="math inline">\(\widehat\theta_k,k=1,\dots,5\)</span> dans le cours).</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="reg-comp.html#cb31-1"></a>donnees &lt;-<span class="st"> </span><span class="kw">cbind.data.frame</span>(CC,<span class="dt">Salary=</span>Hitters<span class="op">$</span>Salary)</span>
-<span id="cb31-2"><a href="reg-comp.html#cb31-2"></a>mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary<span class="op">~</span>.,<span class="dt">data=</span>donnees)</span>
-<span id="cb31-3"><a href="reg-comp.html#cb31-3"></a>theta &lt;-<span class="st"> </span><span class="kw">coef</span>(mod)</span>
-<span id="cb31-4"><a href="reg-comp.html#cb31-4"></a>theta</span>
-<span id="cb31-5"><a href="reg-comp.html#cb31-5"></a>(Intercept)       Dim<span class="fl">.1</span>       Dim<span class="fl">.2</span>       Dim<span class="fl">.3</span>       Dim<span class="fl">.4</span> </span>
-<span id="cb31-6"><a href="reg-comp.html#cb31-6"></a>  <span class="fl">535.92588</span>   <span class="fl">106.57139</span>    <span class="fl">21.64469</span>    <span class="fl">24.34057</span>    <span class="fl">37.05637</span> </span>
-<span id="cb31-7"><a href="reg-comp.html#cb31-7"></a>      Dim<span class="fl">.5</span> </span>
-<span id="cb31-8"><a href="reg-comp.html#cb31-8"></a>  <span class="fl">-58.52540</span> </span></code></pre></div>
-<div class="corR">
-<p>
-<p><strong>Remarque</strong> :</p>
-</p>
-<ul>
-<li>
-<p>On obtient ici les estimateurs des <span class="math inline"><span class="math inline">\(\theta_j,j=1,\dots,5\)</span></span>.<br /></p>
-</li>
-<li>
-<p>on peut aussi tout faire “à la main” (sans utiliser <strong>PCA</strong>)</p>
-</li>
-</ul>
-</div>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="reg-comp.html#cb32-1"></a> acp.main &lt;-<span class="st"> </span><span class="kw">eigen</span>(<span class="kw">t</span>(Xcr)<span class="op">%*%</span>Xcr)</span>
-<span id="cb32-2"><a href="reg-comp.html#cb32-2"></a> U &lt;-<span class="st"> </span>acp.main<span class="op">$</span>vectors</span>
-<span id="cb32-3"><a href="reg-comp.html#cb32-3"></a> CC &lt;-<span class="st"> </span>Xcr<span class="op">%*%</span>(<span class="op">-</span>U[,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</span>
-<span id="cb32-4"><a href="reg-comp.html#cb32-4"></a> D &lt;-<span class="st"> </span><span class="kw">cbind.data.frame</span>(CC,<span class="dt">Salary=</span>Hitters<span class="op">$</span>Salary)</span>
-<span id="cb32-5"><a href="reg-comp.html#cb32-5"></a> modS &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary<span class="op">~</span>.,<span class="dt">data=</span>D)</span>
-<span id="cb32-6"><a href="reg-comp.html#cb32-6"></a> coefS &lt;-<span class="st"> </span>modS<span class="op">$</span>coefficients</span>
-<span id="cb32-7"><a href="reg-comp.html#cb32-7"></a> <span class="kw">coef</span>(modS)</span>
-<span id="cb32-8"><a href="reg-comp.html#cb32-8"></a> (Intercept)         <span class="st">`</span><span class="dt">1</span><span class="st">`</span>         <span class="st">`</span><span class="dt">2</span><span class="st">`</span>         <span class="st">`</span><span class="dt">3</span><span class="st">`</span>         <span class="st">`</span><span class="dt">4</span><span class="st">`</span> </span>
-<span id="cb32-9"><a href="reg-comp.html#cb32-9"></a>   <span class="fl">535.92588</span>   <span class="fl">106.57139</span>    <span class="fl">21.64469</span>    <span class="fl">24.34057</span>    <span class="fl">37.05637</span> </span>
-<span id="cb32-10"><a href="reg-comp.html#cb32-10"></a>         <span class="st">`</span><span class="dt">5</span><span class="st">`</span> </span>
-<span id="cb32-11"><a href="reg-comp.html#cb32-11"></a>   <span class="fl">-58.52540</span> </span></code></pre></div></li>
-<li><p>En déduire les estimateurs dans l’espace des données initiales pour les données centrées réduites, puis pour les données brutes. On pourra récupérer les vecteurs propres de l’ACP (<span class="math inline">\(u_k\)</span> dans le cours) dans la sortie <strong>svd</strong> de la fonction <strong>PCA</strong></p>
-<div class="corR">
-<ul>
-<li>
-<p>Pour les données centrées-réduites, les coefficients s’obtiennent avec les formules vues en cours</p>
-</li>
-</ul>
-<p>
-<p><span class="math display"><span class="math display">\[\widehat\gamma_0=\bar{\mathbb Y}\quad\text{et}\quad \widehat\gamma_j=\widehat{\theta}^t v_j.\]</span></span></p>
-</p>
-</div>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="reg-comp.html#cb33-1"></a> U &lt;-<span class="st"> </span>acp.hit<span class="op">$</span>svd<span class="op">$</span>V</span>
-<span id="cb33-2"><a href="reg-comp.html#cb33-2"></a> V &lt;-<span class="st"> </span><span class="kw">t</span>(U)</span>
-<span id="cb33-3"><a href="reg-comp.html#cb33-3"></a> beta0.cr &lt;-<span class="st"> </span><span class="kw">mean</span>(Hitters<span class="op">$</span>Salary)</span>
-<span id="cb33-4"><a href="reg-comp.html#cb33-4"></a> beta.cr &lt;-<span class="st"> </span><span class="kw">as.vector</span>(theta[<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>])<span class="op">%*%</span>V</span>
-<span id="cb33-5"><a href="reg-comp.html#cb33-5"></a> beta.cr</span>
-<span id="cb33-6"><a href="reg-comp.html#cb33-6"></a>          [,<span class="dv">1</span>]     [,<span class="dv">2</span>]    [,<span class="dv">3</span>]     [,<span class="dv">4</span>]     [,<span class="dv">5</span>]     [,<span class="dv">6</span>]</span>
-<span id="cb33-7"><a href="reg-comp.html#cb33-7"></a> [<span class="dv">1</span>,] <span class="fl">28.76604</span> <span class="fl">30.44702</span> <span class="fl">25.8445</span> <span class="fl">33.00088</span> <span class="fl">33.81997</span> <span class="fl">35.08779</span></span>
-<span id="cb33-8"><a href="reg-comp.html#cb33-8"></a>          [,<span class="dv">7</span>]     [,<span class="dv">8</span>]     [,<span class="dv">9</span>]    [,<span class="dv">10</span>]    [,<span class="dv">11</span>]    [,<span class="dv">12</span>]</span>
-<span id="cb33-9"><a href="reg-comp.html#cb33-9"></a> [<span class="dv">1</span>,] <span class="fl">22.35103</span> <span class="fl">29.01477</span> <span class="fl">29.78584</span> <span class="fl">30.00201</span> <span class="fl">32.06912</span> <span class="fl">31.11231</span></span>
-<span id="cb33-10"><a href="reg-comp.html#cb33-10"></a>         [,<span class="dv">13</span>]  [,<span class="dv">14</span>]     [,<span class="dv">15</span>]    [,<span class="dv">16</span>]     [,<span class="dv">17</span>]     [,<span class="dv">18</span>]</span>
-<span id="cb33-11"><a href="reg-comp.html#cb33-11"></a> [<span class="dv">1</span>,] <span class="fl">31.48735</span> <span class="fl">19.439</span> <span class="fl">-63.20387</span> <span class="fl">17.36044</span> <span class="fl">-5.523264</span> <span class="fl">-6.044002</span></span>
-<span id="cb33-12"><a href="reg-comp.html#cb33-12"></a>         [,<span class="dv">19</span>]</span>
-<span id="cb33-13"><a href="reg-comp.html#cb33-13"></a> [<span class="dv">1</span>,] <span class="fl">21.74267</span></span></code></pre></div>
-<div class="corR">
-<ul>
-<li>
-<p>Pour les données brutes, on utilise les formules :</p>
-</li>
-</ul>
-<p>
-<p><span class="math display"><span class="math display">\[\widehat\beta_0=\bar{\mathbb Y}-\sum_{j=1}^p\widehat\theta^t v_j\frac{\bar{\mathbb X}_j}{\sigma_{\mathbb X_j}}\quad\text{et}\quad\widehat\beta_j=\frac{\widehat\theta^t v_j}{\sigma_{\mathbb X_j}},j=1,\dots,p.\]</span></span></p>
-</p>
-</div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="reg-comp.html#cb34-1"></a> beta0 &lt;-<span class="st"> </span>beta0.cr<span class="op">-</span><span class="kw">sum</span>(beta.cr<span class="op">*</span>Xbar<span class="op">/</span>stdX)</span>
-<span id="cb34-2"><a href="reg-comp.html#cb34-2"></a> beta &lt;-<span class="st"> </span>beta.cr<span class="op">/</span>stdX</span>
-<span id="cb34-3"><a href="reg-comp.html#cb34-3"></a> beta0</span>
-<span id="cb34-4"><a href="reg-comp.html#cb34-4"></a> [<span class="dv">1</span>] <span class="fl">-58.32022</span></span>
-<span id="cb34-5"><a href="reg-comp.html#cb34-5"></a> beta</span>
-<span id="cb34-6"><a href="reg-comp.html#cb34-6"></a>           [,<span class="dv">1</span>]      [,<span class="dv">2</span>]    [,<span class="dv">3</span>]     [,<span class="dv">4</span>]     [,<span class="dv">5</span>]     [,<span class="dv">6</span>]</span>
-<span id="cb34-7"><a href="reg-comp.html#cb34-7"></a> [<span class="dv">1</span>,] <span class="fl">0.1952793</span> <span class="fl">0.6747214</span> <span class="fl">2.95126</span> <span class="fl">1.292134</span> <span class="fl">1.306662</span> <span class="fl">1.615605</span></span>
-<span id="cb34-8"><a href="reg-comp.html#cb34-8"></a>          [,<span class="dv">7</span>]       [,<span class="dv">8</span>]       [,<span class="dv">9</span>]     [,<span class="dv">10</span>]      [,<span class="dv">11</span>]</span>
-<span id="cb34-9"><a href="reg-comp.html#cb34-9"></a> [<span class="dv">1</span>,] <span class="fl">4.662667</span> <span class="fl">0.01268914</span> <span class="fl">0.04595165</span> <span class="fl">0.3649987</span> <span class="fl">0.09682748</span></span>
-<span id="cb34-10"><a href="reg-comp.html#cb34-10"></a>           [,<span class="dv">12</span>]    [,<span class="dv">13</span>]    [,<span class="dv">14</span>]   [,<span class="dv">15</span>]      [,<span class="dv">16</span>]</span>
-<span id="cb34-11"><a href="reg-comp.html#cb34-11"></a> [<span class="dv">1</span>,] <span class="fl">0.09621344</span> <span class="fl">0.119245</span> <span class="fl">38.86728</span> <span class="fl">-126.19</span> <span class="fl">0.06201606</span></span>
-<span id="cb34-12"><a href="reg-comp.html#cb34-12"></a>            [,<span class="dv">17</span>]      [,<span class="dv">18</span>]    [,<span class="dv">19</span>]</span>
-<span id="cb34-13"><a href="reg-comp.html#cb34-13"></a> [<span class="dv">1</span>,] <span class="fl">-0.03807032</span> <span class="fl">-0.9148466</span> <span class="fl">43.51629</span></span></code></pre></div></li>
-<li><p>Retrouver les estimateurs dans l’espace des données initiales pour les données centrées réduites à l’aide de la fonction <code>pcr</code> du package <strong>pls</strong>.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="reg-comp.html#cb35-1"></a><span class="kw">library</span>(pls)</span>
-<span id="cb35-2"><a href="reg-comp.html#cb35-2"></a>pcr.fit &lt;-<span class="st"> </span><span class="kw">pcr</span>(Salary<span class="op">~</span>.,<span class="dt">data=</span>Hitters,<span class="dt">scale=</span><span class="ot">TRUE</span>,<span class="dt">ncomp=</span><span class="dv">19</span>)</span>
-<span id="cb35-3"><a href="reg-comp.html#cb35-3"></a><span class="kw">coefficients</span>(pcr.fit,<span class="dt">ncomp=</span><span class="dv">5</span>)</span>
-<span id="cb35-4"><a href="reg-comp.html#cb35-4"></a>, , <span class="dv">5</span> comps</span>
-<span id="cb35-5"><a href="reg-comp.html#cb35-5"></a></span>
-<span id="cb35-6"><a href="reg-comp.html#cb35-6"></a>               Salary</span>
-<span id="cb35-7"><a href="reg-comp.html#cb35-7"></a>AtBat       <span class="fl">28.766042</span></span>
-<span id="cb35-8"><a href="reg-comp.html#cb35-8"></a>Hits        <span class="fl">30.447021</span></span>
-<span id="cb35-9"><a href="reg-comp.html#cb35-9"></a>HmRun       <span class="fl">25.844498</span></span>
-<span id="cb35-10"><a href="reg-comp.html#cb35-10"></a>Runs        <span class="fl">33.000876</span></span>
-<span id="cb35-11"><a href="reg-comp.html#cb35-11"></a>RBI         <span class="fl">33.819966</span></span>
-<span id="cb35-12"><a href="reg-comp.html#cb35-12"></a>Walks       <span class="fl">35.087794</span></span>
-<span id="cb35-13"><a href="reg-comp.html#cb35-13"></a>Years       <span class="fl">22.351033</span></span>
-<span id="cb35-14"><a href="reg-comp.html#cb35-14"></a>CAtBat      <span class="fl">29.014768</span></span>
-<span id="cb35-15"><a href="reg-comp.html#cb35-15"></a>CHits       <span class="fl">29.785842</span></span>
-<span id="cb35-16"><a href="reg-comp.html#cb35-16"></a>CHmRun      <span class="fl">30.002014</span></span>
-<span id="cb35-17"><a href="reg-comp.html#cb35-17"></a>CRuns       <span class="fl">32.069124</span></span>
-<span id="cb35-18"><a href="reg-comp.html#cb35-18"></a>CRBI        <span class="fl">31.112315</span></span>
-<span id="cb35-19"><a href="reg-comp.html#cb35-19"></a>CWalks      <span class="fl">31.487349</span></span>
-<span id="cb35-20"><a href="reg-comp.html#cb35-20"></a>LeagueN     <span class="fl">19.438996</span></span>
-<span id="cb35-21"><a href="reg-comp.html#cb35-21"></a>DivisionW  <span class="fl">-63.203872</span></span>
-<span id="cb35-22"><a href="reg-comp.html#cb35-22"></a>PutOuts     <span class="fl">17.360440</span></span>
-<span id="cb35-23"><a href="reg-comp.html#cb35-23"></a>Assists     <span class="fl">-5.523264</span></span>
-<span id="cb35-24"><a href="reg-comp.html#cb35-24"></a>Errors      <span class="fl">-6.044002</span></span>
-<span id="cb35-25"><a href="reg-comp.html#cb35-25"></a>NewLeagueN  <span class="fl">21.742668</span></span></code></pre></div>
-<div class="corR">
-<p>
-On remarque que la fonction <strong>PCR</strong> renvoie les coefficients par rapport aux variables initiales centrées réduites. Cela fait du sens car il est dans ce cas possible de comparer les valeurs des estimateurs pour tenter d’interpréter le modèle. C’est beaucoup plus difficile à faire avec les coefficients des axes de l’ACP ou des variables intiales. Il est également important de noter que, contrairement aux estimateurs MCO du modèle linéaire Gaussien, on n’a pas d’information précise sur la loi des estimateurs, il n’est donc pas possible (ou pas facile) de faire des tests ou de calculer des intervalles de confiance.
-</p>
-</div></li>
+<li><p>Parmi les variables explicatives, certaines sont qualitatives. Expliquer comment, à l’aide de la fonction <strong>model.matrix</strong> on peut utiliser ces variables dans un modèle linéaire. On appellera <strong>X</strong> la matrice des variables explicatives construites avec cette variable.</p></li>
+<li><p>Calculer la matrice <strong>Xcr</strong> qui correspond à la matrice <strong>X</strong> centrée réduite. On pourra utiliser la fonction <code>scale</code>.</p></li>
+<li><p>A l’aide de la fonction <code>PCA</code> du package <strong>FactoMineR</strong>, effectuer l’ACP du tableau <strong>Xcr</strong> avec l’option <code>scale.unit=FALSE</code>.</p></li>
+<li><p>Récupérer les coordonnées des individus sur les 5 premiers axes de l’ACP (variables <span class="math inline">\(Z\)</span> dans le cours).</p></li>
+<li><p>Effectuer la régression linéaire sur les 5 premières composantes principales et calculer les estimateurs des MCO (<span class="math inline">\(\widehat\alpha_k,k=1,\dots,5\)</span> dans le cours).</p></li>
+<li><p>En déduire les estimateurs dans l’espace des données initiales pour les données centrées réduites, puis pour les données brutes. On pourra récupérer les vecteurs propres de l’ACP (<span class="math inline">\(w_k\)</span> dans le cours) dans la sortie <strong>svd</strong> de la fonction <strong>PCA</strong>.</p></li>
+<li><p>Retrouver les estimateurs dans l’espace des données initiales pour les données centrées réduites à l’aide de la fonction <code>pcr</code> du package <strong>pls</strong>.</p></li>
 <li><p>On considère les individus suivants</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="reg-comp.html#cb36-1"></a>df.new &lt;-<span class="st"> </span>Hitters[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">100</span>,<span class="dv">80</span>),]</span></code></pre></div>
-<p>Calculer de 3 façons différentes les valeurs de salaire prédites par la régression sur 5 composantes principales.</p>
-<div class="corR">
-<ul>
-<li>
-<p>Approche classique : on utilise <code>predict.pcr</code> :</p>
-</li>
-</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="reg-comp.html#cb12-1" aria-hidden="true" tabindex="-1"></a>df.new <span class="ot">&lt;-</span> Hitters[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">100</span>,<span class="dv">80</span>),]</span></code></pre></div>
+<p>Calculer de 3 façons différentes les valeurs de salaire prédites par la régression sur 5 composantes principales.</p></li>
+</ol>
+
+<div class="exercise">
+<span id="exr:exo-cal-compPCR" class="exercise"><strong>Exercice 2.2  (Composantes PCR)  </strong></span>
 </div>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="reg-comp.html#cb37-1"></a> <span class="kw">predict</span>(pcr.fit,<span class="dt">newdata=</span>df.new,<span class="dt">ncomp=</span><span class="dv">5</span>)</span>
-<span id="cb37-2"><a href="reg-comp.html#cb37-2"></a> , , <span class="dv">5</span> comps</span>
-<span id="cb37-3"><a href="reg-comp.html#cb37-3"></a></span>
-<span id="cb37-4"><a href="reg-comp.html#cb37-4"></a>                 Salary</span>
-<span id="cb37-5"><a href="reg-comp.html#cb37-5"></a> <span class="op">-</span>Alan Ashby   <span class="fl">495.0068</span></span>
-<span id="cb37-6"><a href="reg-comp.html#cb37-6"></a> <span class="op">-</span>Hubie Brooks <span class="fl">577.9581</span></span>
-<span id="cb37-7"><a href="reg-comp.html#cb37-7"></a> <span class="op">-</span>George Bell  <span class="fl">822.0296</span></span></code></pre></div>
-<div class="corR">
-<ul>
-<li>
-<p>On considère les valeurs centrées réduites et on utilise :</p>
-</li>
-</ul>
-<p>
-<p><span class="math display"><span class="math display">\[\widehat y=\bar y+ \widehat\theta^\prime v_1\tilde x_1+\cdots+\widehat\theta^\prime v_p\tilde x_p\]</span></span></p>
-</p>
-</div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="reg-comp.html#cb38-1"></a> <span class="kw">t</span>(<span class="kw">as.matrix</span>(<span class="kw">coefficients</span>(pcr.fit,<span class="dt">ncomp=</span><span class="dv">5</span>))) <span class="op">%*%</span><span class="st"> </span></span>
-<span id="cb38-2"><a href="reg-comp.html#cb38-2"></a><span class="st">   </span><span class="kw">t</span>(<span class="kw">as.matrix</span>(Xcr[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">100</span>,<span class="dv">80</span>),]))<span class="op">+</span><span class="kw">mean</span>(Hitters<span class="op">$</span>Salary)</span>
-<span id="cb38-3"><a href="reg-comp.html#cb38-3"></a>      <span class="op">-</span>Alan Ashby <span class="op">-</span>Hubie Brooks <span class="op">-</span>George Bell</span>
-<span id="cb38-4"><a href="reg-comp.html#cb38-4"></a> [<span class="dv">1</span>,]    <span class="fl">495.0068</span>      <span class="fl">577.9581</span>     <span class="fl">822.0296</span></span>
-<span id="cb38-5"><a href="reg-comp.html#cb38-5"></a> <span class="co">#ou</span></span>
-<span id="cb38-6"><a href="reg-comp.html#cb38-6"></a> beta0.cr<span class="op">+</span>beta.cr<span class="op">%*%</span><span class="kw">t</span>(<span class="kw">as.matrix</span>(Xcr[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">100</span>,<span class="dv">80</span>),]))</span>
-<span id="cb38-7"><a href="reg-comp.html#cb38-7"></a>      <span class="op">-</span>Alan Ashby <span class="op">-</span>Hubie Brooks <span class="op">-</span>George Bell</span>
-<span id="cb38-8"><a href="reg-comp.html#cb38-8"></a> [<span class="dv">1</span>,]    <span class="fl">495.0068</span>      <span class="fl">577.9581</span>     <span class="fl">822.0296</span></span></code></pre></div>
-<div class="corR">
-<ul>
-<li>
-<p>On considère les données brutes et on utilise :</p>
-</li>
-</ul>
-<p>
-<p><span class="math display"><span class="math display">\[\widehat y=\widehat\beta_0+\widehat\beta_1x_1+\cdots+\widehat\beta_px_p\]</span></span></p>
-</p>
-</div>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="reg-comp.html#cb39-1"></a> beta0<span class="op">+</span>beta <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(<span class="kw">as.matrix</span>(X[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">100</span>,<span class="dv">80</span>),]))</span>
-<span id="cb39-2"><a href="reg-comp.html#cb39-2"></a>      <span class="op">-</span>Alan Ashby <span class="op">-</span>Hubie Brooks <span class="op">-</span>George Bell</span>
-<span id="cb39-3"><a href="reg-comp.html#cb39-3"></a> [<span class="dv">1</span>,]    <span class="fl">495.0068</span>      <span class="fl">577.9581</span>     <span class="fl">822.0296</span></span></code></pre></div></li>
+<p>On rappelle que les poids <span class="math inline">\(w_k\)</span> des composantes principales s’obtiennent en résolvant le problème :</p>
+<p><span class="math display">\[\max_{w\in\mathbb R^d}\mathbf V(\mathbb Xw)\]</span>
+<span class="math display">\[\text{sous les contraintes }\|w\|=1,w^t\mathbb X^t\mathbb X w_\ell=0, \ell=1,\dots,k-1.\]</span></p>
+<ol style="list-style-type: decimal">
+<li><p>Montrer <span class="math inline">\(w_1\)</span> est un vecteur propre associé à la plus grande valeur propre de <span class="math inline">\(\mathbb X^t\mathbb X\)</span>.</p></li>
+<li><p>Calculer <span class="math inline">\(w_2\)</span>.</p></li>
 </ol>
 </div>
-<div id="régression-pls-méthodo" class="section level2">
+<div id="régression-pls-méthodo" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Régression PLS : méthodo</h2>
 <p>La régression <strong>PLS</strong> propose de construire également de nouvelles composantes comme des combinaisons linéaires des variables explicatives. Comme pour l’algorithme <strong>PCR</strong>, les composantes sont calculées les unes après les autres et orthogonales entre elles. La principale différence et qu’on ne cherche pas les composantes qui maximisent la variabilités des observations projetées, mais les composantes qui maximisent la colinéarité avec la cible. L’algorithme est expliqué dans l’exercice suivant.</p>
 
 <div class="exercise">
-<span id="exr:exo-calc-comp-pls" class="exercise"><strong>Exercice 2.2  (Calcul des composantes PLS)  </strong></span>
+<span id="exr:exo-calc-comp-pls" class="exercise"><strong>Exercice 2.3  (Calcul des composantes PLS)  </strong></span>
 </div>
-
-<p>On reprend les notations du cours : <span class="math inline">\(\mathbb Y\)</span> désigne le vecteur de la variable à expliquer et <span class="math inline">\(\mathbb X\)</span> la matrice qui contient les observations des variables explicatives. On la supposera centrée réduite.</p>
+<p>On reprend les notations du cours : <span class="math inline">\(\mathbb Y\)</span> désigne le vecteur de la variable à expliquer et <span class="math inline">\(\mathbb X\)</span> la matrice qui contient les observations des variables explicatives. On la suppose toujours centrée réduite.</p>
 <ol style="list-style-type: decimal">
 <li><p>On pose <span class="math inline">\(\mathbb Y^{(1)}=\mathbb Y\)</span> et <span class="math inline">\(\mathbb X^{(1)}=\mathbb X\)</span>. On cherche <span class="math inline">\(Z_1=w_1^tX^{(1)}\)</span> qui maximise
 <span class="math display">\[\langle \mathbb X^{(1)}w_1,\mathbb Y^{(1)}\rangle\quad\text{sous la contrainte}\quad\|w\|^2=1.\]</span>
-Cela revient à cherche la combinaison linéaire des colonnes de <span class="math inline">\(\mathbb X^{(1)}\)</span> la plus corrélée à <span class="math inline">\(\mathbb Y^{(1)}\)</span>. Calculer cette première composante.</p>
-<div class="correction">
-<p>
-On écrit le lagrangien <span class="math display"><span class="math display">\[L(x,\lambda)={\mathbb Y^{(1)}}^t\mathbb X^{(1)}w_1-\frac{1}{2}\lambda(\|w_1\|^2-1)\]</span></span> En dérivant par rapport à <span class="math inline"><span class="math inline">\(w\)</span></span> et <span class="math inline"><span class="math inline">\(\lambda\)</span></span> on obtient les équations <span class="math display"><span class="math display">\[\left\{
- \begin{array}{l}
- {\mathbb X^{(1)}}^t\mathbb Y^{(1)}-\lambda w_1=0 \\
- \|w_1\|^2=1
- \end{array}\right.\]</span></span> La solution est donnée par <span class="math display"><span class="math display">\[w_1=\frac{{\mathbb X^{(1)}}^t\mathbb Y^{(1)}}{{\|\mathbb X^{(1)}}^t\mathbb Y^{(1)}\|}.\]</span></span>
-</p>
-</div></li>
+Cela revient à cherche la combinaison linéaire des colonnes de <span class="math inline">\(\mathbb X^{(1)}\)</span> la plus corrélée à <span class="math inline">\(\mathbb Y^{(1)}\)</span>. Calculer cette première composante.</p></li>
 <li><p>On pose <span class="math inline">\(Z_1=w_1^tX^{(1)}\)</span> et <span class="math inline">\(\mathbb Z_1=\mathbb X^{(1)}w_1\)</span>. On considère le modèle de régression linéaire
 <span class="math display">\[Y^{(1)}=\alpha_0+\alpha_1Z_1+\varepsilon.\]</span>
-Exprimer les estimateurs MCO de <span class="math inline">\(\alpha=(\alpha_0,\alpha_1)\)</span> en fonction de <span class="math inline">\(\mathbb Z^{(1)}\)</span> et <span class="math inline">\(\mathbb Y^{(1)}\)</span>.</p>
-<div class="correction">
-<p>
-On déduit <span class="math display"><span class="math display">\[\widehat \alpha_0=\bar{\mathbb Y}^{(1)}-\widehat \alpha_1\bar{\mathbb Z}_1=\bar{\mathbb Y}^{(1)}\]</span></span> car <span class="math inline"><span class="math inline">\(\bar{\mathbb Z}_1=0\)</span></span> puisque <span class="math inline"><span class="math inline">\(\mathbb X^{(1)}\)</span></span> est centrée. Le second estimateur s’obtient par <span class="math display"><span class="math display">\[\widehat \alpha_1=\frac{\langle \mathbb Z_1,\mathbb Y^{(1)}\rangle}{\langle \mathbb Z_1,\mathbb Z_1\rangle}.\]</span></span>
-</p>
-</div></li>
+Exprimer les estimateurs MCO de <span class="math inline">\(\alpha=(\alpha_0,\alpha_1)\)</span> en fonction de <span class="math inline">\(\mathbb Z^{(1)}\)</span> et <span class="math inline">\(\mathbb Y^{(1)}\)</span>.</p></li>
 <li><p>On passe maintenant à la deuxième composante. On cherche à expliquer la partie résiduelle
 <span class="math display">\[\mathbb Y^{(2)}=P_{Z_1^\perp}(\mathbb Y^{(1)})=\widehat\varepsilon_1=\mathbb Y^{(1)}-\widehat{\mathbb Y}^{(1)}\]</span>
 par la “meilleure” combinaison linéaire orthogonale à <span class="math inline">\(Z_1\)</span>. On orthogonalise chaque <span class="math inline">\(\tilde{\mathbb X}_j^{(1)}\)</span> par rapport à <span class="math inline">\(\mathbb Z_1\)</span> :
 <span class="math display">\[{\mathbb X}_j^{(2)}=P_{\mathbb Z_1^\perp}({\mathbb X}_j^{(1)})=(\text{Id}-P_{\mathbb Z_1})({\mathbb X}_j^{(1)})={\mathbb X}_j^{(1)}-\frac{\langle \mathbb Z_1,{\mathbb X}_j^{(1)}\rangle}{\langle \mathbb Z_1,\mathbb Z_1\rangle}\mathbb Z_1.\]</span>
-et on déduit <span class="math inline">\(w_2\)</span> comme <span class="math inline">\(w_1\)</span> : <span class="math inline">\(w_2=\tilde{\mathbb X}^{(2)&#39;}\mathbb Y^{(2)}\)</span>. On considère ensuite le modèle <span class="math inline">\(Y^{(2)}=\alpha_2Z_2+\varepsilon\)</span>. Exprimer l’estimateur des MCO de <span class="math inline">\(\alpha_2\)</span> en fonction de <span class="math inline">\(\mathbb Z_2=\mathbb X^{(2)}w_2\)</span> et <span class="math inline">\(\mathbb Y\)</span>.</p>
-<div class="correction">
-<p>
-On a <span class="math display"><span class="math display">\[\widehat\alpha_2=\frac{\langle \mathbb Z_2,\mathbb Y^{(2)}\rangle}{\langle \mathbb Z_2,\mathbb Z_2\rangle}=\frac{\langle \mathbb Z_2,\mathbb Y-\widehat{\mathbb Y}^{(1)}\rangle}{\langle \mathbb Z_2,\mathbb Z_2\rangle}=\frac{\langle \mathbb Z_2,\mathbb Y\rangle}{\langle \mathbb Z_2,\mathbb Z_2\rangle}\]</span></span> car <span class="math inline"><span class="math inline">\(\widehat{\mathbb Y}^{(1)}=\widehat \alpha_0+\widehat \alpha_1\mathbb Z_1\)</span></span> est orthogonal à <span class="math inline"><span class="math inline">\(\mathbb Z_2\)</span></span>.
-</p>
-</div></li>
+et on déduit <span class="math inline">\(w_2\)</span> comme <span class="math inline">\(w_1\)</span> : <span class="math inline">\(w_2=\tilde{\mathbb X}^{(2)&#39;}\mathbb Y^{(2)}\)</span>. On considère ensuite le modèle <span class="math inline">\(Y^{(2)}=\alpha_2Z_2+\varepsilon\)</span>. Exprimer l’estimateur des MCO de <span class="math inline">\(\alpha_2\)</span> en fonction de <span class="math inline">\(\mathbb Z_2=\mathbb X^{(2)}w_2\)</span> et <span class="math inline">\(\mathbb Y\)</span>.</p></li>
 </ol>
 
 <div class="exercise">
-<span id="exr:exo-methodo-pls" class="exercise"><strong>Exercice 2.3  (Régression PLS sur R)  </strong></span>
+<span id="exr:exo-methodo-pls" class="exercise"><strong>Exercice 2.4  (Régression PLS sur R)  </strong></span>
 </div>
-
 <p>On considère les mêmes données que précédemment.</p>
 <ol style="list-style-type: decimal">
-<li><p>A l’aide du vecteur <span class="math inline">\(\mathbb Y\)</span> (<em>Salary</em>) et de la matrice des <span class="math inline">\(\mathbb X\)</span> centrées réduites calculées dans l’exercice précédent, calculer la première composante <strong>PLS</strong> <span class="math inline">\(\mathbb Z_1\)</span>.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="reg-comp.html#cb40-1"></a>Y &lt;-<span class="st"> </span><span class="kw">as.vector</span>(Hitters<span class="op">$</span>Salary)</span>
-<span id="cb40-2"><a href="reg-comp.html#cb40-2"></a>w1 &lt;-<span class="st"> </span><span class="kw">t</span>(Xcr)<span class="op">%*%</span>Y</span>
-<span id="cb40-3"><a href="reg-comp.html#cb40-3"></a>w1</span>
-<span id="cb40-4"><a href="reg-comp.html#cb40-4"></a>                  [,<span class="dv">1</span>]</span>
-<span id="cb40-5"><a href="reg-comp.html#cb40-5"></a>AtBat       <span class="fl">46659.1995</span></span>
-<span id="cb40-6"><a href="reg-comp.html#cb40-6"></a>Hits        <span class="fl">51848.3247</span></span>
-<span id="cb40-7"><a href="reg-comp.html#cb40-7"></a>HmRun       <span class="fl">40543.5500</span></span>
-<span id="cb40-8"><a href="reg-comp.html#cb40-8"></a>Runs        <span class="fl">49624.3823</span></span>
-<span id="cb40-9"><a href="reg-comp.html#cb40-9"></a>RBI         <span class="fl">53122.7240</span></span>
-<span id="cb40-10"><a href="reg-comp.html#cb40-10"></a>Walks       <span class="fl">52462.0450</span></span>
-<span id="cb40-11"><a href="reg-comp.html#cb40-11"></a>Years       <span class="fl">47354.8899</span></span>
-<span id="cb40-12"><a href="reg-comp.html#cb40-12"></a>CAtBat      <span class="fl">62185.5603</span></span>
-<span id="cb40-13"><a href="reg-comp.html#cb40-13"></a>CHits       <span class="fl">64877.3193</span></span>
-<span id="cb40-14"><a href="reg-comp.html#cb40-14"></a>CHmRun      <span class="fl">62043.1671</span></span>
-<span id="cb40-15"><a href="reg-comp.html#cb40-15"></a>CRuns       <span class="fl">66504.6198</span></span>
-<span id="cb40-16"><a href="reg-comp.html#cb40-16"></a>CRBI        <span class="fl">67011.4288</span></span>
-<span id="cb40-17"><a href="reg-comp.html#cb40-17"></a>CWalks      <span class="fl">57893.5821</span></span>
-<span id="cb40-18"><a href="reg-comp.html#cb40-18"></a>LeagueN     <span class="fl">-1688.0134</span></span>
-<span id="cb40-19"><a href="reg-comp.html#cb40-19"></a>DivisionW  <span class="fl">-22753.8726</span></span>
-<span id="cb40-20"><a href="reg-comp.html#cb40-20"></a>PutOuts     <span class="fl">35514.7030</span></span>
-<span id="cb40-21"><a href="reg-comp.html#cb40-21"></a>Assists      <span class="fl">3006.3756</span></span>
-<span id="cb40-22"><a href="reg-comp.html#cb40-22"></a>Errors       <span class="fl">-638.3256</span></span>
-<span id="cb40-23"><a href="reg-comp.html#cb40-23"></a>NewLeagueN   <span class="fl">-335.0136</span></span>
-<span id="cb40-24"><a href="reg-comp.html#cb40-24"></a>Z1 &lt;-<span class="st"> </span>Xcr<span class="op">%*%</span>w1</span></code></pre></div></li>
+<li><p>A l’aide du vecteur <span class="math inline">\(\mathbb Y\)</span> (<em>Salary</em>) et de la matrice des <span class="math inline">\(\mathbb X\)</span> centrées réduites calculées dans l’exercice précédent, calculer la première composante <strong>PLS</strong> <span class="math inline">\(\mathbb Z_1\)</span>.</p></li>
 <li><p>En déduire le coefficient associé à cette première composante en considérant le modèle
-<span class="math display">\[Y=\alpha_1 Z_1+\varepsilon.\]</span></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="reg-comp.html#cb41-1"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Z1,Y)</span>
-<span id="cb41-2"><a href="reg-comp.html#cb41-2"></a>mod1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Y<span class="op">~</span>Z1<span class="dv">-1</span>,<span class="dt">data=</span>df)</span>
-<span id="cb41-3"><a href="reg-comp.html#cb41-3"></a>alpha1 &lt;-<span class="st"> </span><span class="kw">coef</span>(mod1)</span>
-<span id="cb41-4"><a href="reg-comp.html#cb41-4"></a>alpha1</span>
-<span id="cb41-5"><a href="reg-comp.html#cb41-5"></a>          Z1 </span>
-<span id="cb41-6"><a href="reg-comp.html#cb41-6"></a><span class="fl">0.0005367014</span> </span></code></pre></div></li>
+<span class="math display">\[Y=\alpha_1 Z_1+\varepsilon.\]</span></p></li>
 <li><p>En déduire les coefficients en fonction des variables initiales (centrées réduites) de la régression PLS à une composante
-<span class="math display">\[Y=\beta_0+\beta_1X_1+\dots+\beta_pX_p+\varepsilon.\]</span></p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="reg-comp.html#cb42-1"></a>alpha1<span class="op">*</span>w1</span>
-<span id="cb42-2"><a href="reg-comp.html#cb42-2"></a>                  [,<span class="dv">1</span>]</span>
-<span id="cb42-3"><a href="reg-comp.html#cb42-3"></a>AtBat       <span class="fl">25.0420570</span></span>
-<span id="cb42-4"><a href="reg-comp.html#cb42-4"></a>Hits        <span class="fl">27.8270677</span></span>
-<span id="cb42-5"><a href="reg-comp.html#cb42-5"></a>HmRun       <span class="fl">21.7597795</span></span>
-<span id="cb42-6"><a href="reg-comp.html#cb42-6"></a>Runs        <span class="fl">26.6334747</span></span>
-<span id="cb42-7"><a href="reg-comp.html#cb42-7"></a>RBI         <span class="fl">28.5110396</span></span>
-<span id="cb42-8"><a href="reg-comp.html#cb42-8"></a>Walks       <span class="fl">28.1564522</span></span>
-<span id="cb42-9"><a href="reg-comp.html#cb42-9"></a>Years       <span class="fl">25.4154350</span></span>
-<span id="cb42-10"><a href="reg-comp.html#cb42-10"></a>CAtBat      <span class="fl">33.3750764</span></span>
-<span id="cb42-11"><a href="reg-comp.html#cb42-11"></a>CHits       <span class="fl">34.8197471</span></span>
-<span id="cb42-12"><a href="reg-comp.html#cb42-12"></a>CHmRun      <span class="fl">33.2986538</span></span>
-<span id="cb42-13"><a href="reg-comp.html#cb42-13"></a>CRuns       <span class="fl">35.6931216</span></span>
-<span id="cb42-14"><a href="reg-comp.html#cb42-14"></a>CRBI        <span class="fl">35.9651267</span></span>
-<span id="cb42-15"><a href="reg-comp.html#cb42-15"></a>CWalks      <span class="fl">31.0715657</span></span>
-<span id="cb42-16"><a href="reg-comp.html#cb42-16"></a>LeagueN     <span class="fl">-0.9059591</span></span>
-<span id="cb42-17"><a href="reg-comp.html#cb42-17"></a>DivisionW  <span class="fl">-12.2120349</span></span>
-<span id="cb42-18"><a href="reg-comp.html#cb42-18"></a>PutOuts     <span class="fl">19.0607903</span></span>
-<span id="cb42-19"><a href="reg-comp.html#cb42-19"></a>Assists      <span class="fl">1.6135259</span></span>
-<span id="cb42-20"><a href="reg-comp.html#cb42-20"></a>Errors      <span class="fl">-0.3425902</span></span>
-<span id="cb42-21"><a href="reg-comp.html#cb42-21"></a>NewLeagueN  <span class="fl">-0.1798022</span></span></code></pre></div></li>
-<li><p>Retrouver ces coefficients en utilisant la fonction <code>plsr</code>.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="reg-comp.html#cb43-1"></a>pls.fit &lt;-<span class="st"> </span><span class="kw">plsr</span>(Salary<span class="op">~</span>.,<span class="dt">data=</span>Hitters,<span class="dt">scale=</span><span class="ot">TRUE</span>)</span>
-<span id="cb43-2"><a href="reg-comp.html#cb43-2"></a><span class="kw">coefficients</span>(pls.fit,<span class="dt">ncomp =</span> <span class="dv">1</span>)</span>
-<span id="cb43-3"><a href="reg-comp.html#cb43-3"></a>, , <span class="dv">1</span> comps</span>
-<span id="cb43-4"><a href="reg-comp.html#cb43-4"></a></span>
-<span id="cb43-5"><a href="reg-comp.html#cb43-5"></a>                Salary</span>
-<span id="cb43-6"><a href="reg-comp.html#cb43-6"></a>AtBat       <span class="fl">25.0420570</span></span>
-<span id="cb43-7"><a href="reg-comp.html#cb43-7"></a>Hits        <span class="fl">27.8270677</span></span>
-<span id="cb43-8"><a href="reg-comp.html#cb43-8"></a>HmRun       <span class="fl">21.7597795</span></span>
-<span id="cb43-9"><a href="reg-comp.html#cb43-9"></a>Runs        <span class="fl">26.6334747</span></span>
-<span id="cb43-10"><a href="reg-comp.html#cb43-10"></a>RBI         <span class="fl">28.5110396</span></span>
-<span id="cb43-11"><a href="reg-comp.html#cb43-11"></a>Walks       <span class="fl">28.1564522</span></span>
-<span id="cb43-12"><a href="reg-comp.html#cb43-12"></a>Years       <span class="fl">25.4154350</span></span>
-<span id="cb43-13"><a href="reg-comp.html#cb43-13"></a>CAtBat      <span class="fl">33.3750764</span></span>
-<span id="cb43-14"><a href="reg-comp.html#cb43-14"></a>CHits       <span class="fl">34.8197471</span></span>
-<span id="cb43-15"><a href="reg-comp.html#cb43-15"></a>CHmRun      <span class="fl">33.2986538</span></span>
-<span id="cb43-16"><a href="reg-comp.html#cb43-16"></a>CRuns       <span class="fl">35.6931216</span></span>
-<span id="cb43-17"><a href="reg-comp.html#cb43-17"></a>CRBI        <span class="fl">35.9651267</span></span>
-<span id="cb43-18"><a href="reg-comp.html#cb43-18"></a>CWalks      <span class="fl">31.0715657</span></span>
-<span id="cb43-19"><a href="reg-comp.html#cb43-19"></a>LeagueN     <span class="fl">-0.9059591</span></span>
-<span id="cb43-20"><a href="reg-comp.html#cb43-20"></a>DivisionW  <span class="fl">-12.2120349</span></span>
-<span id="cb43-21"><a href="reg-comp.html#cb43-21"></a>PutOuts     <span class="fl">19.0607903</span></span>
-<span id="cb43-22"><a href="reg-comp.html#cb43-22"></a>Assists      <span class="fl">1.6135259</span></span>
-<span id="cb43-23"><a href="reg-comp.html#cb43-23"></a>Errors      <span class="fl">-0.3425902</span></span>
-<span id="cb43-24"><a href="reg-comp.html#cb43-24"></a>NewLeagueN  <span class="fl">-0.1798022</span></span></code></pre></div></li>
+<span class="math display">\[Y=\beta_0+\beta_1X_1+\dots+\beta_pX_p+\varepsilon.\]</span></p></li>
+<li><p>Retrouver ces coefficients en utilisant la fonction <code>plsr</code>.</p></li>
 </ol>
 </div>
-<div id="comparaison-pcr-vs-pls." class="section level2">
+<div id="comparaison-pcr-vs-pls." class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Comparaison : PCR vs PLS.</h2>
 <ol style="list-style-type: decimal">
-<li><p>Séparer le jeu de données (<code>Hitters</code> toujours) en un échantillon d’apprentissage de taille 200 et un échantillon test de taille 63.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="reg-comp.html#cb44-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb44-2"><a href="reg-comp.html#cb44-2"></a>perm &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Hitters))</span>
-<span id="cb44-3"><a href="reg-comp.html#cb44-3"></a>dapp &lt;-<span class="st"> </span>Hitters[perm[<span class="dv">1</span><span class="op">:</span><span class="dv">200</span>],]</span>
-<span id="cb44-4"><a href="reg-comp.html#cb44-4"></a>dtest &lt;-<span class="st"> </span>Hitters[perm[<span class="dv">201</span><span class="op">:</span><span class="kw">nrow</span>(Hitters)],]</span></code></pre></div></li>
-<li><p>Avec les données d’apprentissage uniquement construire les régressions PCR et PLS. On choisira les nombres de composantes par validation croisée.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="reg-comp.html#cb45-1"></a>choix.pcr &lt;-<span class="st"> </span><span class="kw">pcr</span>(Salary<span class="op">~</span>.,<span class="dt">data=</span>dapp,<span class="dt">validation=</span><span class="st">&quot;CV&quot;</span>)</span>
-<span id="cb45-2"><a href="reg-comp.html#cb45-2"></a>ncomp.pcr &lt;-<span class="st"> </span><span class="kw">which.min</span>(choix.pcr<span class="op">$</span>validation<span class="op">$</span>PRESS)</span>
-<span id="cb45-3"><a href="reg-comp.html#cb45-3"></a>ncomp.pcr</span>
-<span id="cb45-4"><a href="reg-comp.html#cb45-4"></a>[<span class="dv">1</span>] <span class="dv">4</span></span></code></pre></div>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="reg-comp.html#cb46-1"></a>choix.pls &lt;-<span class="st"> </span><span class="kw">plsr</span>(Salary<span class="op">~</span>.,<span class="dt">data=</span>dapp,<span class="dt">validation=</span><span class="st">&quot;CV&quot;</span>)</span>
-<span id="cb46-2"><a href="reg-comp.html#cb46-2"></a>ncomp.pls &lt;-<span class="st"> </span><span class="kw">which.min</span>(choix.pls<span class="op">$</span>validation<span class="op">$</span>PRESS)</span>
-<span id="cb46-3"><a href="reg-comp.html#cb46-3"></a>ncomp.pls</span>
-<span id="cb46-4"><a href="reg-comp.html#cb46-4"></a>[<span class="dv">1</span>] <span class="dv">3</span></span></code></pre></div></li>
-<li><p>Comparer les deux méthodes en utilisant l’échantillon de validation. On pourra également utiliser un modèle linéaire classique.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="reg-comp.html#cb47-1"></a>mod.lin &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary<span class="op">~</span>.,<span class="dt">data=</span>dapp)</span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="reg-comp.html#cb48-1"></a>prev &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb48-2"><a href="reg-comp.html#cb48-2"></a>  <span class="dt">lin=</span><span class="kw">predict</span>(mod.lin,<span class="dt">newdata=</span>dtest),</span>
-<span id="cb48-3"><a href="reg-comp.html#cb48-3"></a>  <span class="dt">pcr=</span><span class="kw">as.vector</span>(<span class="kw">predict</span>(choix.pcr,<span class="dt">newdata =</span> dtest,<span class="dt">ncomp=</span>ncomp.pcr)),</span>
-<span id="cb48-4"><a href="reg-comp.html#cb48-4"></a>  <span class="dt">pls=</span><span class="kw">as.vector</span>(<span class="kw">predict</span>(choix.pls,<span class="dt">newdata =</span> dtest,<span class="dt">ncomp=</span>ncomp.pls)),</span>
-<span id="cb48-5"><a href="reg-comp.html#cb48-5"></a>  <span class="dt">obs=</span>dtest<span class="op">$</span>Salary</span>
-<span id="cb48-6"><a href="reg-comp.html#cb48-6"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="reg-comp.html#cb49-1"></a>prev <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize_at</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="op">~</span>(<span class="kw">mean</span>((.<span class="op">-</span>obs)<span class="op">^</span><span class="dv">2</span>))) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sqrt</span>()</span>
-<span id="cb49-2"><a href="reg-comp.html#cb49-2"></a>       lin      pcr      pls</span>
-<span id="cb49-3"><a href="reg-comp.html#cb49-3"></a><span class="dv">1</span> <span class="fl">334.8819</span> <span class="fl">348.3943</span> <span class="fl">342.7771</span></span></code></pre></div></li>
-<li><p>Comparer ces méthodes à l’aide d’une validation croisée 10 blocs.</p>
-<div class="corR">
-<p>
-<p><strong>Attention</strong> il ne s’agit pas ici de sélectionner les nombres de composantes par validation croisée. On veut comparer :</p>
-</p>
-<ul>
-<li>
-<p>L’algorithme <strong>PCR</strong> qui sélectionne le nombre de composantes par validation croisée à</p>
-</li>
-<li>
-<p>L’algorithme <strong>PLS</strong> qui sélectionne le nombre de composantes par validation croisée.</p>
-</li>
-</ul>
-</div>
-<div class="corR">
-<p>
-On définit d’abord les 10 blocs pour la validation croisée :
-</p>
-</div>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="reg-comp.html#cb50-1"></a> <span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb50-2"><a href="reg-comp.html#cb50-2"></a> bloc &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="kw">nrow</span>(Hitters),<span class="dt">replace=</span><span class="ot">TRUE</span>)</span>
-<span id="cb50-3"><a href="reg-comp.html#cb50-3"></a> <span class="kw">table</span>(bloc)</span>
-<span id="cb50-4"><a href="reg-comp.html#cb50-4"></a> bloc</span>
-<span id="cb50-5"><a href="reg-comp.html#cb50-5"></a>  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">6</span>  <span class="dv">7</span>  <span class="dv">8</span>  <span class="dv">9</span> <span class="dv">10</span> </span>
-<span id="cb50-6"><a href="reg-comp.html#cb50-6"></a> <span class="dv">19</span> <span class="dv">22</span> <span class="dv">31</span> <span class="dv">29</span> <span class="dv">28</span> <span class="dv">39</span> <span class="dv">19</span> <span class="dv">26</span> <span class="dv">25</span> <span class="dv">25</span> </span></code></pre></div>
-<div class="corR">
-<p>
-Puis on fait la validation croisée (en sélectionnant le nombre de composantes par validation croisée) à chaque étape :
-</p>
-</div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="reg-comp.html#cb51-1"></a> <span class="kw">set.seed</span>(<span class="dv">4321</span>)</span>
-<span id="cb51-2"><a href="reg-comp.html#cb51-2"></a> prev &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dt">nrow=</span><span class="kw">nrow</span>(Hitters),<span class="dt">ncol=</span><span class="dv">3</span>))</span>
-<span id="cb51-3"><a href="reg-comp.html#cb51-3"></a> <span class="kw">names</span>(prev) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;lin&quot;</span>,<span class="st">&quot;PCR&quot;</span>,<span class="st">&quot;PLS&quot;</span>)</span>
-<span id="cb51-4"><a href="reg-comp.html#cb51-4"></a> <span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>){</span>
-<span id="cb51-5"><a href="reg-comp.html#cb51-5"></a> <span class="co">#  print(k)</span></span>
-<span id="cb51-6"><a href="reg-comp.html#cb51-6"></a>   ind.test &lt;-<span class="st"> </span>bloc<span class="op">==</span>k</span>
-<span id="cb51-7"><a href="reg-comp.html#cb51-7"></a>   dapp &lt;-<span class="st"> </span>Hitters[<span class="op">!</span>ind.test,]</span>
-<span id="cb51-8"><a href="reg-comp.html#cb51-8"></a>   dtest &lt;-<span class="st"> </span>Hitters[ind.test,]</span>
-<span id="cb51-9"><a href="reg-comp.html#cb51-9"></a>   choix.pcr &lt;-<span class="st"> </span><span class="kw">pcr</span>(Salary<span class="op">~</span>.,<span class="dt">data=</span>dapp,<span class="dt">validation=</span><span class="st">&quot;CV&quot;</span>)</span>
-<span id="cb51-10"><a href="reg-comp.html#cb51-10"></a>   ncomp.pcr &lt;-<span class="st"> </span><span class="kw">which.min</span>(choix.pcr<span class="op">$</span>validation<span class="op">$</span>PRESS)</span>
-<span id="cb51-11"><a href="reg-comp.html#cb51-11"></a>   choix.pls &lt;-<span class="st"> </span><span class="kw">plsr</span>(Salary<span class="op">~</span>.,<span class="dt">data=</span>dapp,<span class="dt">validation=</span><span class="st">&quot;CV&quot;</span>)</span>
-<span id="cb51-12"><a href="reg-comp.html#cb51-12"></a>   ncomp.pls &lt;-<span class="st"> </span><span class="kw">which.min</span>(choix.pls<span class="op">$</span>validation<span class="op">$</span>PRESS)</span>
-<span id="cb51-13"><a href="reg-comp.html#cb51-13"></a>   mod.lin &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary<span class="op">~</span>.,<span class="dt">data=</span>dapp)</span>
-<span id="cb51-14"><a href="reg-comp.html#cb51-14"></a>   prev[ind.test,] &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb51-15"><a href="reg-comp.html#cb51-15"></a> <span class="dt">lin=</span><span class="kw">predict</span>(mod.lin,<span class="dt">newdata=</span>dtest),</span>
-<span id="cb51-16"><a href="reg-comp.html#cb51-16"></a> <span class="dt">PCR=</span><span class="kw">as.vector</span>(<span class="kw">predict</span>(choix.pcr,<span class="dt">newdata =</span> dtest,<span class="dt">ncomp=</span>ncomp.pcr)),</span>
-<span id="cb51-17"><a href="reg-comp.html#cb51-17"></a> <span class="dt">PLS=</span><span class="kw">as.vector</span>(<span class="kw">predict</span>(choix.pls,<span class="dt">newdata =</span> dtest,<span class="dt">ncomp=</span>ncomp.pls)))</span>
-<span id="cb51-18"><a href="reg-comp.html#cb51-18"></a> }</span></code></pre></div>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="reg-comp.html#cb52-1"></a> prev <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">obs=</span>Hitters<span class="op">$</span>Salary) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize_at</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="op">~</span>(<span class="kw">mean</span>((.<span class="op">-</span>obs)<span class="op">^</span><span class="dv">2</span>))) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sqrt</span>()</span>
-<span id="cb52-2"><a href="reg-comp.html#cb52-2"></a>        lin      PCR      PLS</span>
-<span id="cb52-3"><a href="reg-comp.html#cb52-3"></a> <span class="dv">1</span> <span class="fl">340.0631</span> <span class="fl">343.8019</span> <span class="fl">350.6712</span></span></code></pre></div>
-<div class="corR">
-<p>
-On compare à un modèle qui prédit toujours la moyenne :
-</p>
-</div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="reg-comp.html#cb53-1"></a> <span class="kw">var</span>(Hitters<span class="op">$</span>Salary) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sqrt</span>()</span>
-<span id="cb53-2"><a href="reg-comp.html#cb53-2"></a> [<span class="dv">1</span>] <span class="fl">451.1187</span></span></code></pre></div>
-<div class="corR">
-<p>
-On peut retenter l’analyse en considérant toutes les interactions d’ordre 2 :
-</p>
-</div>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="reg-comp.html#cb54-1"></a> <span class="kw">set.seed</span>(<span class="dv">54321</span>)</span>
-<span id="cb54-2"><a href="reg-comp.html#cb54-2"></a> prev1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dt">nrow=</span><span class="kw">nrow</span>(Hitters),<span class="dt">ncol=</span><span class="dv">3</span>))</span>
-<span id="cb54-3"><a href="reg-comp.html#cb54-3"></a> <span class="kw">names</span>(prev1) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;lin&quot;</span>,<span class="st">&quot;PCR&quot;</span>,<span class="st">&quot;PLS&quot;</span>)</span>
-<span id="cb54-4"><a href="reg-comp.html#cb54-4"></a> <span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>){</span>
-<span id="cb54-5"><a href="reg-comp.html#cb54-5"></a> <span class="co">#  print(k)</span></span>
-<span id="cb54-6"><a href="reg-comp.html#cb54-6"></a>   ind.test &lt;-<span class="st"> </span>bloc<span class="op">==</span>k</span>
-<span id="cb54-7"><a href="reg-comp.html#cb54-7"></a>   dapp &lt;-<span class="st"> </span>Hitters[<span class="op">!</span>ind.test,]</span>
-<span id="cb54-8"><a href="reg-comp.html#cb54-8"></a>   dtest &lt;-<span class="st"> </span>Hitters[ind.test,]</span>
-<span id="cb54-9"><a href="reg-comp.html#cb54-9"></a>   choix.pcr &lt;-<span class="st"> </span><span class="kw">pcr</span>(Salary<span class="op">~</span>.<span class="op">^</span><span class="dv">2</span>,<span class="dt">data=</span>dapp,<span class="dt">validation=</span><span class="st">&quot;CV&quot;</span>)</span>
-<span id="cb54-10"><a href="reg-comp.html#cb54-10"></a>   ncomp.pcr &lt;-<span class="st"> </span><span class="kw">which.min</span>(choix.pcr<span class="op">$</span>validation<span class="op">$</span>PRESS)</span>
-<span id="cb54-11"><a href="reg-comp.html#cb54-11"></a>   choix.pls &lt;-<span class="st"> </span><span class="kw">plsr</span>(Salary<span class="op">~</span>.<span class="op">^</span><span class="dv">2</span>,<span class="dt">data=</span>dapp,<span class="dt">validation=</span><span class="st">&quot;CV&quot;</span>)</span>
-<span id="cb54-12"><a href="reg-comp.html#cb54-12"></a>   ncomp.pls &lt;-<span class="st"> </span><span class="kw">which.min</span>(choix.pls<span class="op">$</span>validation<span class="op">$</span>PRESS)</span>
-<span id="cb54-13"><a href="reg-comp.html#cb54-13"></a>   mod.lin &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary<span class="op">~</span>.<span class="op">^</span><span class="dv">2</span>,<span class="dt">data=</span>dapp)</span>
-<span id="cb54-14"><a href="reg-comp.html#cb54-14"></a>   prev1[ind.test,] &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb54-15"><a href="reg-comp.html#cb54-15"></a> <span class="dt">lin=</span><span class="kw">predict</span>(mod.lin,<span class="dt">newdata=</span>dtest),</span>
-<span id="cb54-16"><a href="reg-comp.html#cb54-16"></a> <span class="dt">PCR=</span><span class="kw">as.vector</span>(<span class="kw">predict</span>(choix.pcr,<span class="dt">newdata =</span> dtest,<span class="dt">ncomp=</span>ncomp.pcr)),</span>
-<span id="cb54-17"><a href="reg-comp.html#cb54-17"></a> <span class="dt">PLS=</span><span class="kw">as.vector</span>(<span class="kw">predict</span>(choix.pls,<span class="dt">newdata =</span> dtest,<span class="dt">ncomp=</span>ncomp.pls)))</span>
-<span id="cb54-18"><a href="reg-comp.html#cb54-18"></a> }</span></code></pre></div>
-<div class="corR">
-<p>
-On obtient les performances suivantes :
-</p>
-</div>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="reg-comp.html#cb55-1"></a> prev1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">obs=</span>Hitters<span class="op">$</span>Salary) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize_at</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="op">~</span>(<span class="kw">mean</span>((.<span class="op">-</span>obs)<span class="op">^</span><span class="dv">2</span>))) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sqrt</span>()</span>
-<span id="cb55-2"><a href="reg-comp.html#cb55-2"></a>        lin      PCR      PLS</span>
-<span id="cb55-3"><a href="reg-comp.html#cb55-3"></a> <span class="dv">1</span> <span class="fl">1494.847</span> <span class="fl">330.0474</span> <span class="fl">349.1116</span></span></code></pre></div>
-<div class="corR">
-<p>
-On mesure bien l’intérêt de réduire la dimension dans ce nouveau contexte.
-</p>
-</div></li>
+<li><p>Séparer le jeu de données (<code>Hitters</code> toujours) en un échantillon d’apprentissage de taille 200 et un échantillon test de taille 63.</p></li>
+<li><p>Avec les données d’apprentissage uniquement construire les régressions PCR et PLS. On choisira les nombres de composantes par validation croisée.</p></li>
+<li><p>Comparer les deux méthodes en utilisant l’échantillon de validation. On pourra également utiliser un modèle linéaire classique.</p></li>
+<li><p>Comparer ces méthodes à l’aide d’une validation croisée 10 blocs.</p></li>
 </ol>
-
 
 </div>
 </div>

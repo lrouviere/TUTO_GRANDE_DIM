@@ -13,9 +13,15 @@ pre code {
   white-space: inherit;
 }
 
+
+
 div.correction {
+  padding: 1em;
   color: black;
   background-color: #F0F0F0;
+  font-style: normal;
+  border: 2px solid orange;
+  border-radius: 10px;
 }
 
 div.corR {
