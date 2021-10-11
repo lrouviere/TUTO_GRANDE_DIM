@@ -50,14 +50,40 @@ mod3ppv$PRESS
 ## ---------------------------------------------------------
 mod3ppv$PRESS/max(c(nrow(df$Xapp),1))
 
+## ----teacher=correct--------------------------------------
+sel.k <- function(K_cand=seq(1,50,by=5),Xapp,Yapp){
+  ind <- 1
+  err <- rep(0,length(K_cand))
+  for (k in K_cand){
+modkppv <- knn.reg(train=Xapp,y=Yapp,k=k)
+err[ind] <- modkppv$PRESS/max(c(nrow(Xapp),1))
+ind <- ind+1
+  }
+  return(K_cand[which.min(err)])
+}
+
 ## ----eval=cor,echo=TRUE-----------------------------------
-#  k.opt <- sel.k(seq(1,50,by=5),df$Xapp,df$Yapp)
-#  prev <- knn.reg(train=df$Xapp,y=df$Yapp,test=df$Xtest,k=k.opt)$pred
-#  mean((prev-df$Ytest)^2)
+k.opt <- sel.k(seq(1,50,by=5),df$Xapp,df$Yapp)
+prev <- knn.reg(train=df$Xapp,y=df$Yapp,test=df$Xtest,k=k.opt)$pred
+mean((prev-df$Ytest)^2)
 
 ## ---------------------------------------------------------
 DIM <- c(1,5,10,50)
 K_cand <- seq(1,50,by=5)
+
+## ----teacher=correct--------------------------------------
+df <- data.frame(mat.err)
+nom.dim <- paste("D",DIM,sep="")
+names(df) <- nom.dim
+
+## ----teacher=correct--------------------------------------
+df %>% summarise_all(mean)
+df %>% summarise_all(var)
+
+## ----teacher=correct--------------------------------------
+df1 <- pivot_longer(df,cols=everything(),names_to="dim",values_to="erreur")
+df1 <- df1 %>% mutate(dim=fct_relevel(dim,nom.dim))
+ggplot(df1)+aes(x=dim,y=erreur)+geom_boxplot()
 
 ## ---------------------------------------------------------
 DIM <- c(0,50,100,200)
@@ -73,33 +99,206 @@ simu.lin <- function(X,graine){
   return(df)
 }
 
+## ----teacher=correct--------------------------------------
+df <- data.frame(matbeta1)
+nom.dim <- paste("D",DIM,sep="")
+names(df) <- nom.dim
+
+## ----teacher=correct--------------------------------------
+df %>% summarise_all(mean)
+df %>% summarise_all(var)
+
+## ----teacher=correct--------------------------------------
+df1 <- gather(df,key="dim",value="erreur")
+df1 <- df1 %>% mutate(dim=fct_relevel(dim,nom.dim))
+ggplot(df1)+aes(x=dim,y=erreur)+geom_boxplot()+theme_classic()
+
 ## ---------------------------------------------------------
 ozone <- read.table("data/ozone.txt")
 head(ozone)
+
+## ----teacher=correct--------------------------------------
+lin.complet <- lm(maxO3~.,data=ozone)
+summary(lin.complet)
+anova(lin.complet)
 
 ## ---------------------------------------------------------
 library(leaps)
 mod.sel <- regsubsets(maxO3~.,data=ozone,nvmax=14)
 summary(mod.sel)
 
+## ----teacher=correct--------------------------------------
+plot(mod.sel,scale="r2")
+
+## ----teacher=correct--------------------------------------
+plot(mod.sel,scale="bic")
+plot(mod.sel,scale="Cp")
+
+## ----teacher=correct,indent='        '--------------------
+mod.step <- step(lin.complet,direction="backward",trace=0)
+mod.step
+
 ## ---------------------------------------------------------
 library(ISLR)
 Hitters <- na.omit(Hitters)
 
+## ----teacher=correct--------------------------------------
+X <- model.matrix(Salary~.,data=Hitters)[,-1]
+
+## ----teacher=correct--------------------------------------
+Xcr <- scale(X)
+Xbar  <- apply(X,2,mean)
+stdX <- apply(X,2,sd)
+
+## ----teacher=correct--------------------------------------
+library(FactoMineR)
+acp.hit <- PCA(Xcr,scale.unit=FALSE,graph=TRUE)
+
+## ----teacher=correct--------------------------------------
+CC <- acp.hit$ind$coord
+
+## ----teacher=correct--------------------------------------
+donnees <- cbind.data.frame(CC,Salary=Hitters$Salary)
+mod <- lm(Salary~.,data=donnees)
+alpha <- coef(mod)
+alpha
+
+## ----teacher=correct--------------------------------------
+acp.main <- eigen(t(Xcr)%*%Xcr)
+U <- acp.main$vectors
+CC <- Xcr%*%(-U[,1:5])
+D <- cbind.data.frame(CC,Salary=Hitters$Salary)
+modS <- lm(Salary~.,data=D)
+coefS <- modS$coefficients
+coef(modS)
+
+## ----teacher=correct--------------------------------------
+W <- acp.hit$svd$V
+V <- t(W)
+beta0.cr <- mean(Hitters$Salary)
+beta.cr <- as.vector(alpha[2:6])%*%V
+beta.cr
+
+## ----teacher=correct--------------------------------------
+gamma0 <- beta0.cr-sum(beta.cr*Xbar/stdX)
+gamma <- beta.cr/stdX
+gamma0
+gamma
+
+## ----teacher=correct--------------------------------------
+library(pls)
+pcr.fit <- pcr(Salary~.,data=Hitters,scale=TRUE,ncomp=19)
+coefficients(pcr.fit,ncomp=5)
+
 ## ---------------------------------------------------------
 df.new <- Hitters[c(1,100,80),]
 
+## ----teacher=correct--------------------------------------
+predict(pcr.fit,newdata=df.new,ncomp=5)
+
 ## ----echo=cor,eval=cor------------------------------------
-#  t(as.matrix(coefficients(pcr.fit,ncomp=5))) %*%
-#    t(as.matrix(Xcr[c(1,100,80),]))+mean(Hitters$Salary)
-#  #ou
-#  beta0.cr+beta.cr%*%t(as.matrix(Xcr[c(1,100,80),]))
+t(as.matrix(coefficients(pcr.fit,ncomp=5))) %*% 
+  t(as.matrix(Xcr[c(1,100,80),]))+mean(Hitters$Salary)
+#ou
+beta0.cr+beta.cr%*%t(as.matrix(Xcr[c(1,100,80),]))
+
+## ----teacher=correct--------------------------------------
+gamma0+gamma %*% t(as.matrix(X[c(1,100,80),]))
 
 ## ----echo=FALSE,eval=FALSE--------------------------------
 #  mod.lin <- lm(Salary~.,data=Hitters)
 #  predict(mod.lin,newdata = df.new)
 #  predict(pcr.fit,newdata=df.new,ncomp=19)
 #  
+
+## ----teacher=correct--------------------------------------
+Y <- as.vector(Hitters$Salary)
+w1 <- t(Xcr)%*%Y
+w1
+Z1 <- Xcr%*%w1
+
+## ----teacher=correct--------------------------------------
+df <- data.frame(Z1,Y)
+mod1 <- lm(Y~Z1-1,data=df)
+alpha1 <- coef(mod1)
+alpha1
+
+## ----teacher=correct--------------------------------------
+alpha1*w1
+
+## ----teacher=correct--------------------------------------
+pls.fit <- plsr(Salary~.,data=Hitters,scale=TRUE)
+coefficients(pls.fit,ncomp = 1)
+
+## ----teacher=correct--------------------------------------
+set.seed(1234)
+perm <- sample(nrow(Hitters))
+dapp <- Hitters[perm[1:200],]
+dtest <- Hitters[perm[201:nrow(Hitters)],]
+
+## ----teacher=correct--------------------------------------
+choix.pcr <- pcr(Salary~.,data=dapp,validation="CV")
+ncomp.pcr <- which.min(choix.pcr$validation$PRESS)
+ncomp.pcr
+
+## ----teacher=correct--------------------------------------
+choix.pls <- plsr(Salary~.,data=dapp,validation="CV")
+ncomp.pls <- which.min(choix.pls$validation$PRESS)
+ncomp.pls
+
+## ----teacher=correct--------------------------------------
+mod.lin <- lm(Salary~.,data=dapp)
+
+## ----teacher=correct--------------------------------------
+prev <- data.frame(
+  lin=predict(mod.lin,newdata=dtest),
+  pcr=as.vector(predict(choix.pcr,newdata = dtest,ncomp=ncomp.pcr)),
+  pls=as.vector(predict(choix.pls,newdata = dtest,ncomp=ncomp.pls)),
+  obs=dtest$Salary
+)
+
+## ----teacher=correct--------------------------------------
+prev %>% summarize_at(1:3,~(mean((.-obs)^2))) %>% sqrt()
+
+## ----teacher=correct--------------------------------------
+set.seed(1234)
+bloc <- sample(1:10,nrow(Hitters),replace=TRUE)
+table(bloc)
+
+## ----teacher=correct,indent='    '------------------------
+set.seed(4321)
+prev <- data.frame(matrix(0,nrow=nrow(Hitters),ncol=3))
+names(prev) <- c("lin","PCR","PLS")
+for (k in 1:10){
+#  print(k)
+  ind.test <- bloc==k
+  dapp <- Hitters[!ind.test,]
+  dtest <- Hitters[ind.test,]
+  choix.pcr <- pcr(Salary~.,data=dapp,validation="CV")
+  ncomp.pcr <- which.min(choix.pcr$validation$PRESS)
+  choix.pls <- plsr(Salary~.,data=dapp,validation="CV")
+  ncomp.pls <- which.min(choix.pls$validation$PRESS)
+  mod.lin <- lm(Salary~.,data=dapp)
+  prev[ind.test,] <- data.frame(
+    lin=predict(mod.lin,newdata=dtest),
+    PCR=as.vector(predict(choix.pcr,newdata = dtest,ncomp=ncomp.pcr)),
+    PLS=as.vector(predict(choix.pls,newdata = dtest,ncomp=ncomp.pls)))
+}
+
+## ----teacher=correct--------------------------------------
+prev %>% mutate(obs=Hitters$Salary) %>% 
+  summarize_at(1:3,~(mean((.-obs)^2))) %>% sqrt()
+
+## ----teacher=correct--------------------------------------
+var(Hitters$Salary) %>% sqrt()
+
+## ----teacher=correct--------------------------------------
+prev1 %>% mutate(obs=Hitters$Salary) %>% 
+  summarize_at(1:3,~(mean((.-obs)^2))) %>% sqrt()
+
+## ----echo=FALSE-------------------------------------------
+correct <- FALSE
+cor <- correct
 
 ## ---------------------------------------------------------
 ozone <- read.table("data/ozone.txt")
