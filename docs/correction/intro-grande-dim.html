@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 1 Introduction à la grande dimension | Régression en grande dimension</title>
   <meta name="description" content="Chapitre 1 Introduction à la grande dimension | Régression en grande dimension" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 1 Introduction à la grande dimension | Régression en grande dimension" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Laurent Rouvière" />
 
 
-<meta name="date" content="2021-10-14" />
+<meta name="date" content="2022-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="reg-comp.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,7 +51,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -116,6 +118,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -352,22 +377,18 @@ On retrouve bien que la dimension impacte notamment la variance des estimateurs.
 </div>
 <div id="exercices" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Exercices</h2>
-
 <div class="exercise">
-<span id="exr:exo-dist-points" class="exercise"><strong>Exercice 1.1  (Distances entre deux points, voir <span class="citation"><a href="références.html#ref-gir15" role="doc-biblioref">Giraud</a> (<a href="références.html#ref-gir15" role="doc-biblioref">2015</a>)</span>)  </strong></span>
-</div>
-<p>Soit <span class="math inline">\(X^{(1)}=(X_1^{(1)},\dots,X_p^{(1)})\)</span> et <span class="math inline">\(X^{(2)}=(X_1^{(2)},\dots,X_p^{(2)})\)</span> deux variables aléatoires indépendantes de loi uniforme sur l’hypercube <span class="math inline">\([0,1]^p\)</span>. Montrer que
+<p><span id="exr:exo-dist-points" class="exercise"><strong>Exercice 1.1  (Distances entre deux points) </strong></span>Cet exercice est fortement inspiré de <span class="citation"><a href="#ref-gir15" role="doc-biblioref">Giraud</a> (<a href="#ref-gir15" role="doc-biblioref">2015</a>)</span>.
+Soit <span class="math inline">\(X^{(1)}=(X_1^{(1)},\dots,X_p^{(1)})\)</span> et <span class="math inline">\(X^{(2)}=(X_1^{(2)},\dots,X_p^{(2)})\)</span> deux variables aléatoires indépendantes de loi uniforme sur l’hypercube <span class="math inline">\([0,1]^p\)</span>. Montrer que
 <span class="math display">\[\mathbf E[\|X^{(1)}-X^{(2)}\|^2]=\frac{p}{6}\quad\text{et}\quad\sigma[\|X^{(1)}-X^{(2)}\|^2]\approx 0.2\sqrt{p}.\]</span></p>
 <div class="correction">
 <p>
 Soit <span class="math inline"><span class="math inline">\(U\)</span></span> et <span class="math inline"><span class="math inline">\(U^\prime\)</span></span> deux variables aléatoires indépendantes de loi uniforme sur <span class="math inline"><span class="math inline">\([0,1]\)</span></span>. On a <span class="math display"><span class="math display">\[\mathbf E[\|X^{(1)}-X^{(2)}\|^2]=\sum_{k=1}^p\mathbf E\left[\left(X_k^{(1)}-X_k^{(2)}\right)\right]=p\mathbf E[(U-U^\prime)^2]=p(2\mathbf E[U^2]-2\mathbf E[U]^2)=\frac{p}{6}\]</span></span> car <span class="math inline"><span class="math inline">\(\mathbf E[U^2]=1/3\)</span></span> et <span class="math inline"><span class="math inline">\(\mathbf E[U]=1/2\)</span></span>. De même <span class="math display"><span class="math display">\[\sigma[\|X^{(1)}-X^{(2)}\|^2]=\sqrt{\sum_{k=1}^p\mathbf V\left[\left(X_k^{(1)}-X_k^{(2)}\right)\right]}=\sqrt{p\mathbf V[(U^\prime-U)^2]}\approx 0.2\sqrt{p}\]</span></span> car <span class="math display"><span class="math display">\[\mathbf E\left[(U^\prime-U)^4\right]=\int_0^1\int_0^1(x-y)^4\,\mathrm{d}x\mathrm{d}y=\frac{1}{15}\]</span></span> et donc <span class="math inline"><span class="math inline">\(\mathbf V[(U^\prime-U)^2]=1/15-1/36\approx 0.04\)</span></span>.
 </p>
 </div>
-
-<div class="exercise">
-<span id="exr:exo-noyau-curse" class="exercise"><strong>Exercice 1.2  (Vitesse de convergence pour l’estimateur à noyau)  </strong></span>
 </div>
-<p>On considère le modèle de régression
+<div class="exercise">
+<p><span id="exr:exo-noyau-curse" class="exercise"><strong>Exercice 1.2  (Vitesse de convergence pour l'estimateur à noyau) </strong></span>On considère le modèle de régression
 <span class="math display">\[Y_i=m(x_i)+\varepsilon_i,\quad i=1,\dots,n\]</span>
 où <span class="math inline">\(x_1,\dots,x_n\in\mathbb R^d\)</span> sont déterministes et <span class="math inline">\(\varepsilon_1,\dots,\varepsilon_n\)</span> sont des variables i.i.d. d’espérance nulle et de variance <span class="math inline">\(\sigma^2&lt;+\infty\)</span>. On désigne par <span class="math inline">\(\|\,.\,\|\)</span> la norme Euclidienne dans <span class="math inline">\(\mathbb R^d\)</span>. On définit l’estimateur localement constant de <span class="math inline">\(m\)</span> en <span class="math inline">\(x\in\mathbb R^d\)</span> par :
 <span class="math display">\[\hat m(x)=\mathop{\mathrm{argmin}}_{a\in\mathbb R}\sum_{i=1}^n(Y_i-a)^2K\left(\frac{\|x_i-x\|}{h}\right)\]</span>
@@ -420,7 +441,14 @@ Soit <span class="math inline"><span class="math inline">\(M(h)\)</span></span> 
 </p>
 </div></li>
 </ol>
+</div>
 
+</div>
+</div>
+<h3>Références</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-gir15" class="csl-entry">
+Giraud, C. 2015. <em>Introduction to High-Dimensional Statistics</em>. CRC Press.
 </div>
 </div>
             </section>
@@ -433,7 +461,6 @@ Soit <span class="math inline"><span class="math inline">\(M(h)\)</span></span> 
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -452,6 +479,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -472,6 +500,10 @@ gitbook.start({
 "text": null
 },
 "download": ["TUTO_GRANDE_DIM.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection",
 "fontsettings": {
