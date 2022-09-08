@@ -19,10 +19,15 @@ bookdown::gitbook:
     download: ["pdf"] #["pdf", "epub"]
 bookdown::pdf_book:
   highlight: kate #kate
+  latex_engine: pdflatex #xelatex
   includes:
 #    in_header: preamble.tex
-    in_header: ~/Dropbox/FICHIERS_STYLE/Latex/header_bdown.tex
-  latex_engine: pdflatex #xelatex
+    in_header: ~/Google Drive/FICHIERS_STYLE/Latex/header_bdown.tex
   citation_package: natbib
   keep_tex: yes
+  urlcolor: magenta
+#  extra_dependencies: 
+#    hyperref: ["colorlinks=true"]
+
+
 #bookdown::epub_book: default
