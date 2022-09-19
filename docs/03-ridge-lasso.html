@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Statistique en grande dimension - 3&nbsp; Régressions pénalisées (ou sous contraintes)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04-mod-add.html" rel="next">
+<link href="./02-reg-comp.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Régressions pénalisées (ou sous contraintes)</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistique en grande dimension</a> 
+        <div class="sidebar-tools-main">
+    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./Statistique-en-grande-dimension.pdf">
+            <i class="bi bi-bi-file-pdf pe-1"></i>
+          Download PDF
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./Statistique-en-grande-dimension.epub">
+            <i class="bi bi-bi-journal pe-1"></i>
+          Download ePub
+          </a>
+        </li>
+    </ul>
+    <a href="" title="Share" id="sidebar-tool-dropdown-1" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-1">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+            <i class="bi bi-bi-facebook pe-1"></i>
+          Facebook
+          </a>
+        </li>
+    </ul>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Présentation</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro-grande-dim.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Les problèmes de la grande dimension</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-reg-comp.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Régression sur composantes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-ridge-lasso.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Régressions pénalisées (ou sous contraintes)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-mod-add.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modèle additif</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">Références</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table des matières</h2>
+   
+  <ul>
+  <li><a href="#ridge-et-lasso-avec-glmnet" id="toc-ridge-et-lasso-avec-glmnet" class="nav-link active" data-scroll-target="#ridge-et-lasso-avec-glmnet"> <span class="header-section-number">3.1</span> Ridge et lasso avec glmnet</a></li>
+  <li><a href="#reconstruction-dun-signal" id="toc-reconstruction-dun-signal" class="nav-link" data-scroll-target="#reconstruction-dun-signal"> <span class="header-section-number">3.2</span> Reconstruction d’un signal</a></li>
+  <li><a href="#régression-logistique-pénalisée" id="toc-régression-logistique-pénalisée" class="nav-link" data-scroll-target="#régression-logistique-pénalisée"> <span class="header-section-number">3.3</span> Régression logistique pénalisée</a></li>
+  <li><a href="#exo-ridgelasso" id="toc-exo-ridgelasso" class="nav-link" data-scroll-target="#exo-ridgelasso"> <span class="header-section-number">3.4</span> Exercices</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="reg-pen" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Régressions pénalisées (ou sous contraintes)</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div>
+<div class="cell">
+
+</div>
+<style>
+div.correction {
+  color: black;
+  background-color: #F0F0F0;
+  font-style: normal;
+  display: none;
+}
+
+.corR {
+  font-style: italic;
+  display: none;
+}
+</style>
+</div>
+<div class="cell">
+
+</div>
+<p>Nous considérons toujours le modèle linéaire</p>
+<p><span class="math display">\[Y=\beta_0+\beta_1X_1+\dots+\beta_dX_d+\varepsilon\]</span> Lorsque <span class="math inline">\(d\)</span> est grand ou que les variables sont linéairement dépendantes, les estimateurs des moindres carrées peuvent être mis en défaut. Les méthodes pénalisées ou sous contraintes consistent alors à restreindre l’espace sur lequel on minimise ce critère. On va alors chercher le vecteur <span class="math inline">\(\beta\)</span> qui minimise</p>
+<p><span class="math display">\[\sum_{i=1}^n \left(y_i-\beta_0-\sum_{j=1}^dx_{ij}\beta_j\right)^2\quad\text{sous la contrainte }\quad\sum_{j=1}^d\beta_j^2\leq t\]</span> ou de façon équivalente (dans le sens où il existe une équivalence entre <span class="math inline">\(t\)</span> et <span class="math inline">\(\lambda\)</span>)</p>
+<p><span class="math display">\[\sum_{i=1}^n \left(y_i-\beta_0-\sum_{j=1}^dx_{ij}\beta_j\right)^2+\lambda\sum_{j=1}^d\beta_j^2.\]</span> Les estimateurs obtenus sont les estimateurs <strong>ridge</strong>. Les estimateurs <strong>lasso</strong> s’obtiennent en remplaçant la contrainte ou la pénalité par une norme 1 (<span class="math inline">\(\sum_{j=1}^d|\beta_j|\)</span>). Nous présentons dans cette partie les étapes principales qui permettent de faire ce type de régression avec <strong>R</strong>. Le package le plus souvent utilisé est <code>glmnet</code>.</p>
+<section id="ridge-et-lasso-avec-glmnet" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="ridge-et-lasso-avec-glmnet"><span class="header-section-number">3.1</span> Ridge et lasso avec glmnet</h2>
+<p>On considère le jeu de données <code>ozone.txt</code> où on cherche à expliquer la concentration maximale en ozone relevée sur une journée (variable <code>maxO3</code>) par d’autres variables essentiellement météorologiques.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ozone <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/ozone.txt"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ozone)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         maxO3   T9  T12  T15 Ne9 Ne12 Ne15     Vx9    Vx12    Vx15 maxO3v
+20010601    87 15.6 18.5 18.4   4    4    8  0.6946 -1.7101 -0.6946     84
+20010602    82 17.0 18.4 17.7   5    5    7 -4.3301 -4.0000 -3.0000     87
+20010603    92 15.3 17.6 19.5   2    5    4  2.9544  1.8794  0.5209     82
+20010604   114 16.2 19.7 22.5   1    1    0  0.9848  0.3473 -0.1736     92
+20010605    94 17.4 20.5 20.4   8    8    7 -0.5000 -2.9544 -4.3301    114
+20010606    80 17.7 19.8 18.3   6    6    7 -5.6382 -5.0000 -6.0000     94
+          vent pluie
+20010601  Nord   Sec
+20010602  Nord   Sec
+20010603   Est   Sec
+20010604  Nord   Sec
+20010605 Ouest   Sec
+20010606 Ouest Pluie</code></pre>
+</div>
+</div>
+<p>Contrairement à la plupart des autres package <strong>R</strong> qui permettent de faire de l’apprentissage, le package <code>glmnet</code> n’autorise pas l’utilisation de <code>formules</code> : il faut spécifier explicitement la matrice des <span class="math inline">\(X\)</span> et le vecteur des <span class="math inline">\(Y\)</span>. On peut obtenir la matrice des <span class="math inline">\(X\)</span> et notamment le codage des variables qualitatives avec la fonction <code>model.matrix</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ozone.X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(maxO3<span class="sc">~</span>.,<span class="at">data=</span>ozone)[,<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ozone.Y <span class="ot">&lt;-</span> ozone<span class="sc">$</span>maxO3</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li><p>Charger le package <code>glmnet</code> et à l’aide de la fonction <code>glmnet</code> calculer les estimateurs <code>ridge</code> et <code>lasso</code>.</p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>Analyser les sorties qui se trouvent dans les arguments <code>lambda</code> et <code>beta</code> de <code>glmnet</code>.</p>
+<div class="corR">
+<p>La fonction <code>glmnet</code> calcule tous les estimateurs pour une grille de valeurs de <code>lambda</code> spécifiée ici :</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>On peut récupérer les valeurs de <code>beta</code> associées à chaque valeur de la grille avec</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>Visualiser les chemins de régularisation des estimateurs <code>ridge</code> et <code>lasso</code>. On pourra utiliser la fonction <code>plot</code>.</p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>Sélectionner les paramètres de régularisation à l’aide de la fonction <code>cv.glmnet</code>. On pourra notamment faire un <code>plot</code> de l’objet et expliquer le graphe obtenu.</p>
+<div class="corR">
+<p>Commençons par <strong>ridge</strong> :</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>On visualise les erreurs quadratiques calculées par validation croisée 10 blocs en fonction de <code>lambda</code> (échelle logarithmique). Deux traites verticaux sont représentés :</p>
+<ul>
+<li><p>celui de gauche correspond à la valeur de `lambda` qui minimise l’erreur quadratique ;</p></li>
+<li><p>celui de droite correspond à la plus grande valeur de `lambda` telle que l’erreur ne dépasse pas l’erreur minimale + 1 écart-type estimé de cette erreur.</p></li>
+</ul>
+<p>D’un point de vu pratique, cela signifie que l’utilisateur peut choisir n’importe quelle valeur de <code>lambda</code> entre les deux traits verticaux. Si on veut diminuer la complexité du modèle on choisira la valeur de droite. On peut obtenir ces deux valeurs avec</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>On peut faire de même pour le <strong>lasso</strong> :</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>On souhaite prédire la variable cible pour de nouveaux individus, par exemple les 25ème et 50ème individus du jeu de données. Calculer les valeurs prédites pour ces deux individus.</p>
+<div class="corR">
+<p>Une première approche pourrait consister à réajuster le modèle sur toutes les données pour la valeur de <code>lambda</code> sélectionnée. Cette étape est en réalité déjà effectuée par la fonction <code>cv.glmnet</code>. Il suffit par conséquent d’appliquer la fonction <code>predict</code> à l’objet obtenu avec <code>cv.glmnet</code> en spécifiant la valeur de <code>lambda</code> souhaitée. Par exemple pour <strong>ridge</strong> :</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>On peut faire de même pour le <strong>lasso</strong> :</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>A l’aide d’une validation croisée, comparer les performances des estimateurs <strong>MCO</strong>, <strong>ridge</strong> et <strong>lasso</strong>. On pourra utiliser les données <code>ozone_complet.txt</code> qui contiennent plus d’individus et de variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ozone1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/ozone_complet.txt"</span>,<span class="at">sep=</span><span class="st">";"</span>) <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ozone1.X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(maxO3<span class="sc">~</span>.,<span class="at">data=</span>ozone1)[,<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>ozone1.Y <span class="ot">&lt;-</span> ozone1<span class="sc">$</span>maxO3</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="corR">
+<p>On crée une fonction qui calcule les erreurs quadratiques par validations croisée des 3 procédures d’estimation.</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="cell" data-teacher="false" data-hash="03-ridge-lasso_cache/html/cv-ozone-RL_a3e6604c51110434a0659037a52a7abc">
+
+</div>
+<div class="corR">
+<p>On remarque que les approches régularisées n’apportent rien par rapport aux estimateurs MCO ici. Ceci peut s’expliquer par le fait que le nombre de variables n’est pas très important.</p>
+</div></li>
+<li><p>Refaire la question précédente en considérant toutes les interactions d’ordre 2.</p>
+<div class="cell" data-teacher="false" data-hash="03-ridge-lasso_cache/html/cv-ozone-RL-inter_fa40bdfbc104bc9dd4c718242668fdbe">
+
+</div>
+<div class="corR">
+<p>Les méthodes régularisées permettent ici de diminuer les erreurs quadratiques de manière intéressante. Cela vient certainement du fait du nombre de variables explicatives qui est beaucoup plus important lorsqu’on prend en compte toutes les interactions d’ordre 2, nous en avons en effet 253 :</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div></li>
+</ol>
+</section>
+<section id="reconstruction-dun-signal" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="reconstruction-dun-signal"><span class="header-section-number">3.2</span> Reconstruction d’un signal</h2>
+<p>Le fichier <code>signal.csv</code> contient un signal que l’on peut représenter par une fonction <span class="math inline">\(m:\mathbb R\to\mathbb R\)</span>. On le visualise</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>signal <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/signal.csv"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(signal)<span class="sc">+</span><span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)<span class="sc">+</span><span class="fu">geom_line</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-ridge-lasso_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Plaçons nous dans le cas où on ne dispose que d’une version bruitée de ce signal. La courbe n’est pas observée mais on dispose d’un échantillon <span class="math inline">\((x_i,y_i),i=1,\dots,n\)</span> généré selon le modèle</p>
+<p><span class="math display">\[y_i=m(x_i)+\varepsilon_i.\]</span></p>
+<p>Le fichier <code>ech_signal.csv</code> contient <span class="math inline">\(n=60\)</span> observations issues de ce modèle. On représente les données et la courbe</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>donnees <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/ech_signal.csv"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(signal)<span class="sc">+</span><span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)<span class="sc">+</span><span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>donnees,<span class="fu">aes</span>(<span class="at">x=</span>X,<span class="at">y=</span>Y))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-ridge-lasso_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Nous cherchons dans cette partie à reconstruire le signal à partir de l’échantillon. Bien entendu, vu la forme du signal, un modèle linéaire de la forme <span class="math display">\[y_i=\beta_0+\beta_1x_i+\varepsilon_i\]</span> n’est pas approprié. De nombreuses approches en <strong>traitement du signal</strong> proposent d’utiliser une <code>base</code> ou <code>dictionnaire</code> représentée par une collection de fonctions <span class="math inline">\(\{\psi_j(x)\}_{j=1,\dots,K}\)</span> et de décomposer le signal dans cette base :</p>
+<p><span class="math display">\[m(x)\approx \sum_{j=1}^K \beta_j\psi_j(x).\]</span></p>
+<p>Pour un dictionnaire donné, on peut alors considérer un <strong>modèle linéaire</strong></p>
+<span class="math display">\[\begin{equation}
+  y_i=\sum_{j=1}^K \beta_j\psi_j(x_i)+\varepsilon_i.
+  (\#eq:mod-lin-signal)
+\end{equation}\]</span>
+<p>Le problème est toujours d’estimer les paramètres <span class="math inline">\(\beta_j\)</span> mais les variables sont maintenant définies par les élements du dictionnaire. Il existe différents types de dictionnaire, dans cet exercice nous proposons de considérer la base de Fourier définie par</p>
+<p><span class="math display">\[\psi_0(x)=1,\quad \psi_{2j-1}(x)=\cos(2j\pi x)\quad\text{et}\quad \psi_{2j}(x)=\sin(2j\pi x),\quad j=1,\dots,K.\]</span></p>
+<ol type="1">
+<li><p>Écrire une fonction <strong>R</strong> qui admet en entrée :</p>
+<ul>
+<li>une grille de valeurs de <code>x</code> (un vecteur)</li>
+<li>une valeur de <code>K</code> (un entier positif)</li>
+</ul>
+<p>et qui renvoie en sortie une matrice qui contiennent les valeurs du dictionnaire pour chaque valeur de <code>x</code>. Cette matrice devra donc contenir <code>2K</code> colonnes et le nombre de lignes sera égal à la longueur du vecteur <code>x</code>.</p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>On fixe <code>K=25</code>. Calculer les estimateurs des moindres carrés du modèle @ref(eq:mod-lin-signal).</p>
+<div class="corR">
+<p>Il suffit d’ajuster le modèle linéaire où les variables explicatives sont données par le dictionnaire :</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>Représenter le signal estimé. Commenter le graphe.</p>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>Le signal estimé a tendance à surajuster les données. Cela vient du fait que on estime 51 paramètres avec seulement 60 observations.</p>
+</div></li>
+<li><p>Calculer les estimateurs <strong>lasso</strong> et représenter le signal issu de ces estimateurs.</p>
+<div class="corR">
+<p>On regarde tout d’abord le <code>chemin de régularisation</code> des estimateurs <strong>lasso</strong></p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>Il semble que quelques coefficients quittent la valeur 0 bien avant les autres. On effectue maintenant la validation croisée pour sélectionner le paramètre <span class="math inline">\(\lambda\)</span>.</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>On calcule les prévisions et on trace le signal.</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>L’algorithme <strong>lasso</strong> a permis de corriger le problème de sur-apprentissage.</p>
+</div></li>
+<li><p>Identifier les coefficients lasso sélectionnés qui ne sont pas nuls.</p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>Ajouter les signaux ajustés par les algorithme PCR et PLS.</p>
+<div class="corR">
+<ul>
+<li><p>On effectue la <code>PCR</code> :</p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+</ul>
+<!-- -->
+<ul>
+<li><p>Puis la <code>PLS</code> :</p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+</ul>
+<!-- -->
+<ul>
+<li><p>On trace les signaux :</p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+</ul>
+<p>On peut également obtenir les erreurs quadratiques (puisqu’on connait la vraie courbe)</p>
+<div class="cell" data-teacher="false">
+
+</div>
+</div></li>
+</ol>
+</section>
+<section id="régression-logistique-pénalisée" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="régression-logistique-pénalisée"><span class="header-section-number">3.3</span> Régression logistique pénalisée</h2>
+<p>On considère le jeu de données sur la détection d’images publicitaires disponible ici <a href="https://archive.ics.uci.edu/ml/datasets/internet+advertisements" class="uri">https://archive.ics.uci.edu/ml/datasets/internet+advertisements</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ad.data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/ad_data.txt"</span>,<span class="at">header=</span><span class="cn">FALSE</span>,<span class="at">sep=</span><span class="st">","</span>,<span class="at">dec=</span><span class="st">"."</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">na.strings =</span> <span class="st">"?"</span>,<span class="at">strip.white =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(ad.data)[<span class="fu">ncol</span>(ad.data)] <span class="ot">&lt;-</span> <span class="st">"Y"</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>ad.data<span class="sc">$</span>Y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ad.data<span class="sc">$</span>Y)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La variable à expliquer est</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ad.data<span class="sc">$</span>Y)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ad. nonad. 
+   459   2820 </code></pre>
+</div>
+</div>
+<p>Cette variable est binaire. On considère une régression logistique pour expliquer cette variable. Le nombre de variables explicatives étant important, comparer les algorithmes du maximum de vraisemblance aux algorithmes de type <strong>ridge/lasso</strong> en faisant une validation croisée 10 blocs. On pourra utiliser comme critère de comparaison l’<code>erreur de classification</code>, la <code>courbe ROC</code> et l’<code>AUC</code>. Il faudra également prendre des décisions pertinentes vis-à-vis des données manquantes…</p>
+<div class="corR">
+<p>On commence par regarder les données manquantes :</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>On remarque que 920 individus ont au moins une donnée manquante alors que seules les 4 premières variables ont des données manquantes, on choisit donc de supprimer ces 4 variables.</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>On construit les matrices des variables explicatives pour les méthodes lasso et ridge (<code>glmnet</code> veut les variables explicatives sous forme de matrices).</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>Avant de faire la validation croisée, nous présentons juste comment faire l’algorithme <code>lasso</code>. Comme pour la régression, on utilise la fonction <code>cv.glmnet</code>, il faut juste ajouter l’argument <code>family="binomial"</code> :</p>
+</div>
+<div class="cell" data-teacher="false" data-hash="03-ridge-lasso_cache/html/lasso-ad_51e7d21b3d55207688ac35381e9df295">
+
+</div>
+<div class="corR">
+<p>Par défaut le critère utilisé pour la classification binaire est celui de la <code>déviance</code>. On peut utiliser d’autres critères comme l’<code>erreur de classification</code> ou l’<code>auc</code> en modifiant l’argument <code>type.measure</code>. On gardera la déviance dans la suite. On peut maintenant faire la validation croisée 10 blocs pour calculer les prévisions des 3 algorithmes.</p>
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="corR">
+<p>Le tibble <code>score</code> contient, pour chaque individu, les prévisions des probabilités a posteriori <span class="math display">\[\mathbf P(Y=\text{nonad.}|X=x_i),\quad i=1,\dots,n.\]</span></p>
+<p>On peut déduire de ce tableau les critères souhaités :</p>
+<ul>
+<li><p>les <code>courbes ROC</code>:</p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+</ul>
+<!-- -->
+<ul>
+<li><p>les <code>AUC</code>:</p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+</ul>
+<!-- -->
+<ul>
+<li><p>les <code>erreurs de classification</code> :</p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+</ul>
+<p>On remarque que les méthodes pénalisées sont nettement meilleures que l’approche classique par maximum de vraisemblance sur cet exemple.</p>
+</div>
+</section>
+<section id="exo-ridgelasso" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="exo-ridgelasso"><span class="header-section-number">3.4</span> Exercices</h2>
+<div id="exr-calcridge" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 3.1 (Estimateurs ridge pour le modèle linéaire) </strong></span>On considère le modèle de régression <span class="math display">\[Y_i=\beta_1x_{i1}+\dots+\beta_px_{ip}+\varepsilon_i\]</span> où les <span class="math inline">\(\varepsilon_i\)</span> sont i.i.d de loi <span class="math inline">\(\mathcal N(0,\sigma^2)\)</span>. Pour <span class="math inline">\(\lambda\geq 0\)</span>, on note <span class="math inline">\(\hat\beta_R(\lambda)\)</span> l’estimateur ridge défini par <span class="math display">\[
+\hat\beta_R(\lambda)=\mathop{\mathrm{argmin}}_\beta\sum_{i=1}^n\left(y_i-\sum_{j=1}^px_{ij}\beta_j\right)^2+\lambda\sum_{j=1}^p\beta_j^2.
+\]</span></p>
+<ol type="1">
+<li><p>Exprimer <span class="math inline">\(\hat\beta_R(\lambda)\)</span> en fonction de <span class="math inline">\(\mathbb X\)</span>, <span class="math inline">\(\mathbb Y\)</span> et <span class="math inline">\(\lambda\)</span>.</p>
+<div class="correction">
+<p>Le critère à minimiser se réécrit <span class="math display">\[\mathcal C(\beta)=(\mathbb Y-\mathbb X\beta)^t (\mathbb Y-\mathbb X\beta)+\lambda\beta^t\beta.\]</span> L’estimateur ridge est donc solution de <span class="math display">\[-2\mathbb X^t\mathbb Y+2\mathbb X^t\mathbb X\beta+2\lambda\beta=0,\]</span> d’où <span class="math display">\[\hat\beta_R(\lambda)=(\mathbb X^t\mathbb X+\lambda I)^{-1}\mathbb X^t\mathbb Y.\]</span></p>
+</div></li>
+<li><p>Étudier le biais et la variance de <span class="math inline">\(\hat\beta_R(\lambda)\)</span> en fonction de <span class="math inline">\(\lambda\)</span>. On pourra également faire la comparaison avec l’estimateur des MCO.</p>
+<div class="correction">
+<p>Comme <span class="math inline">\(\mathbb Y=\mathbb X\beta+\varepsilon\)</span>, on obtient</p>
+<span class="math display">\[\begin{align*}
+\esp[\hat\beta_R(\lambda)]-\beta &amp; =(\mathbb X^t\mathbb X+\lambda I)^{-1}\mathbb X^t\mathbb X\beta-\beta \\
+&amp; =\left[(\mathbb X^t\mathbb X+\lambda I)^{-1}(\mathbb X^t\mathbb X-(\mathbb X^t\mathbb X+\lambda I))\right]\beta \\
+&amp; = -\lambda(\mathbb X^t\mathbb X+\lambda I)^{-1}\beta.
+\end{align*}\]</span>
+<p>De même, on obtient pour la variance <span class="math display">\[
+\mathbf V(\hat\beta_R(\lambda))=\sigma^2(\mathbb X^t\mathbb X+\lambda\mathbb I)^{-1}\mathbb X^t\mathbb X(\mathbb X^t\mathbb X+\lambda\mathbb I)^{-1}.
+\]</span> La variance diminue lorsque <span class="math inline">\(\lambda\)</span> augmente, mais on remarque une augmentation du bais par rapport à l’estimateur des moindres carrés (et réciproquement lorsque <span class="math inline">\(\lambda\)</span> diminue).</p>
+</div></li>
+<li><p>On suppose que la matrice <span class="math inline">\(\mathbb X\)</span> est orthogonale. Exprimer les estimateurs <span class="math inline">\(\hat\beta_{R,j}(\lambda)\)</span> en fonction des estimateurs des MCO <span class="math inline">\(\hat\beta_j, j=1,\dots,p\)</span>. Interpréter.</p>
+<div class="correction">
+<p>Si <span class="math inline">\(\mathbb X\)</span> est orthogonale, alors <span class="math display">\[\hat\beta_R(\lambda)=\frac{1}{1+\lambda}\mathbb X^t\mathbb Y=\frac{\hat\beta_{MCO}}{1+\lambda}.\]</span></p>
+</div></li>
+</ol>
+</div>
+<div id="exr-calclasso" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 3.2 (Estimateurs lasso dans le cas orthogonal) </strong></span>Cet exercice est inspiré de <span class="citation" data-cites="gir15">Giraud (<a href="references.html#ref-gir15" role="doc-biblioref">2015</a>)</span>. On rappelle qu’une fonction <span class="math inline">\(F:\mathbb R^n\to\mathbb R\)</span> est convexe si <span class="math inline">\(\forall x,y\in\mathbb R^n\)</span>, <span class="math inline">\(\forall\lambda\in[0,1]\)</span> on a <span class="math display">\[F(\lambda x+(1-\lambda) y)\leq \lambda F(x)+(1-\lambda)F(y).\]</span> On définit la sous-différentielle d’une fonction convexe <span class="math inline">\(F\)</span> par <span class="math display">\[\partial F(x)=\{w\in\mathbb R^n:F(y)\geq F(x)+\langle w,y-x\rangle\textrm{ pour tout }y\in\mathbb R^n\}.\]</span> On admettra que les minima d’une fonction convexe <span class="math inline">\(F:\mathbb R^n\to\mathbb R\)</span> sont caractérisés par <span class="math display">\[x^\star\in\mathop{\mathrm{argmin}}_{x\in\mathbb R^n}F(x)\Longleftrightarrow 0\in \partial F(x^\star)\]</span> et que <span class="math inline">\(\partial F(x)=\{\nabla F(x)\}\)</span> lorsque <span class="math inline">\(F\)</span> est différentiable en <span class="math inline">\(x\)</span>.</p>
+<ol type="1">
+<li><p>Montrer que pour <span class="math inline">\(x\in\mathbb R\)</span> <span class="math display">\[
+\partial |x|=\left\{
+\begin{array}{ll}
+\textrm{signe}(x)   &amp; \textrm{si } x\neq 0 \\
+\left[-1;1\right] &amp; \textrm{sinon,}
+\end{array}\right.
+\]</span> où <span class="math inline">\(\text{signe}(x)=\mathbf 1_{x&gt;0}-\mathbf 1_{x\leq 0}\)</span>.</p>
+<div class="correction">
+<p><span class="math inline">\(x\mapsto|x|\)</span> est dérivable partout sauf en 0 donc <span class="math inline">\(\partial |x|=\textrm{signe}(x)1\)</span> si <span class="math inline">\(x\neq 0\)</span>. De plus, si <span class="math inline">\(x=0\)</span> <span class="math display">\[\partial|x|=\{w\in\mathbb R:|y|\geq \langle w,y\rangle\ \forall y\in\mathbb R\}=\{w\in\mathbb R:|y|\geq wy\ \forall y\in\mathbb R\}=[-1,1].\]</span></p>
+</div></li>
+<li><p>Soit <span class="math inline">\(x\in\mathbb R^n\)</span>.</p>
+<ol type="a">
+<li><p>Montrer que <span class="math display">\[\partial\|x\|_1=\{w\in\mathbb R^n:\langle w,x\rangle=\|x\|_1\text{ et }\|w\|_\infty\leq 1\}.\]</span> On pourra utiliser que pour tout <span class="math inline">\(p,q\)</span> tels que <span class="math inline">\(1/p+1/q=1\)</span> on a <span class="math display">\[\|x\|_p=\sup\left\{\langle w,x\rangle:\|w\|_q\leq 1\right\}.\]</span></p>
+<div class="correction">
+<p>On montre la double inclusion. Soit <span class="math inline">\(w\)</span> tel que <span class="math inline">\(\langle w,x\rangle=\|x\|_1\)</span> et <span class="math inline">\(\|w\|_\infty=1\)</span>. On a <span class="math inline">\(\forall y\in\mathbb R^n\)</span>, <span class="math display">\[\|y\|_1\geq \langle w,y\rangle=\langle w,y-x+x\rangle=\|x\|_1+\langle w,y-x\rangle.\]</span> Donc <span class="math inline">\(w\in\partial\|x\|_1\)</span>. Inversement, soit <span class="math inline">\(w\in\partial\|x\|_1\)</span>. Par définition <span class="math display">\[\partial\|x\|_1=\{w\in\mathbb R^n:\|y\|_1\geq \langle w,y-x\rangle+\|x\|_1\ \forall y\in\mathbb R^n\}.\]</span> Pour <span class="math inline">\(y=0\)</span> et <span class="math inline">\(y=2x\)</span>, on a donc <span class="math display">\[\|x\|_1\leq\langle w,x\rangle\quad\textrm{et}\quad 2\|x\|_1\geq \langle w,x\rangle+\|x\|_1\]</span> d’où <span class="math inline">\(\|x\|_1=\langle x,w\rangle=\sum_iw_ix_i\)</span>. De plus en posant <span class="math inline">\(\tilde w=(0,\dots,0,\text{signe}(w_i),0,\dots,0)\)</span> où la coordonnée non nulle correspond au <span class="math inline">\(\max_i(|w_i|)\)</span> on a <span class="math inline">\(\|w\|_\infty=\langle w,\tilde w\rangle\)</span> et <span class="math inline">\(\|\tilde w\|_\infty=\|\tilde w\|_1=1\)</span>. De plus <span class="math display">\[\|\tilde w\|_1\geq \|x\|_1+\langle w,\tilde{w}-x\rangle=\|w\|_\infty\quad\Longrightarrow \|w\|_\infty\leq \|\tilde w\|_1=1.\]</span></p>
+</div></li>
+<li><p>En déduire <span class="math display">\[\partial\|x\|_1=\{w\in\mathbb R^n:w_j=\textrm{signe}(x_j)\textrm{ si }x_j\neq 0, w_j\in[-1,1]\textrm{ si }x_j=0\}.\]</span></p>
+<div class="correction">
+<p>On a</p>
+<span class="math display">\[\begin{align*}
+\partial\|x\|_1 &amp; =\{w\in\R^n:\ps{w}{x}=\|x\|_1\text{ et }\|w\|_\infty\leq 1\}\\
+&amp; = \{w\in\R^n:\sum_{i=1}^n(w_ix_i-|x_i|)=0\text{ et }\|w\|_\infty\leq 1\}.
+\end{align*}\]</span>
+<p>Or si <span class="math inline">\(\|w\|_\infty\leq 1\)</span> alors <span class="math inline">\(w_ix_i-|x_i|\leq 0\)</span> <span class="math inline">\(\forall i=1,\dots,n\)</span>. Donc</p>
+<span class="math display">\[\begin{align*}
+\partial\|x\|_1 &amp; =\{w\in\R^n:(w_ix_i-|x_i|)=0,i=1,\dots,n\text{ et }\|w\|_\infty\leq 1\}\\
+&amp;=\{w\in\R^n:w_j=\textrm{signe}(x_j)1\textrm{ si }x_j\neq 0, w_j\in[-1,1]\textrm{ si }x_j=0\}.
+\end{align*}\]</span>
+</div></li>
+</ol></li>
+<li><p>Étant données <span class="math inline">\(n\)</span> observations <span class="math inline">\((x_i,y_i),i=1,\dots,n\)</span> telles que <span class="math inline">\(x_i\in\mathbb R^p\)</span> et <span class="math inline">\(y_i\in\mathbb R\)</span> on rappelle que l’estimateur lasso <span class="math inline">\(\hat\beta(\lambda)\)</span> est construit en minimisant <span id="eq-critL1"><span class="math display">\[\mathcal L(\beta)=\|Y-\mathbb X\beta\|_2^2+\lambda\|\beta\|_1. \tag{3.1}\]</span></span></p>
+<p>On admettra que la sous-différentielle <span class="math inline">\(\partial \mathcal L(\beta)\)</span> est donnée par <span class="math display">\[\partial \mathcal L(\beta)=\left\{-2\mathbb X^t(Y-\mathbb X\beta)+\lambda z:z\in\partial\|\beta\|_1\right\}.\]</span> Montrer que <span class="math inline">\(\hat\beta(\lambda)\)</span> vérifie <span class="math display">\[\mathbb X^t\mathbb X\hat\beta(\lambda)=\mathbb X^tY-\frac{\lambda}{2}\hat z\]</span> où <span class="math inline">\(\hat z\in\mathbb R^p\)</span> vérifie <span class="math display">\[
+\hat z_j\left\{
+\begin{array}{ll}
+=\textrm{signe}(\hat\beta_j(\lambda))   &amp; \textrm{si } \hat\beta_j(\lambda)\neq 0 \\
+\in\left[-1;1\right] &amp; \textrm{sinon.}
+\end{array}\right.
+\]</span></p>
+<div class="correction">
+<p>D’après les indications, on a <span class="math inline">\(0\in\partial \mathcal L(\hat\beta(\lambda))\)</span>. Donc il existe <span class="math inline">\(\hat z\in\partial\|\hat\beta(\lambda)\|_1\)</span> tel que <span class="math display">\[-2\mathbb X^t(Y-\mathbb X\hat\beta(\lambda))+\lambda \hat z=0\quad\Longleftrightarrow\quad \mathbb X^t\mathbb X\hat\beta(\lambda)=\mathbb X^tY-\frac{\lambda}{2}\hat z.\]</span></p>
+</div></li>
+<li><p>On suppose maintenant que la matrice <span class="math inline">\(\mathbb X\)</span> est orthogonale.</p>
+<ol type="a">
+<li><p>Montrer que <span class="math display">\[\textrm{signe}(\hat\beta_j(\lambda))=\textrm{signe}(\mathbb X_j^tY)\quad\textrm{lorsque }\hat\beta_j(\lambda)\neq 0\]</span> et <span class="math inline">\(\hat\beta_j(\lambda)=0\)</span> si et seulement si <span class="math inline">\(|\mathbb X_j^tY|\leq \lambda/2\)</span>.</p>
+<div class="correction">
+<p><span class="math inline">\(\mathbb X\)</span> étant orthogonale, on a pour <span class="math inline">\(\hat\beta_j(\lambda)\neq 0\)</span> <span class="math display">\[\hat\beta_j(\lambda)+\frac{\lambda}{2}\textrm{signe}(\hat\beta_j(\lambda))=\hat\beta_j(\lambda)\left(1+\frac{\lambda}{2|\hat\beta_j(\lambda)|}\right)=\mathbb X_j^tY,\]</span> donc <span class="math inline">\(\hat\beta_j(\lambda)\)</span> est du signe de <span class="math inline">\(\mathbb X_j^tY\)</span>. De plus si <span class="math inline">\(\hat\beta_j(\lambda)=0\)</span> alors <span class="math inline">\(\mathbb X^t_jY=\frac{\lambda}{2}\hat z_j\)</span> avec <span class="math inline">\(\hat z_j\in[-1,1]\)</span>. Donc <span class="math display">\[|\mathbb X^t_jY|=\left|\frac{\lambda}{2}\hat z_j\right|\leq\frac{\lambda}{2}.\]</span> A l’inverse si <span class="math inline">\(|\mathbb X_j^tY|\leq \lambda/2\)</span> et si <span class="math inline">\(\hat\beta_j(\lambda)\neq 0\)</span> alors <span class="math display">\[\left|\hat\beta_j(\lambda)\left(1+\frac{\lambda}{2|\hat\beta_j(\lambda)|}\right)\right|=|\hat\beta_j(\lambda)|+\frac{\lambda}{2}=|\mathbb X^t_jY|\leq\frac{\lambda}{2}.\]</span> Donc <span class="math inline">\(\hat\beta_j(\lambda)=0\)</span>.</p>
+</div></li>
+<li><p>En déduire <span class="math display">\[\hat\beta_j(\lambda)=\mathbb X_j^tY\left(1-\frac{\lambda}{2|\mathbb X_j^tY|}\right)_+,\quad j=1,\dots,p\]</span> où <span class="math inline">\((x)_+=\max(x,0)\)</span>. Interpréter ce résultat.</p>
+<div class="correction">
+<p>On obtient donc <span class="math display">\[\hat\beta_j(\lambda)=\mathbb X_j^tY-\frac{\lambda}{2}\,\frac{\mathbb X_j^tY}{|\mathbb X_j^tY|}=\mathbb X_j^tY\left(1-\frac{\lambda}{2|\mathbb X_j^tY|}\right)\]</span> si <span class="math inline">\(\mathbb X_j^tY\geq \frac{\lambda}{2}\)</span> et <span class="math inline">\(\hat\beta_j(\lambda)=0\)</span> sinon. D’où <span class="math display">\[\hat\beta_j(\lambda)=\mathbb X_j^tY\left(1-\frac{\lambda}{2|\mathbb X_j^tY|}\right)_+,\quad j=1,\dots,d.\]</span><br>
+</p>
+</div></li>
+</ol></li>
+</ol>
+</div>
+<div id="exr-unicite-lasso" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 3.3 (Unicité de l’estimateur lasso) </strong></span>Cet exercice est inspiré de <span class="citation" data-cites="gir15">Giraud (<a href="references.html#ref-gir15" role="doc-biblioref">2015</a>)</span>. Soit <span class="math inline">\(\hat\beta^{1}(\lambda)\)</span> et <span class="math inline">\(\hat\beta^{2}(\lambda)\)</span> deux solutions qui minimisent l’<a href="#eq-critL1">Équation&nbsp;<span>3.1</span></a>. Soit <span class="math inline">\(\hat\beta=(\hat\beta^{1}(\lambda)+\hat\beta^{2}(\lambda))/2\)</span>.</p>
+<ol type="1">
+<li><p>Montrer que si <span class="math inline">\(\mathbb X \hat\beta^{1}(\lambda)\neq\mathbb X \hat\beta^{2}(\lambda)\)</span> alors <span class="math display">\[\|\mathbb Y-\mathbb X\hat\beta\|_2^2+\lambda\|\hat\beta\|_1&lt;\frac{1}{2}\left(\|\mathbb Y-\mathbb X\hat\beta^1(\lambda)\|_2^2+\lambda\|\hat\beta^1(\lambda)\|_1+\|\mathbb Y-\mathbb X\hat\beta^2(\lambda)\|_2^2+\lambda\|\hat\beta^2(\lambda)\|_1\right).\]</span> On pourra utiliser la convexité (forte) de <span class="math inline">\(x\mapsto\|x\|_2^2\)</span>.</p>
+<div class="correction">
+<p>On a</p>
+<span class="math display">\[\begin{align*}
+\|\mathbb Y-\mathbb X\hat\beta\|_2^2+\lambda\|\hat\beta\|_1= &amp; \left\|\frac{1}{2}(\mathbb Y-\mathbb X\hat\beta^1(\lambda))+\frac{1}{2}(\mathbb Y-\mathbb X\hat\beta^2(\lambda))\right\|_2^2+\lambda\left\|\frac{1}{2}(\hat\beta^1(\lambda)+\hat\beta^2(\lambda))\right\|_1 \\
+&lt; &amp; \frac{1}{2}\left\|\mathbb Y-\mathbb X\hat\beta^1(\lambda))\right\|_2^2+\frac{1}{2}\left\|\mathbb Y-\mathbb X\hat\beta^2(\lambda))\right\|_2^2+\frac{1}{2}\lambda\|\hat\beta^1(\lambda)\|_1+\frac{1}{2}\lambda\|\hat\beta^2(\lambda)\|_1
+\end{align*}\]</span>
+<p>en utilisant la stricte convexité de <span class="math inline">\(x\mapsto\|x\|_2^2\)</span> et l’inégalité triangulaire.</p>
+</div></li>
+<li><p>En déduire que <span class="math inline">\(\mathbb X \hat\beta^{1}(\lambda)=\mathbb X \hat\beta^{2}(\lambda)\)</span>.</p>
+<div class="correction">
+<p>Donc si <span class="math inline">\(\mathbb X \hat\beta^{1}(\lambda)\neq\mathbb X \hat\beta^{2}(\lambda)\)</span> alors <span class="math display">\[\|\mathbb Y-\mathbb X\hat\beta\|_2^2+\lambda\|\hat\beta\|_1&lt; \|\mathbb Y-\mathbb X\hat\beta^1(\lambda)\|_2^2+\lambda\|\hat\beta^1(\lambda)\|_1\]</span> ce qui est impossible par définition de <span class="math inline">\(\hat\beta^1(\lambda)\)</span>.</p>
+</div></li>
+</ol>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-gir15" class="csl-entry" role="doc-biblioentry">
+Giraud, C. 2015. <em>Introduction to High-Dimensional Statistics</em>. CRC Press.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copié");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02-reg-comp.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Régression sur composantes</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04-mod-add.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modèle additif</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

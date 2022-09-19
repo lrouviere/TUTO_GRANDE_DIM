@@ -1,9 +1,0 @@
-book_filename: "TUTO_GRANDE_DIM"
-delete_merged_file: true
-output_dir: "docs" #sujet
-#output_dir: "docs/correction" #corrigé
-language:
-  ui:
-    chapter_name: "Chapitre "
-  label:
-    exr: "Exercice "

@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Statistique en grande dimension - 2&nbsp; Régression sur composantes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./03-ridge-lasso.html" rel="next">
+<link href="./01-intro-grande-dim.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Régression sur composantes</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistique en grande dimension</a> 
+        <div class="sidebar-tools-main">
+    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./Statistique-en-grande-dimension.pdf">
+            <i class="bi bi-bi-file-pdf pe-1"></i>
+          Download PDF
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./Statistique-en-grande-dimension.epub">
+            <i class="bi bi-bi-journal pe-1"></i>
+          Download ePub
+          </a>
+        </li>
+    </ul>
+    <a href="" title="Share" id="sidebar-tool-dropdown-1" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-1">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+            <i class="bi bi-bi-facebook pe-1"></i>
+          Facebook
+          </a>
+        </li>
+    </ul>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Présentation</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro-grande-dim.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Les problèmes de la grande dimension</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-reg-comp.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Régression sur composantes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-ridge-lasso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Régressions pénalisées (ou sous contraintes)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-mod-add.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modèle additif</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">Références</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table des matières</h2>
+   
+  <ul>
+  <li><a href="#sélection-de-variables" id="toc-sélection-de-variables" class="nav-link active" data-scroll-target="#sélection-de-variables"> <span class="header-section-number">2.1</span> Sélection de variables</a></li>
+  <li><a href="#régression-sur-composantes-principales-méthodo" id="toc-régression-sur-composantes-principales-méthodo" class="nav-link" data-scroll-target="#régression-sur-composantes-principales-méthodo"> <span class="header-section-number">2.2</span> Régression sur composantes principales (méthodo)</a></li>
+  <li><a href="#régression-pls-méthodo" id="toc-régression-pls-méthodo" class="nav-link" data-scroll-target="#régression-pls-méthodo"> <span class="header-section-number">2.3</span> Régression PLS : méthodo</a></li>
+  <li><a href="#comparaison-pcr-vs-pls." id="toc-comparaison-pcr-vs-pls." class="nav-link" data-scroll-target="#comparaison-pcr-vs-pls."> <span class="header-section-number">2.4</span> Comparaison : PCR vs PLS.</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="reg-comp" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Régression sur composantes</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div>
+<div class="cell">
+
+</div>
+<style>
+div.correction {
+  color: black;
+  background-color: #F0F0F0;
+  font-style: normal;
+  display: none;
+}
+
+.corR {
+  font-style: italic;
+  display: none;
+}
+</style>
+</div>
+<div class="cell">
+
+</div>
+<p>Les performances des estimateurs classiques (MCO) des paramètres du modèle linéaire</p>
+<p><span class="math display">\[Y=\beta_0+\beta_1X_1+\dots+\beta_dX_d+\varepsilon\]</span> peuvent se dégrader lorsque la dimension <span class="math inline">\(d\)</span> est grande ou en présence de dépendance linéaire entre les variables explicatives. Les régressions sur composantes consistent à trouver de nouvelles composantes <span class="math inline">\(Z_k,j=k,\dots,q\)</span> avec <span class="math inline">\(q\leq p\)</span> qui s’écrivent le plus souvent comme des combinaisons linéaires des <span class="math inline">\(X_j\)</span> dans l’idée de diminuer le nombre de paramètres du modèle ou la dépendance entre les covariables. Il existe plusieurs façons de construire ces composantes, dans cette partie nous proposons :</p>
+<ul>
+<li>la <strong>régression sous composantes principales (PCR)</strong> : il s’agit de faire simplement une ACP sur la matrice des variables explicatives ;</li>
+<li>la <strong>régression partial least square (PLS)</strong> qui fait intervenir la variable cible dans la construction des composantes.</li>
+</ul>
+<p>Nous commençons par un bref rappel sur la sélection de variables.</p>
+<section id="sélection-de-variables" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="sélection-de-variables"><span class="header-section-number">2.1</span> Sélection de variables</h2>
+<p>On considère le jeu de données <code>ozone.txt</code> où on cherche à expliquer la concentration maximale en ozone relevée sur une journée (variable <code>maxO3</code>) par d’autres variables essentiellement météorologiques.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ozone <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/ozone.txt"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ozone)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         maxO3   T9  T12  T15 Ne9 Ne12 Ne15     Vx9    Vx12    Vx15 maxO3v
+20010601    87 15.6 18.5 18.4   4    4    8  0.6946 -1.7101 -0.6946     84
+20010602    82 17.0 18.4 17.7   5    5    7 -4.3301 -4.0000 -3.0000     87
+20010603    92 15.3 17.6 19.5   2    5    4  2.9544  1.8794  0.5209     82
+20010604   114 16.2 19.7 22.5   1    1    0  0.9848  0.3473 -0.1736     92
+20010605    94 17.4 20.5 20.4   8    8    7 -0.5000 -2.9544 -4.3301    114
+20010606    80 17.7 19.8 18.3   6    6    7 -5.6382 -5.0000 -6.0000     94
+          vent pluie
+20010601  Nord   Sec
+20010602  Nord   Sec
+20010603   Est   Sec
+20010604  Nord   Sec
+20010605 Ouest   Sec
+20010606 Ouest Pluie</code></pre>
+</div>
+</div>
+<ol type="1">
+<li><p>Ajuster un modèle linéaire avec <code>lm</code> et analyser la pertinence des variables explicatives dans le modèle.</p>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>Il semble que quelques variables ne sont pas nécessaires dans le modèle.</p>
+</div></li>
+<li><p>Expliquer les sorties de la commande</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaps)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mod.sel <span class="ot">&lt;-</span> <span class="fu">regsubsets</span>(maxO3<span class="sc">~</span>.,<span class="at">data=</span>ozone,<span class="at">nvmax=</span><span class="dv">14</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod.sel)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Subset selection object
+Call: regsubsets.formula(maxO3 ~ ., data = ozone, nvmax = 14)
+14 Variables  (and intercept)
+          Forced in Forced out
+T9            FALSE      FALSE
+T12           FALSE      FALSE
+T15           FALSE      FALSE
+Ne9           FALSE      FALSE
+Ne12          FALSE      FALSE
+Ne15          FALSE      FALSE
+Vx9           FALSE      FALSE
+Vx12          FALSE      FALSE
+Vx15          FALSE      FALSE
+maxO3v        FALSE      FALSE
+ventNord      FALSE      FALSE
+ventOuest     FALSE      FALSE
+ventSud       FALSE      FALSE
+pluieSec      FALSE      FALSE
+1 subsets of each size up to 14
+Selection Algorithm: exhaustive
+          T9  T12 T15 Ne9 Ne12 Ne15 Vx9 Vx12 Vx15 maxO3v ventNord ventOuest
+1  ( 1 )  " " "*" " " " " " "  " "  " " " "  " "  " "    " "      " "      
+2  ( 1 )  " " "*" " " " " " "  " "  " " " "  " "  "*"    " "      " "      
+3  ( 1 )  " " "*" " " "*" " "  " "  " " " "  " "  "*"    " "      " "      
+4  ( 1 )  " " "*" " " "*" " "  " "  "*" " "  " "  "*"    " "      " "      
+5  ( 1 )  " " "*" " " "*" " "  " "  "*" " "  " "  "*"    " "      " "      
+6  ( 1 )  " " "*" " " "*" " "  " "  "*" " "  "*"  "*"    " "      " "      
+7  ( 1 )  " " "*" " " "*" " "  " "  "*" " "  "*"  "*"    "*"      " "      
+8  ( 1 )  " " "*" " " "*" " "  " "  "*" " "  "*"  "*"    " "      "*"      
+9  ( 1 )  " " "*" " " "*" "*"  " "  "*" " "  "*"  "*"    " "      "*"      
+10  ( 1 ) " " "*" "*" "*" "*"  " "  "*" " "  "*"  "*"    " "      "*"      
+11  ( 1 ) " " "*" "*" "*" "*"  " "  "*" "*"  "*"  "*"    " "      "*"      
+12  ( 1 ) " " "*" "*" "*" "*"  " "  "*" "*"  "*"  "*"    "*"      "*"      
+13  ( 1 ) "*" "*" "*" "*" "*"  " "  "*" "*"  "*"  "*"    "*"      "*"      
+14  ( 1 ) "*" "*" "*" "*" "*"  "*"  "*" "*"  "*"  "*"    "*"      "*"      
+          ventSud pluieSec
+1  ( 1 )  " "     " "     
+2  ( 1 )  " "     " "     
+3  ( 1 )  " "     " "     
+4  ( 1 )  " "     " "     
+5  ( 1 )  " "     "*"     
+6  ( 1 )  " "     "*"     
+7  ( 1 )  " "     "*"     
+8  ( 1 )  "*"     "*"     
+9  ( 1 )  "*"     "*"     
+10  ( 1 ) "*"     "*"     
+11  ( 1 ) "*"     "*"     
+12  ( 1 ) "*"     "*"     
+13  ( 1 ) "*"     "*"     
+14  ( 1 ) "*"     "*"     </code></pre>
+</div>
+</div>
+<div class="corR">
+<p>On obtient une table avec des étoiles qui permettent de visualiser les meilleurs modèles à <span class="math inline">\(1,2,\dots,8\)</span> variables au sens du <span class="math inline">\(R^2\)</span>.</p>
+</div></li>
+<li><p>Sélectionner le meilleur modèle au sens du <span class="math inline">\(R^2\)</span>. Que remarquez-vous ?</p>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>Le meilleur modèle est le modèle complet. C’est logique puisque le <span class="math inline">\(R^2\)</span> va toujours privilégier le modèle le plus complexe, c’est un critère <code>d'ajustement</code>.</p>
+</div></li>
+<li><p>Faire de même pour le <span class="math inline">\(C_p\)</span> et le <span class="math inline">\(BIC\)</span>. Que remarquez-vous pour les variables explicatives qualitatives ?</p>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>Ces critères choisissent ici le même modèle, avec 4 variables. On remarque que les variables qualitatives ne sont <code>pas réellement traitées comme des variables</code> : une modalité est égale à une variable. Par conséquent, cette procédure ne permet pas vraiment de sélectionner des variables qualitatives.</p>
+</div></li>
+<li><p>Comparer cette méthode avec des modèles sélectionnées par la fonction <code>step</code> ou la fonction <code>bestglm</code> du package <code>bestglm</code>.<br>
+</p>
+<div class="corR">
+<ul>
+<li><p>La fonction <code>step</code> permet de faire de la sélection <strong>pas à pas</strong>. Par exemple, pour une procédure <code>descendante</code> avec le critère <span class="math inline">\(AIC\)</span> on utilisera :</p>
+<pre data-rteacher="correct"><code>mod.step &lt;- step(lin.complet,direction="backward",trace=0)
+mod.step</code></pre>
+<p>La fonction <code>bestglm</code> permet quant à elle de faire des sélections exhaustive ou pas à pas, on peut l’utiliser pour tous les <strong>glm</strong>. Attention les variables qualitatives doivent être des facteurs et la variable à expliquer doit être positionnée en dernière colonne pour cette fonction.</p>
+<div class="cell" data-teacher="false" data-hash="02-reg-comp_cache/html/chunk-bestglm_41d6ccfb085e345806b413fb9f7309a4">
+
+</div></li>
+</ul>
+</div></li>
+</ol>
+</section>
+<section id="régression-sur-composantes-principales-méthodo" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="régression-sur-composantes-principales-méthodo"><span class="header-section-number">2.2</span> Régression sur composantes principales (méthodo)</h2>
+<p>L’algorithme <strong>PCP</strong> est une méthode de réduction de dimension, elle consiste à faire un modèle linéaire <strong>MCO</strong> sur les premiers axes de l’<strong>ACP</strong>. On désigne par</p>
+<ul>
+<li><span class="math inline">\(\mathbb X\)</span> la matrice qui contient les valeurs des variables explicatives que l’on suppose centrée réduite.</li>
+<li><span class="math inline">\(Z_1,\dots,Z_p\)</span> les axes de l’ACP qui s’écrivent comme des combinaisons linéaires des variables explicatives : <span class="math inline">\(Z_j=w_j^t X\)</span>.</li>
+</ul>
+<p>L’algorithme <strong>PCR</strong> consiste à choisir un nombre de composantes <span class="math inline">\(m\)</span> et à faire une régression MCO sur les <span class="math inline">\(m\)</span> premiers axes de l’ACP : <span class="math display">\[Y=\alpha_0+\alpha_1 Z_1+\dots+\alpha_mZ_m+\varepsilon.\]</span></p>
+<p>Si on désigne par</p>
+<ul>
+<li><span class="math inline">\(x\in\mathbb R^d\)</span> une nouvelle observation que l’on a centrée réduite également;</li>
+<li><span class="math inline">\(z_1,\dots,z_M\)</span> les coordonnées de <span class="math inline">\(x\)</span> dans la base définie par les <span class="math inline">\(m\)</span> premiers axes de l’ACP (<span class="math inline">\(z_j=w_j^tx\)</span>)</li>
+</ul>
+<p>l’algorithme <strong>PCR</strong> reverra la prévision <span class="math display">\[\widehat m_{\text{PCR}}(x)=\widehat \alpha_0+\widehat \alpha_1 z_1+\dots+\widehat \alpha_mz_m.\]</span> Cette prévision peut s’écrire également comme une combinaison linéaire des variables explicatives (centrées réduites ou non) : <span class="math display">\[\widehat m_{\text{PCR}}(x)=\widehat \gamma_0+\widehat \gamma_1 \tilde x_1+\dots+\widehat \gamma_p \tilde x_p=\widehat \beta_0+\widehat \beta_1 x_1+\dots+\widehat \beta_p x_p,\]</span> <span class="math inline">\(\tilde x_j\)</span> désignant l’observation brute (non centrée réduite).</p>
+<p>L’exercice suivant revient sur cet algorithme et notamment sur le lien entre ces différents paramètres.</p>
+<div id="exr-exo-methodo-pcr" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 2.1 (Régression PCR avec R) </strong></span>On considère le jeu de données <strong>Hitters</strong> dans lequel on souhaite expliquer la variable <strong>Salary</strong> par les autres variables du jeu de données. Pour simplifier le problème, on supprime les individus qui possèdent des données manquantes (il ne faut pas faire ça normalement !).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Hitters <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(Hitters)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li><p>Parmi les variables explicatives, certaines sont qualitatives. Expliquer comment, à l’aide de la fonction <strong>model.matrix</strong> on peut utiliser ces variables dans un modèle linéaire. On appellera <strong>X</strong> la matrice des variables explicatives construites avec cette variable.</p>
+<div class="corR">
+<p>Comme pour le modèle linéaire, on utilise des contraintes identifiantes. Cela revient à prendre une modalité de référence et à coder les autres modalités par 0-1.</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>Calculer la matrice <strong>Xcr</strong> qui correspond à la matrice <strong>X</strong> centrée réduite. On pourra utiliser la fonction <code>scale</code>.</p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>A l’aide de la fonction <code>PCA</code> du package <strong>FactoMineR</strong>, effectuer l’ACP du tableau <strong>Xcr</strong> avec l’option <code>scale.unit=FALSE</code>.</p>
+<div class="corR">
+<p>On utilise ici <code>scale.unit=FALSE</code> car les données sont déjà centrées-réduites. Ça nous permet de contrôler cette étape.</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>Récupérer les coordonnées des individus sur les 5 premiers axes de l’ACP (variables <span class="math inline">\(Z\)</span> dans le cours).</p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>Effectuer la régression linéaire sur les 5 premières composantes principales et calculer les estimateurs des MCO (<span class="math inline">\(\widehat\alpha_k,k=1,\dots,5\)</span> dans le cours).</p>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p><strong>Remarque</strong> :</p>
+<ul>
+<li>On obtient ici les estimateurs des <span class="math inline">\(\alpha,j=1,\dots,5\)</span>.<br>
+</li>
+<li>on peut aussi tout faire “à la main” (sans utiliser <strong>PCA</strong>)</li>
+</ul>
+</div>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>En déduire les estimateurs dans l’espace des données initiales pour les données centrées réduites, puis pour les données brutes. On pourra récupérer les vecteurs propres de l’ACP (<span class="math inline">\(w_k\)</span> dans le cours) dans la sortie <strong>svd</strong> de la fonction <strong>PCA</strong>.</p>
+<div class="corR">
+<ul>
+<li><p>Pour les données centrées-réduites, les coefficients s’obtiennent avec les formules vues en cours<br>
+</p>
+<p><span class="math display">\[\widehat\beta_0=\bar{\mathbb Y}\quad\text{et}\quad \widehat\beta_j=\sum_{k=1}^m\widehat\alpha_kw_{kj}.\]</span></p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>Pour les données brutes, on utilise les formules :</p>
+<p><span class="math display">\[\widehat\gamma_0=\widehat\beta_0-\sum_{j=1}^p\widehat\beta_j\mu_j\quad\text{et}\quad\widehat\gamma_j=\frac{\widehat\beta_j}{\sigma_j}.\]</span></p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+</ul>
+</div></li>
+<li><p>Retrouver les estimateurs dans l’espace des données initiales pour les données centrées réduites à l’aide de la fonction <code>pcr</code> du package <strong>pls</strong>.</p>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>On remarque que la fonction <strong>PCR</strong> renvoie les coefficients par rapport aux variables initiales centrées réduites. Cela fait du sens car il est dans ce cas possible de comparer les valeurs des estimateurs pour tenter d’interpréter le modèle. C’est beaucoup plus difficile à faire avec les coefficients des axes de l’ACP ou des variables intiales. Il est également important de noter que, contrairement aux estimateurs MCO du modèle linéaire Gaussien, on n’a pas d’information précise sur la loi des estimateurs, il n’est donc pas possible (ou pas facile) de faire des tests ou de calculer des intervalles de confiance.</p>
+</div></li>
+<li><p>On considère les individus suivants</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.new <span class="ot">&lt;-</span> Hitters[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">100</span>,<span class="dv">80</span>),]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Calculer de 3 façons différentes les valeurs de salaire prédites par la régression sur 5 composantes principales.</p>
+<div class="corR">
+<ul>
+<li><p>Approche classique : on utilise <code>predict.pcr</code> :</p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>On considère les valeurs centrées réduites et on utilise : <span class="math display">\[\widehat m_{\text{PCR}}(x)=\widehat\beta_0+\widehat\beta_1x_1+\dots+\widehat\beta_px_p.\]</span></p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>On considère les données brutes et on utilise : <span class="math display">\[\widehat m_{\text{PCR}}(x)=\widehat\gamma+\widehat\gamma_1\tilde x_1+\dots+\widehat\gamma_p\tilde x_p.\]</span></p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+</ul>
+</div></li>
+</ol>
+<div class="cell">
+
+</div>
+</div>
+<div id="exr-exo-cal-compPCR" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 2.2 (Composantes PCR) </strong></span>On rappelle que les poids <span class="math inline">\(w_k\)</span> des composantes principales s’obtiennent en résolvant le problème :</p>
+<p><span class="math display">\[\max_{w\in\mathbb R^d}\mathbf V(\mathbb Xw)\]</span> <span class="math display">\[\text{sous les contraintes }\|w\|=1,w^t\mathbb X^t\mathbb X w_\ell=0, \ell=1,\dots,k-1.\]</span></p>
+<ol type="1">
+<li><p>Montrer <span class="math inline">\(w_1\)</span> est un vecteur propre associé à la plus grande valeur propre de <span class="math inline">\(\mathbb X^t\mathbb X\)</span>.</p>
+<div class="correction">
+<p>On écrit le Lagrangien <span class="math display">\[L(w,\lambda)=w^t\mathbb X^t\mathbb Xw-\lambda(w^tw-1).\]</span> et on le dérive par rapport à <span class="math inline">\(w\)</span> : <span class="math display">\[\frac{\partial L}{\partial w}(w,\lambda)=2\mathbb X^t\mathbb Xw-2\lambda w.\]</span> En annulant cette dérivée, on déduit que <span class="math inline">\(w_1\)</span> est un vecteur propre de <span class="math inline">\(\mathbb X^t\mathbb X\)</span>. De plus, si <span class="math inline">\(w\)</span> est vecteur propre unitaire de <span class="math inline">\(\mathbb X^t\mathbb X\)</span> associé à la valeur propre <span class="math inline">\(\lambda\)</span> on a <span class="math inline">\(\mathbf V(\mathbb Xw)=\lambda\)</span>. On déduit que <span class="math inline">\(w_1\)</span> est un vecteur propre associé à la plus grande valeur propre de <span class="math inline">\(\mathbb X^t\mathbb X\)</span>.</p>
+</div></li>
+<li><p>Calculer <span class="math inline">\(w_2\)</span>.</p>
+<div class="correction">
+<p>On écrit le Lagrangien <span class="math display">\[L(w,\lambda,\mu)=w^t\mathbb X^t\mathbb Xw-\lambda(w^tw-1)-\mu w^t\mathbb X^t\mathbb Xw_1\]</span> et on calcule les dérivées partielles : <span class="math display">\[\frac{\partial L}{\partial w}(w,\lambda,\mu)=2\mathbb X^t\mathbb Xw-2\lambda w-\mu\mathbb X^t\mathbb Xw_1.\]</span> <span class="math display">\[\frac{\partial L}{\partial \lambda}(w,\lambda,\mu)=w^tw-1\quad\text{et}\quad\frac{\partial L}{\partial \mu}(w,\lambda,\mu)=-w^t\mathbb X^t\mathbb Xw_1.\]</span> En multipliant la première dérivée partielle par <span class="math inline">\(w_1^t\)</span> et en utilisant le fait que <span class="math inline">\(W_1\)</span> est un vecteur propre de <span class="math inline">\(\mathbb X^t\mathbb X\)</span>, on déduit que <span class="math inline">\(\mu=0\)</span>. Par conséquent, <span class="math inline">\(w_2\)</span> est un vecteur propre associé à la deuxième plus grande valeur propre de <span class="math inline">\(\mathbb X^t\mathbb X\)</span>.</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="régression-pls-méthodo" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="régression-pls-méthodo"><span class="header-section-number">2.3</span> Régression PLS : méthodo</h2>
+<p>La régression <strong>PLS</strong> propose de construire également de nouvelles composantes comme des combinaisons linéaires des variables explicatives. Comme pour l’algorithme <strong>PCR</strong>, les composantes sont calculées les unes après les autres et orthogonales entre elles. La principale différence et qu’on ne cherche pas les composantes qui maximisent la variabilités des observations projetées, mais les composantes qui maximisent la colinéarité avec la cible. L’algorithme est expliqué dans l’exercice suivant.</p>
+<div id="exr-exo-calc-comp-pls" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 2.3 (Calcul des composantes PLS) </strong></span>On reprend les notations du cours : <span class="math inline">\(\mathbb Y\)</span> désigne le vecteur de la variable à expliquer et <span class="math inline">\(\mathbb X\)</span> la matrice qui contient les observations des variables explicatives. On la suppose toujours centrée réduite.</p>
+<ol type="1">
+<li><p>On pose <span class="math inline">\(\mathbb Y^{(1)}=\mathbb Y\)</span> et <span class="math inline">\(\mathbb X^{(1)}=\mathbb X\)</span>. On cherche <span class="math inline">\(Z_1=w_1^tX^{(1)}\)</span> qui maximise <span class="math display">\[\langle \mathbb X^{(1)}w_1,\mathbb Y^{(1)}\rangle\quad\text{sous la contrainte}\quad\|w\|^2=1.\]</span> Cela revient à cherche la combinaison linéaire des colonnes de <span class="math inline">\(\mathbb X^{(1)}\)</span> la plus corrélée à <span class="math inline">\(\mathbb Y^{(1)}\)</span>. Calculer cette première composante.</p>
+<div class="correction">
+<p>On écrit le lagrangien <span class="math display">\[L(x,\lambda)={\mathbb Y^{(1)}}^t\mathbb X^{(1)}w_1-\frac{1}{2}\lambda(\|w_1\|^2-1)\]</span> En dérivant par rapport à <span class="math inline">\(w\)</span> et <span class="math inline">\(\lambda\)</span> on obtient les équations <span class="math display">\[\left\{
+\begin{array}{l}
+{\mathbb X^{(1)}}^t\mathbb Y^{(1)}-\lambda w_1=0 \\
+\|w_1\|^2=1
+\end{array}\right.\]</span> La solution est donnée par <span class="math display">\[w_1=\frac{{\mathbb X^{(1)}}^t\mathbb Y^{(1)}}{{\|\mathbb X^{(1)}}^t\mathbb Y^{(1)}\|}.\]</span></p>
+</div></li>
+<li><p>On pose <span class="math inline">\(Z_1=w_1^tX^{(1)}\)</span> et <span class="math inline">\(\mathbb Z_1=\mathbb X^{(1)}w_1\)</span>. On considère le modèle de régression linéaire <span class="math display">\[Y^{(1)}=\alpha_0+\alpha_1Z_1+\varepsilon.\]</span> Exprimer les estimateurs MCO de <span class="math inline">\(\alpha=(\alpha_0,\alpha_1)\)</span> en fonction de <span class="math inline">\(\mathbb Z^{(1)}\)</span> et <span class="math inline">\(\mathbb Y^{(1)}\)</span>.</p>
+<div class="correction">
+<p>On déduit <span class="math display">\[\widehat \alpha_0=\bar{\mathbb Y}^{(1)}-\widehat \alpha_1\bar{\mathbb Z}_1=\bar{\mathbb Y}^{(1)}\]</span> car <span class="math inline">\(\bar{\mathbb Z}_1=0\)</span> puisque <span class="math inline">\(\mathbb X^{(1)}\)</span> est centrée. Le second estimateur s’obtient par <span class="math display">\[\widehat \alpha_1=\frac{\langle \mathbb Z_1,\mathbb Y^{(1)}\rangle}{\langle \mathbb Z_1,\mathbb Z_1\rangle}.\]</span></p>
+</div></li>
+<li><p>On passe maintenant à la deuxième composante. On cherche à expliquer la partie résiduelle <span class="math display">\[\mathbb Y^{(2)}=P_{Z_1^\perp}(\mathbb Y^{(1)})=\widehat\varepsilon_1=\mathbb Y^{(1)}-\widehat{\mathbb Y}^{(1)}\]</span> par la “meilleure” combinaison linéaire orthogonale à <span class="math inline">\(Z_1\)</span>. On orthogonalise chaque <span class="math inline">\(\tilde{\mathbb X}_j^{(1)}\)</span> par rapport à <span class="math inline">\(\mathbb Z_1\)</span> : <span class="math display">\[{\mathbb X}_j^{(2)}=P_{\mathbb Z_1^\perp}({\mathbb X}_j^{(1)})=(\text{Id}-P_{\mathbb Z_1})({\mathbb X}_j^{(1)})={\mathbb X}_j^{(1)}-\frac{\langle \mathbb Z_1,{\mathbb X}_j^{(1)}\rangle}{\langle \mathbb Z_1,\mathbb Z_1\rangle}\mathbb Z_1.\]</span> et on déduit <span class="math inline">\(w_2\)</span> comme <span class="math inline">\(w_1\)</span> : <span class="math inline">\(w_2=\tilde{\mathbb X}^{(2)'}\mathbb Y^{(2)}\)</span>. On considère ensuite le modèle <span class="math inline">\(Y^{(2)}=\alpha_2Z_2+\varepsilon\)</span>. Exprimer l’estimateur des MCO de <span class="math inline">\(\alpha_2\)</span> en fonction de <span class="math inline">\(\mathbb Z_2=\mathbb X^{(2)}w_2\)</span> et <span class="math inline">\(\mathbb Y\)</span>.</p>
+<div class="correction">
+<p>On a <span class="math display">\[\widehat\alpha_2=\frac{\langle \mathbb Z_2,\mathbb Y^{(2)}\rangle}{\langle \mathbb Z_2,\mathbb Z_2\rangle}=\frac{\langle \mathbb Z_2,\mathbb Y-\widehat{\mathbb Y}^{(1)}\rangle}{\langle \mathbb Z_2,\mathbb Z_2\rangle}=\frac{\langle \mathbb Z_2,\mathbb Y\rangle}{\langle \mathbb Z_2,\mathbb Z_2\rangle}\]</span> car <span class="math inline">\(\widehat{\mathbb Y}^{(1)}=\widehat \alpha_0+\widehat \alpha_1\mathbb Z_1\)</span> est orthogonal à <span class="math inline">\(\mathbb Z_2\)</span>.</p>
+</div></li>
+</ol>
+</div>
+<div id="exr-exo-methodo-pls" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercice 2.4 (Régression PLS sur R) </strong></span>On considère les mêmes données que précédemment.</p>
+<ol type="1">
+<li><p>A l’aide du vecteur <span class="math inline">\(\mathbb Y\)</span> (<em>Salary</em>) et de la matrice des <span class="math inline">\(\mathbb X\)</span> centrées réduites calculées dans l’<a href="#exr-exo-methodo-pcr">Exercice&nbsp;<span>2.1</span></a>, calculer la première composante <strong>PLS</strong> <span class="math inline">\(\mathbb Z_1\)</span>.</p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>En déduire le coefficient associé à cette première composante en considérant le modèle <span class="math display">\[Y=\alpha_1 Z_1+\varepsilon.\]</span></p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>En déduire les coefficients en fonction des variables initiales (centrées réduites) de la régression PLS à une composante <span class="math display">\[Y=\beta_0+\beta_1X_1+\dots+\beta_pX_p+\varepsilon.\]</span></p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>Retrouver ces coefficients en utilisant la fonction <code>plsr</code>.</p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+</ol>
+</div>
+</section>
+<section id="comparaison-pcr-vs-pls." class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="comparaison-pcr-vs-pls."><span class="header-section-number">2.4</span> Comparaison : PCR vs PLS.</h2>
+<ol type="1">
+<li><p>Séparer le jeu de données (<code>Hitters</code> toujours) en un échantillon d’apprentissage de taille 200 et un échantillon test de taille 63.</p>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>Avec les données d’apprentissage uniquement construire les régressions PCR et PLS. On choisira les nombres de composantes par validation croisée.</p>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>Comparer les deux méthodes en utilisant l’échantillon de validation. On pourra également utiliser un modèle linéaire classique.</p>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="cell" data-teacher="false">
+
+</div></li>
+<li><p>Comparer ces méthodes à l’aide d’une validation croisée 10 blocs.</p>
+<div class="corR">
+<p><strong>Attention</strong> il ne s’agit pas ici de sélectionner les nombres de composantes par validation croisée. On veut comparer :</p>
+<ul>
+<li><p>l’algorithme **PCR** qui sélectionne le nombre de composantes par validation croisée à</p></li>
+<li><p>l’algorithme **PLS** qui sélectionne le nombre de composantes par validation croisée.</p></li>
+</ul>
+<p>On définit d’abord les 10 blocs pour la validation croisée :</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>Puis on fait la validation croisée (en sélectionnant le nombre de composantes par validation croisée) à chaque étape :</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>On compare à un modèle qui prédit toujours la moyenne :</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>On peut retenter l’analyse en considérant toutes les interactions d’ordre 2 :</p>
+</div>
+<div class="cell" data-teacher="false" data-hash="02-reg-comp_cache/html/CV-Hitters_87ce883ac6bf621141c824474e34317d">
+
+</div>
+<div class="corR">
+<p>On obtient les performances suivantes :</p>
+</div>
+<div class="cell" data-teacher="false">
+
+</div>
+<div class="corR">
+<p>On mesure bien l’intérêt de réduire la dimension dans ce nouveau contexte.</p>
+</div></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copié");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01-intro-grande-dim.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Les problèmes de la grande dimension</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03-ridge-lasso.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Régressions pénalisées (ou sous contraintes)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

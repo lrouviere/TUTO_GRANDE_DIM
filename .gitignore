@@ -4,3 +4,9 @@
 .Ruserdata
 *.Rmd
 *.tex
+*.qmd
+*.R
+
+OLD/*
+
+/.quarto/
