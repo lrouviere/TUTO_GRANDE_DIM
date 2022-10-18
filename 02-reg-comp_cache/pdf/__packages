@@ -9,3 +9,6 @@ stringr
 forcats
 leaps
 ISLR
+bestglm
+FactoMineR
+pls

@@ -292,7 +292,7 @@ div.correction {
 <p>Nous proposons ici d’illustrer le problème de la grande dimension en régression. On commencera par étudier, à l’aide de simulation, ce problème pour l’estimateur des <span class="math inline">\(k\)</span> plus proches voisins, puis pour les estimateurs des moindres carrés dans le modèle linéaire. Quelques exercices sont ensuite proposées pour calculer les vitesses de convergence de ces estimateurs dans des modèles simples.</p>
 <section id="fléau-de-la-dimension-pour-les-plus-proches-voisins" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="fléau-de-la-dimension-pour-les-plus-proches-voisins"><span class="header-section-number">1.1</span> Fléau de la dimension pour les plus proches voisins</h2>
-<p>La fonction suivante permet de générer un échantillon d’apprentissage et un échantillon test selon le modèle <span class="math display">\[Y=X_1^2+\dots+X_p^2+\varepsilon\]</span> où les <span class="math inline">\(X_j\)</span> sont uniformes i.i.d de loi uniorme sur <span class="math inline">\([0,1]\)</span> et le bruit <span class="math inline">\(\varepsilon\)</span> suit une loi <span class="math inline">\(\mathcal N(0,0.5^2)\)</span>.</p>
+<p>La fonction suivante permet de générer un échantillon d’apprentissage et un échantillon test selon le modèle <span class="math display">\[Y=X_1^2+\dots+X_p^2+\varepsilon\]</span> où les <span class="math inline">\(X_j\)</span> sont uniformes i.i.d de loi uniforme sur <span class="math inline">\([0,1]\)</span> et le bruit <span class="math inline">\(\varepsilon\)</span> suit une loi <span class="math inline">\(\mathcal N(0,0.5^2)\)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>simu <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">napp=</span><span class="dv">300</span>,<span class="at">ntest=</span><span class="dv">500</span>,<span class="at">p=</span><span class="dv">3</span>,<span class="at">graine=</span><span class="dv">1234</span>){</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(graine)</span>
@@ -340,8 +340,9 @@ div.correction {
 <p>Une fois la fonction créée, on peut calculer l’erreur de l’estimateur sélectionné sur un échantillon test avec</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>k.opt <span class="ot">&lt;-</span> <span class="fu">sel.k</span>(<span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">50</span>,<span class="at">by=</span><span class="dv">5</span>),df<span class="sc">$</span>Xapp,df<span class="sc">$</span>Yapp)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>prev <span class="ot">&lt;-</span> <span class="fu">knn.reg</span>(<span class="at">train=</span>df<span class="sc">$</span>Xapp,<span class="at">y=</span>df<span class="sc">$</span>Yapp,<span class="at">test=</span>df<span class="sc">$</span>Xtest,<span class="at">k=</span>k.opt)<span class="sc">$</span>pred</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((prev<span class="sc">-</span>df<span class="sc">$</span>Ytest)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>k.opt</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>prev <span class="ot">&lt;-</span> <span class="fu">knn.reg</span>(<span class="at">train=</span>df<span class="sc">$</span>Xapp,<span class="at">y=</span>df<span class="sc">$</span>Yapp,<span class="at">test=</span>df<span class="sc">$</span>Xtest,<span class="at">k=</span>k.opt)<span class="sc">$</span>pred</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((prev<span class="sc">-</span>df<span class="sc">$</span>Ytest)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 <li><p>On souhaite comparer les erreurs des règles des <span class="math inline">\(k\)</span> plus proches voisins en fonction de la dimension. On considère 4 dimensions collectées dans le vecteur <code>DIM</code> et la grille de valeurs de <span class="math inline">\(k\)</span> suivantes :</p>
 <div class="cell">
@@ -355,7 +356,7 @@ div.correction {
 <li>calculer l’erreur de l’estimateur sélectionné sur un échantillon test.</li>
 </ul>
 <p>On pourra stocker les résultats dans une matrice de dimension <span class="math inline">\(B\times 4\)</span>.</p>
-<div class="cell" data-teacher="false" data-hash="01-intro-grande-dim_cache/html/simu-err-kppv_f41ec70e0d66b5a43cdfadf72b4626ef">
+<div class="cell" data-teacher="false" data-hash="01-intro-grande-dim_cache/html/simu-err-kppv_6ae355bbd2f1785f07f3c40791529301">
 
 </div></li>
 <li><p>A l’aide d’indicateurs numériques et de boxplots, comparer la distribution des erreurs en fonction de la dimension.</p>

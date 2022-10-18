@@ -1,6 +1,6 @@
 project:
   type: book
-  output-dir: docs #/correction #changer display dans css et \solnfalse dnas preamble.tex pour les corrections 
+  output-dir: docs/correction #changer display dans css et \solnfalse dnas preamble.tex pour les corrections 
   
 book:
   sidebar: 
@@ -45,7 +45,7 @@ format:
   pdf:
     documentclass: scrreprt
     keep-tex: true
-    pdf-engine: pdflatex #lualatex
+    pdf-engine: xelatex #pdflatex #lualatex
     highlight-style: github
     fig-height: 3.8
     fig-width: 5.2

@@ -614,11 +614,13 @@ div.correction {
 <li><p>Étudier le biais et la variance de <span class="math inline">\(\hat\beta_R(\lambda)\)</span> en fonction de <span class="math inline">\(\lambda\)</span>. On pourra également faire la comparaison avec l’estimateur des MCO.</p>
 <div class="correction">
 <p>Comme <span class="math inline">\(\mathbb Y=\mathbb X\beta+\varepsilon\)</span>, on obtient</p>
-<span class="math display">\[\begin{align*}
-\esp[\hat\beta_R(\lambda)]-\beta &amp; =(\mathbb X^t\mathbb X+\lambda I)^{-1}\mathbb X^t\mathbb X\beta-\beta \\
+<p><span class="math display">\[
+\begin{aligned}
+\mathbf E[\hat\beta_R(\lambda)]-\beta &amp; =(\mathbb X^t\mathbb X+\lambda I)^{-1}\mathbb X^t\mathbb X\beta-\beta \\
 &amp; =\left[(\mathbb X^t\mathbb X+\lambda I)^{-1}(\mathbb X^t\mathbb X-(\mathbb X^t\mathbb X+\lambda I))\right]\beta \\
 &amp; = -\lambda(\mathbb X^t\mathbb X+\lambda I)^{-1}\beta.
-\end{align*}\]</span>
+\end{aligned}
+\]</span></p>
 <p>De même, on obtient pour la variance <span class="math display">\[
 \mathbf V(\hat\beta_R(\lambda))=\sigma^2(\mathbb X^t\mathbb X+\lambda\mathbb I)^{-1}\mathbb X^t\mathbb X(\mathbb X^t\mathbb X+\lambda\mathbb I)^{-1}.
 \]</span> La variance diminue lorsque <span class="math inline">\(\lambda\)</span> augmente, mais on remarque une augmentation du bais par rapport à l’estimateur des moindres carrés (et réciproquement lorsque <span class="math inline">\(\lambda\)</span> diminue).</p>
@@ -651,15 +653,18 @@ div.correction {
 <li><p>En déduire <span class="math display">\[\partial\|x\|_1=\{w\in\mathbb R^n:w_j=\textrm{signe}(x_j)\textrm{ si }x_j\neq 0, w_j\in[-1,1]\textrm{ si }x_j=0\}.\]</span></p>
 <div class="correction">
 <p>On a</p>
-<span class="math display">\[\begin{align*}
-\partial\|x\|_1 &amp; =\{w\in\R^n:\ps{w}{x}=\|x\|_1\text{ et }\|w\|_\infty\leq 1\}\\
-&amp; = \{w\in\R^n:\sum_{i=1}^n(w_ix_i-|x_i|)=0\text{ et }\|w\|_\infty\leq 1\}.
-\end{align*}\]</span>
-<p>Or si <span class="math inline">\(\|w\|_\infty\leq 1\)</span> alors <span class="math inline">\(w_ix_i-|x_i|\leq 0\)</span> <span class="math inline">\(\forall i=1,\dots,n\)</span>. Donc</p>
-<span class="math display">\[\begin{align*}
-\partial\|x\|_1 &amp; =\{w\in\R^n:(w_ix_i-|x_i|)=0,i=1,\dots,n\text{ et }\|w\|_\infty\leq 1\}\\
-&amp;=\{w\in\R^n:w_j=\textrm{signe}(x_j)1\textrm{ si }x_j\neq 0, w_j\in[-1,1]\textrm{ si }x_j=0\}.
-\end{align*}\]</span>
+<p><span class="math display">\[
+\begin{aligned}
+\partial\|x\|_1 &amp; =\{w\in\mathbb R^n:\langle w,x\rangle=\|x\|_1\text{ et }\|w\|_\infty\leq 1\}\\
+&amp; = \{w\in\mathbb R^n:\sum_{i=1}^n(w_ix_i-|x_i|)=0\text{ et }\|w\|_\infty\leq 1\}.
+\end{aligned}
+\]</span> Or si <span class="math inline">\(\|w\|_\infty\leq 1\)</span> alors <span class="math inline">\(w_ix_i-|x_i|\leq 0\)</span> <span class="math inline">\(\forall i=1,\dots,n\)</span>. Donc</p>
+<p><span class="math display">\[
+\begin{aligned}
+\partial\|x\|_1 &amp; =\{w\in\mathbb R^n:(w_ix_i-|x_i|)=0,i=1,\dots,n\text{ et }\|w\|_\infty\leq 1\}\\
+&amp;=\{w\in\mathbb R^n:w_j=\textrm{signe}(x_j)1\textrm{ si }x_j\neq 0, w_j\in[-1,1]\textrm{ si }x_j=0\}.
+\end{aligned}
+\]</span></p>
 </div></li>
 </ol></li>
 <li><p>Étant données <span class="math inline">\(n\)</span> observations <span class="math inline">\((x_i,y_i),i=1,\dots,n\)</span> telles que <span class="math inline">\(x_i\in\mathbb R^p\)</span> et <span class="math inline">\(y_i\in\mathbb R\)</span> on rappelle que l’estimateur lasso <span class="math inline">\(\hat\beta(\lambda)\)</span> est construit en minimisant <span id="eq-critL1"><span class="math display">\[\mathcal L(\beta)=\|Y-\mathbb X\beta\|_2^2+\lambda\|\beta\|_1. \tag{3.1}\]</span></span></p>
@@ -693,11 +698,12 @@ div.correction {
 <li><p>Montrer que si <span class="math inline">\(\mathbb X \hat\beta^{1}(\lambda)\neq\mathbb X \hat\beta^{2}(\lambda)\)</span> alors <span class="math display">\[\|\mathbb Y-\mathbb X\hat\beta\|_2^2+\lambda\|\hat\beta\|_1&lt;\frac{1}{2}\left(\|\mathbb Y-\mathbb X\hat\beta^1(\lambda)\|_2^2+\lambda\|\hat\beta^1(\lambda)\|_1+\|\mathbb Y-\mathbb X\hat\beta^2(\lambda)\|_2^2+\lambda\|\hat\beta^2(\lambda)\|_1\right).\]</span> On pourra utiliser la convexité (forte) de <span class="math inline">\(x\mapsto\|x\|_2^2\)</span>.</p>
 <div class="correction">
 <p>On a</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{aligned}
 \|\mathbb Y-\mathbb X\hat\beta\|_2^2+\lambda\|\hat\beta\|_1= &amp; \left\|\frac{1}{2}(\mathbb Y-\mathbb X\hat\beta^1(\lambda))+\frac{1}{2}(\mathbb Y-\mathbb X\hat\beta^2(\lambda))\right\|_2^2+\lambda\left\|\frac{1}{2}(\hat\beta^1(\lambda)+\hat\beta^2(\lambda))\right\|_1 \\
 &lt; &amp; \frac{1}{2}\left\|\mathbb Y-\mathbb X\hat\beta^1(\lambda))\right\|_2^2+\frac{1}{2}\left\|\mathbb Y-\mathbb X\hat\beta^2(\lambda))\right\|_2^2+\frac{1}{2}\lambda\|\hat\beta^1(\lambda)\|_1+\frac{1}{2}\lambda\|\hat\beta^2(\lambda)\|_1
-\end{align*}\]</span>
-<p>en utilisant la stricte convexité de <span class="math inline">\(x\mapsto\|x\|_2^2\)</span> et l’inégalité triangulaire.</p>
+\end{aligned}
+\]</span> en utilisant la stricte convexité de <span class="math inline">\(x\mapsto\|x\|_2^2\)</span> et l’inégalité triangulaire.</p>
 </div></li>
 <li><p>En déduire que <span class="math inline">\(\mathbb X \hat\beta^{1}(\lambda)=\mathbb X \hat\beta^{2}(\lambda)\)</span>.</p>
 <div class="correction">
