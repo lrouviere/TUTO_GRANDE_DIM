@@ -277,12 +277,12 @@ div.correction {
   color: black;
   background-color: #F0F0F0;
   font-style: normal;
-  display: none;
+  /*display: none;*/
 }
 
 .corR {
   font-style: italic;
-  display: none;
+  /*display: none;*/
 }
 </style>
 </div>
@@ -334,20 +334,35 @@ div.correction {
 <li>un vecteur <strong>Yapp</strong> de dimension <span class="math inline">\(n\)</span> qui contient les valeurs de la variable à expliquer</li>
 </ul>
 <p>et qui renvoie en sortie la valeur de <span class="math inline">\(k\)</span> dans la grille qui minimise l’erreur LOO présentée ci-dessus.</p>
-<div class="cell" data-teacher="false">
-
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sel.k <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">K_cand=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">50</span>,<span class="at">by=</span><span class="dv">5</span>),Xapp,Yapp){</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  ind <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  err <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="fu">length</span>(K_cand))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (k <span class="cf">in</span> K_cand){</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    modkppv <span class="ot">&lt;-</span> <span class="fu">knn.reg</span>(<span class="at">train=</span>Xapp,<span class="at">y=</span>Yapp,<span class="at">k=</span>k)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    err[ind] <span class="ot">&lt;-</span> modkppv<span class="sc">$</span>PRESS<span class="sc">/</span><span class="fu">max</span>(<span class="fu">c</span>(<span class="fu">nrow</span>(Xapp),<span class="dv">1</span>))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    ind <span class="ot">&lt;-</span> ind<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(K_cand[<span class="fu">which.min</span>(err)])</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Une fois la fonction créée, on peut calculer l’erreur de l’estimateur sélectionné sur un échantillon test avec</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>k.opt <span class="ot">&lt;-</span> <span class="fu">sel.k</span>(<span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">50</span>,<span class="at">by=</span><span class="dv">5</span>),df<span class="sc">$</span>Xapp,df<span class="sc">$</span>Yapp)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>k.opt</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>prev <span class="ot">&lt;-</span> <span class="fu">knn.reg</span>(<span class="at">train=</span>df<span class="sc">$</span>Xapp,<span class="at">y=</span>df<span class="sc">$</span>Yapp,<span class="at">test=</span>df<span class="sc">$</span>Xtest,<span class="at">k=</span>k.opt)<span class="sc">$</span>pred</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((prev<span class="sc">-</span>df<span class="sc">$</span>Ytest)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>k.opt <span class="ot">&lt;-</span> <span class="fu">sel.k</span>(<span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">50</span>,<span class="at">by=</span><span class="dv">5</span>),df<span class="sc">$</span>Xapp,df<span class="sc">$</span>Yapp)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>k.opt</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 31</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>prev <span class="ot">&lt;-</span> <span class="fu">knn.reg</span>(<span class="at">train=</span>df<span class="sc">$</span>Xapp,<span class="at">y=</span>df<span class="sc">$</span>Yapp,<span class="at">test=</span>df<span class="sc">$</span>Xtest,<span class="at">k=</span>k.opt)<span class="sc">$</span>pred</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((prev<span class="sc">-</span>df<span class="sc">$</span>Ytest)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.283869</code></pre>
+</div>
 </div></li>
 <li><p>On souhaite comparer les erreurs des règles des <span class="math inline">\(k\)</span> plus proches voisins en fonction de la dimension. On considère 4 dimensions collectées dans le vecteur <code>DIM</code> et la grille de valeurs de <span class="math inline">\(k\)</span> suivantes :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>DIM <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">50</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>K_cand <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">50</span>,<span class="at">by=</span><span class="dv">5</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>DIM <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">50</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>K_cand <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">50</span>,<span class="at">by=</span><span class="dv">5</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Pour chaque valeur de dimension répéter <span class="math inline">\(B=100\)</span> fois :</p>
 <ul>
@@ -356,18 +371,43 @@ div.correction {
 <li>calculer l’erreur de l’estimateur sélectionné sur un échantillon test.</li>
 </ul>
 <p>On pourra stocker les résultats dans une matrice de dimension <span class="math inline">\(B\times 4\)</span>.</p>
-<div class="cell" data-teacher="false" data-hash="01-intro-grande-dim_cache/html/simu-err-kppv_6ae355bbd2f1785f07f3c40791529301">
-
+<div class="cell" data-teacher="true" data-hash="01-intro-grande-dim_cache/html/simu-err-kppv_9194a8880924c88cdd066e1c28f6665c">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>mat.err <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>,<span class="at">ncol=</span><span class="fu">length</span>(DIM),<span class="at">nrow=</span>B)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (p <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(DIM)){</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B){</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> <span class="fu">simu</span>(<span class="at">napp=</span><span class="dv">300</span>,<span class="at">ntest=</span><span class="dv">500</span>,<span class="at">p=</span>DIM[p],<span class="at">graine=</span><span class="dv">1234</span><span class="sc">*</span>p<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>i)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    k.opt <span class="ot">&lt;-</span> <span class="fu">sel.k</span>(K_cand,df<span class="sc">$</span>Xapp,df<span class="sc">$</span>Yapp)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    prev <span class="ot">&lt;-</span> <span class="fu">knn.reg</span>(<span class="at">train=</span>df<span class="sc">$</span>Xapp,<span class="at">y=</span>df<span class="sc">$</span>Yapp,<span class="at">test=</span>df<span class="sc">$</span>Xtest,<span class="at">k=</span>k.opt)<span class="sc">$</span>pred</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    mat.err[i,p] <span class="ot">&lt;-</span> <span class="fu">mean</span>((prev<span class="sc">-</span>df<span class="sc">$</span>Ytest)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 <li><p>A l’aide d’indicateurs numériques et de boxplots, comparer la distribution des erreurs en fonction de la dimension.</p>
-<div class="cell" data-teacher="false">
-
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(mat.err)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>nom.dim <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"D"</span>,DIM,<span class="at">sep=</span><span class="st">""</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df) <span class="ot">&lt;-</span> nom.dim</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-teacher="false">
-
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> <span class="fu">summarise_all</span>(mean)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        D1        D5     D10      D50
+1 0.258003 0.3243574 0.52247 3.191055</code></pre>
 </div>
-<div class="cell" data-teacher="false">
-
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> <span class="fu">summarise_all</span>(var)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            D1           D5         D10        D50
+1 0.0002556399 0.0005417109 0.001857967 0.06749414</code></pre>
+</div>
+</div>
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df,<span class="at">cols=</span><span class="fu">everything</span>(),<span class="at">names_to=</span><span class="st">"dim"</span>,<span class="at">values_to=</span><span class="st">"erreur"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> df1 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">dim=</span><span class="fu">fct_relevel</span>(dim,nom.dim))</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df1)<span class="sc">+</span><span class="fu">aes</span>(<span class="at">x=</span>dim,<span class="at">y=</span>erreur)<span class="sc">+</span><span class="fu">geom_boxplot</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="01-intro-grande-dim_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
 </div></li>
 <li><p>Conclure</p>
 <div class="corR">
@@ -379,42 +419,67 @@ div.correction {
 <h2 data-number="1.2" class="anchored" data-anchor-id="influence-de-la-dimension-dans-le-modèle-linéaire"><span class="header-section-number">1.2</span> Influence de la dimension dans le modèle linéaire</h2>
 <p>En vous basant sur l’exercice précédent, proposer une illustration qui peut mettre en évidence la précision d’estimation dans le modèle linéaire en fonction de la dimension. On pourra par exemple considérer le modèle linaire suivant <span class="math display">\[Y=X_1+0X_2+\dots+0X_p+\varepsilon\]</span> et étudier la performance de l’estimateur MCO du coefficient de <span class="math inline">\(X_1\)</span> pour différentes valeurs de <span class="math inline">\(p\)</span>. Par exemple avec <span class="math inline">\(p\)</span> dans le vecteur</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>DIM <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="dv">100</span>,<span class="dv">200</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>DIM <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="dv">100</span>,<span class="dv">200</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Les données pourront être générées avec la fonction suivante</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">250</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(n<span class="sc">*</span>p),<span class="at">ncol=</span>p)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>simu.lin <span class="ot">&lt;-</span> <span class="cf">function</span>(X,graine){</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(graine)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  Y <span class="ot">&lt;-</span> X[,<span class="dv">1</span>]<span class="sc">+</span><span class="fu">rnorm</span>(<span class="fu">nrow</span>(X),<span class="at">sd=</span><span class="fl">0.5</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Y,X)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">250</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(n<span class="sc">*</span>p),<span class="at">ncol=</span>p)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>simu.lin <span class="ot">&lt;-</span> <span class="cf">function</span>(X,graine){</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(graine)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  Y <span class="ot">&lt;-</span> X[,<span class="dv">1</span>]<span class="sc">+</span><span class="fu">rnorm</span>(<span class="fu">nrow</span>(X),<span class="at">sd=</span><span class="fl">0.5</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Y,X)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="corR">
 <p>On s’intéresse à la distribution de <span class="math inline">\(\widehat\beta_1\)</span> en fonction de la dimension. Pour ce faire, on calcule un grand nombre d’estimateurs de <span class="math inline">\(\widehat\beta_1\)</span> pour différentes valeurs de <span class="math inline">\(p\)</span>.</p>
 </div>
-<div class="cell" data-teacher="false" data-hash="01-intro-grande-dim_cache/html/simu-err-mod-lin_a628a6001e3a4624fbf48c19281ed3a5">
-
+<div class="cell" data-teacher="true" data-hash="01-intro-grande-dim_cache/html/simu-err-mod-lin_50bc5afb4f9bebb5b6001b05080c9cae">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>matbeta1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>,<span class="at">nrow=</span>B,<span class="at">ncol=</span><span class="fu">length</span>(DIM))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B){</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  dftot <span class="ot">&lt;-</span> <span class="fu">simu.lin</span>(X,i<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (p <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(DIM)){</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    dfp <span class="ot">&lt;-</span> dftot[,(<span class="dv">1</span><span class="sc">:</span>(<span class="dv">2</span><span class="sc">+</span>DIM[p]))]</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y<span class="sc">~</span>.,<span class="at">data=</span>dfp)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    matbeta1[i,p] <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod)[<span class="dv">2</span>]</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="corR">
 <p>On met en forme les résultats</p>
 </div>
-<div class="cell" data-teacher="false">
-
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(matbeta1)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>nom.dim <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"D"</span>,DIM,<span class="at">sep=</span><span class="st">""</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df) <span class="ot">&lt;-</span> nom.dim</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="corR">
 <p>Puis on compare, pour chaque dimension considérée, les distributions de <span class="math inline">\(\widehat\beta_1\)</span> :</p>
 <ul>
 <li><p>en étudiant le biais et la variance</p>
-<div class="cell" data-teacher="false">
-
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> <span class="fu">summarise_all</span>(mean)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        D0       D50      D100    D200
+1 0.992891 0.9960811 0.9959025 0.98173</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> <span class="fu">summarise_all</span>(var)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          D0      D50       D100       D200
+1 0.01266578 0.016072 0.02023046 0.06939837</code></pre>
+</div>
 </div></li>
 <li><p>en visualisant la distribution avec un boxplot</p>
-<div class="cell" data-teacher="false">
-
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">gather</span>(df,<span class="at">key=</span><span class="st">"dim"</span>,<span class="at">value=</span><span class="st">"erreur"</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> df1 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">dim=</span><span class="fu">fct_relevel</span>(dim,nom.dim))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df1)<span class="sc">+</span><span class="fu">aes</span>(<span class="at">x=</span>dim,<span class="at">y=</span>erreur)<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">theme_classic</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="01-intro-grande-dim_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 <p>On retrouve bien que la dimension impacte notamment la variance des estimateurs.</p></li>
 </ul>

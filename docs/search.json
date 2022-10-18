@@ -39,7 +39,7 @@
     "href": "02-reg-comp.html",
     "title": "2  Régression sur composantes",
     "section": "",
-    "text": "test\nLes performances des estimateurs classiques (MCO) des paramètres du modèle linéaire\n\\[Y=\\beta_0+\\beta_1X_1+\\dots+\\beta_dX_d+\\varepsilon\\] peuvent se dégrader lorsque la dimension \\(d\\) est grande ou en présence de dépendance linéaire entre les variables explicatives. Les régressions sur composantes consistent à trouver de nouvelles composantes \\(Z_k,j=k,\\dots,q\\) avec \\(q\\leq p\\) qui s’écrivent le plus souvent comme des combinaisons linéaires des \\(X_j\\) dans l’idée de diminuer le nombre de paramètres du modèle ou la dépendance entre les covariables. Il existe plusieurs façons de construire ces composantes, dans cette partie nous proposons :\nNous commençons par un bref rappel sur la sélection de variables."
+    "text": "Les performances des estimateurs classiques (MCO) des paramètres du modèle linéaire\n\\[Y=\\beta_0+\\beta_1X_1+\\dots+\\beta_dX_d+\\varepsilon\\] peuvent se dégrader lorsque la dimension \\(d\\) est grande ou en présence de dépendance linéaire entre les variables explicatives. Les régressions sur composantes consistent à trouver de nouvelles composantes \\(Z_k,j=k,\\dots,q\\) avec \\(q\\leq p\\) qui s’écrivent le plus souvent comme des combinaisons linéaires des \\(X_j\\) dans l’idée de diminuer le nombre de paramètres du modèle ou la dépendance entre les covariables. Il existe plusieurs façons de construire ces composantes, dans cette partie nous proposons :\nNous commençons par un bref rappel sur la sélection de variables."
   },
   {
     "objectID": "02-reg-comp.html#sélection-de-variables",
