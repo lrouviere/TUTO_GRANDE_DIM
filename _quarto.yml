@@ -1,6 +1,6 @@
 project:
   type: book
-  output-dir: docs #/correction #changer display dans css et \solnfalse dnas preamble.tex pour les corrections 
+  output-dir: docs/correction #changer display dans css et \solnfalse dnas preamble.tex pour les corrections 
   
 book:
   sidebar: 
