@@ -13,6 +13,7 @@ book:
   author: "L. Rouvière"
   date: today
   date-format: long
+  site-path: "/TUTO_GRANDE_DIM/"
   downloads: [pdf, epub]
   sharing: [twitter, facebook]
 #    - background: light
