@@ -24,10 +24,15 @@ book:
   page-navigation: true
   chapters:
     - index.qmd
-    - 01-intro-grande-dim.qmd
-    - 02-reg-comp.qmd
-    - 03-ridge-lasso.qmd
-    - 04-mod-add.qmd
+    - part: "Supervisée"
+      chapters:
+        - 01-intro-grande-dim.qmd
+        - 02-reg-comp.qmd
+        - 03-ridge-lasso.qmd
+        - 04-mod-add.qmd
+    - part: "Non supevisée"
+      chapters:
+        - 05-kmeans-cah.qmd
     - references.qmd
 
 bibliography: references.bib

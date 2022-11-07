@@ -209,26 +209,51 @@ div.csl-indent {
   <a href="./index.html" class="sidebar-item-text sidebar-link">Présentation</a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Supervisée</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-intro-grande-dim.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Les problèmes de la grande dimension</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-reg-comp.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Régression sur composantes</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-ridge-lasso.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Régressions pénalisées (ou sous contraintes)</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-mod-add.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modèle additif</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Non supevisée</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-kmeans-cah.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rappels sur le <span class="math inline">\(k\)</span>-means et la CAH</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">Références</a>
@@ -383,7 +408,7 @@ div.correction {
 </div></li>
 <li><p>A l’aide d’une validation croisée, comparer les performances des estimateurs <strong>MCO</strong>, <strong>ridge</strong> et <strong>lasso</strong>. On pourra utiliser les données <code>ozone_complet.txt</code> qui contiennent plus d’individus et de variables.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ozone1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/ozone_complet.txt"</span>,<span class="at">sep=</span><span class="st">";"</span>) <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>()</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ozone1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/ozone_complet.txt"</span>,<span class="at">sep=</span><span class="st">";"</span>) <span class="sc">|&gt;</span> <span class="fu">na.omit</span>()</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ozone1.X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(maxO3<span class="sc">~</span>.,<span class="at">data=</span>ozone1)[,<span class="sc">-</span><span class="dv">1</span>]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>ozone1.Y <span class="ot">&lt;-</span> ozone1<span class="sc">$</span>maxO3</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -432,13 +457,14 @@ div.correction {
 <p><img src="03-ridge-lasso_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Nous cherchons dans cette partie à reconstruire le signal à partir de l’échantillon. Bien entendu, vu la forme du signal, un modèle linéaire de la forme <span class="math display">\[y_i=\beta_0+\beta_1x_i+\varepsilon_i\]</span> n’est pas approprié. De nombreuses approches en <strong>traitement du signal</strong> proposent d’utiliser une <code>base</code> ou <code>dictionnaire</code> représentée par une collection de fonctions <span class="math inline">\(\{\psi_j(x)\}_{j=1,\dots,K}\)</span> et de décomposer le signal dans cette base :</p>
+<p>Nous cherchons dans cette partie à reconstruire le signal à partir de l’échantillon. Bien entendu, vu la forme du signal, un modèle linéaire de la forme <span class="math display">\[
+y_i=\beta_0+\beta_1x_i+\varepsilon_i
+\]</span> n’est pas approprié. De nombreuses approches en <strong>traitement du signal</strong> proposent d’utiliser une <code>base</code> ou <code>dictionnaire</code> représentée par une collection de fonctions <span class="math inline">\(\{\psi_j(x)\}_{j=1,\dots,K}\)</span> et de décomposer le signal dans cette base :</p>
 <p><span class="math display">\[m(x)\approx \sum_{j=1}^K \beta_j\psi_j(x).\]</span></p>
 <p>Pour un dictionnaire donné, on peut alors considérer un <strong>modèle linéaire</strong></p>
-<span class="math display">\[\begin{equation}
+<p><span id="eq-mod-lin-signal"><span class="math display">\[
   y_i=\sum_{j=1}^K \beta_j\psi_j(x_i)+\varepsilon_i.
-  (\#eq:mod-lin-signal)
-\end{equation}\]</span>
+\tag{3.1}\]</span></span></p>
 <p>Le problème est toujours d’estimer les paramètres <span class="math inline">\(\beta_j\)</span> mais les variables sont maintenant définies par les élements du dictionnaire. Il existe différents types de dictionnaire, dans cet exercice nous proposons de considérer la base de Fourier définie par</p>
 <p><span class="math display">\[\psi_0(x)=1,\quad \psi_{2j-1}(x)=\cos(2j\pi x)\quad\text{et}\quad \psi_{2j}(x)=\sin(2j\pi x),\quad j=1,\dots,K.\]</span></p>
 <ol type="1">
@@ -451,7 +477,7 @@ div.correction {
 <div class="cell" data-teacher="false">
 
 </div></li>
-<li><p>On fixe <code>K=25</code>. Calculer les estimateurs des moindres carrés du modèle @ref(eq:mod-lin-signal).</p>
+<li><p>On fixe <code>K=25</code>. Calculer les estimateurs des moindres carrés du modèle (<a href="#eq-mod-lin-signal">Équation&nbsp;<span>3.1</span></a>).</p>
 <div class="corR">
 <p>Il suffit d’ajuster le modèle linéaire où les variables explicatives sont données par le dictionnaire :</p>
 </div>
@@ -603,7 +629,12 @@ div.correction {
 <section id="exo-ridgelasso" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="exo-ridgelasso"><span class="header-section-number">3.4</span> Exercices</h2>
 <div id="exr-calcridge" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 3.1 (Estimateurs ridge pour le modèle linéaire) </strong></span>On considère le modèle de régression <span class="math display">\[Y_i=\beta_1x_{i1}+\dots+\beta_px_{ip}+\varepsilon_i\]</span> où les <span class="math inline">\(\varepsilon_i\)</span> sont i.i.d de loi <span class="math inline">\(\mathcal N(0,\sigma^2)\)</span>. Pour <span class="math inline">\(\lambda\geq 0\)</span>, on note <span class="math inline">\(\hat\beta_R(\lambda)\)</span> l’estimateur ridge défini par <span class="math display">\[
+<p><span class="theorem-title"><strong>Exercice 3.1 (Estimateurs ridge pour le modèle linéaire) </strong></span>On considère le modèle de régression</p>
+<p><span class="math display">\[
+Y_i=\beta_1x_{i1}+\dots+\beta_px_{ip}+\varepsilon_i
+\]</span></p>
+<p>où les <span class="math inline">\(\varepsilon_i\)</span> sont i.i.d de loi <span class="math inline">\(\mathcal N(0,\sigma^2)\)</span>. Pour <span class="math inline">\(\lambda\geq 0\)</span>, on note <span class="math inline">\(\hat\beta_R(\lambda)\)</span> l’estimateur ridge défini par</p>
+<p><span class="math display">\[
 \hat\beta_R(\lambda)=\mathop{\mathrm{argmin}}_\beta\sum_{i=1}^n\left(y_i-\sum_{j=1}^px_{ij}\beta_j\right)^2+\lambda\sum_{j=1}^p\beta_j^2.
 \]</span></p>
 <ol type="1">
@@ -667,7 +698,7 @@ div.correction {
 \]</span></p>
 </div></li>
 </ol></li>
-<li><p>Étant données <span class="math inline">\(n\)</span> observations <span class="math inline">\((x_i,y_i),i=1,\dots,n\)</span> telles que <span class="math inline">\(x_i\in\mathbb R^p\)</span> et <span class="math inline">\(y_i\in\mathbb R\)</span> on rappelle que l’estimateur lasso <span class="math inline">\(\hat\beta(\lambda)\)</span> est construit en minimisant <span id="eq-critL1"><span class="math display">\[\mathcal L(\beta)=\|Y-\mathbb X\beta\|_2^2+\lambda\|\beta\|_1. \tag{3.1}\]</span></span></p>
+<li><p>Étant données <span class="math inline">\(n\)</span> observations <span class="math inline">\((x_i,y_i),i=1,\dots,n\)</span> telles que <span class="math inline">\(x_i\in\mathbb R^p\)</span> et <span class="math inline">\(y_i\in\mathbb R\)</span> on rappelle que l’estimateur lasso <span class="math inline">\(\hat\beta(\lambda)\)</span> est construit en minimisant <span id="eq-critL1"><span class="math display">\[\mathcal L(\beta)=\|Y-\mathbb X\beta\|_2^2+\lambda\|\beta\|_1. \tag{3.2}\]</span></span></p>
 <p>On admettra que la sous-différentielle <span class="math inline">\(\partial \mathcal L(\beta)\)</span> est donnée par <span class="math display">\[\partial \mathcal L(\beta)=\left\{-2\mathbb X^t(Y-\mathbb X\beta)+\lambda z:z\in\partial\|\beta\|_1\right\}.\]</span> Montrer que <span class="math inline">\(\hat\beta(\lambda)\)</span> vérifie <span class="math display">\[\mathbb X^t\mathbb X\hat\beta(\lambda)=\mathbb X^tY-\frac{\lambda}{2}\hat z\]</span> où <span class="math inline">\(\hat z\in\mathbb R^p\)</span> vérifie <span class="math display">\[
 \hat z_j\left\{
 \begin{array}{ll}
@@ -693,7 +724,7 @@ div.correction {
 </ol>
 </div>
 <div id="exr-unicite-lasso" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 3.3 (Unicité de l’estimateur lasso) </strong></span>Cet exercice est inspiré de <span class="citation" data-cites="gir15">Giraud (<a href="references.html#ref-gir15" role="doc-biblioref">2015</a>)</span>. Soit <span class="math inline">\(\hat\beta^{1}(\lambda)\)</span> et <span class="math inline">\(\hat\beta^{2}(\lambda)\)</span> deux solutions qui minimisent l’<a href="#eq-critL1">Équation&nbsp;<span>3.1</span></a>. Soit <span class="math inline">\(\hat\beta=(\hat\beta^{1}(\lambda)+\hat\beta^{2}(\lambda))/2\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercice 3.3 (Unicité de l’estimateur lasso) </strong></span>Cet exercice est inspiré de <span class="citation" data-cites="gir15">Giraud (<a href="references.html#ref-gir15" role="doc-biblioref">2015</a>)</span>. Soit <span class="math inline">\(\hat\beta^{1}(\lambda)\)</span> et <span class="math inline">\(\hat\beta^{2}(\lambda)\)</span> deux solutions qui minimisent l’<a href="#eq-critL1">Équation&nbsp;<span>3.2</span></a>. Soit <span class="math inline">\(\hat\beta=(\hat\beta^{1}(\lambda)+\hat\beta^{2}(\lambda))/2\)</span>.</p>
 <ol type="1">
 <li><p>Montrer que si <span class="math inline">\(\mathbb X \hat\beta^{1}(\lambda)\neq\mathbb X \hat\beta^{2}(\lambda)\)</span> alors <span class="math display">\[\|\mathbb Y-\mathbb X\hat\beta\|_2^2+\lambda\|\hat\beta\|_1&lt;\frac{1}{2}\left(\|\mathbb Y-\mathbb X\hat\beta^1(\lambda)\|_2^2+\lambda\|\hat\beta^1(\lambda)\|_1+\|\mathbb Y-\mathbb X\hat\beta^2(\lambda)\|_2^2+\lambda\|\hat\beta^2(\lambda)\|_1\right).\]</span> On pourra utiliser la convexité (forte) de <span class="math inline">\(x\mapsto\|x\|_2^2\)</span>.</p>
 <div class="correction">

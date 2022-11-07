@@ -56,6 +56,7 @@ ul.task-list{list-style: none;}
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -126,26 +127,51 @@ ul.task-list{list-style: none;}
   <a href="./index.html" class="sidebar-item-text sidebar-link active">Présentation</a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Supervisée</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-intro-grande-dim.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Les problèmes de la grande dimension</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-reg-comp.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Régression sur composantes</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-ridge-lasso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Régressions pénalisées (ou sous contraintes)</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-mod-add.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modèle additif</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Non supevisée</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-kmeans-cah.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rappels sur le <span class="math inline">\(k\)</span>-means et la CAH</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">Références</a>
@@ -186,7 +212,7 @@ ul.task-list{list-style: none;}
     <div>
     <div class="quarto-title-meta-heading">Date de publication</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">18 octobre 2022</p>
+      <p class="date">7 novembre 2022</p>
     </div>
   </div>
     
@@ -199,7 +225,7 @@ ul.task-list{list-style: none;}
 <h1 class="unnumbered">Présentation</h1>
 <p>Ce tutoriel présente quelques exercices d’application du cours <code>Modèle linéaire en grande dimension</code>. On pourra trouver</p>
 <ul>
-<li>les supports de cours associés à ce tutoriel ainsi que les données utilisées à l’adresse suivante <a href="https://lrouviere.github.io/stat_grand_dim/" class="uri">https://lrouviere.github.io/stat_grand_dim/</a> ;</li>
+<li>les supports de cours associés à ce tutoriel ainsi que les données utilisées à l’adresse suivante <a href="https://lrouviere.github.io/page_perso/grande_dim.html" class="uri">https://lrouviere.github.io/page_perso/grande_dim.html</a> ;</li>
 <li>le tutoriel sans les corrections à l’url <a href="https://lrouviere.github.io/TUTO_GRANDE_DIM/" class="uri">https://lrouviere.github.io/TUTO_GRANDE_DIM/</a></li>
 <li>le tutoriel avec les corrigés (à certains moment) à l’url <a href="https://lrouviere.github.io/TUTO_GRANDE_DIM/correction" class="uri">https://lrouviere.github.io/TUTO_GRANDE_DIM/correction</a>.</li>
 </ul>

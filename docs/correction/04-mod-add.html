@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Statistique en grande dimension - 4&nbsp; Modèle additif</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05-kmeans-cah.html" rel="next">
+<link href="./03-ridge-lasso.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modèle additif</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistique en grande dimension</a> 
+        <div class="sidebar-tools-main">
+    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./Statistique-en-grande-dimension.pdf">
+            <i class="bi bi-bi-file-pdf pe-1"></i>
+          Download PDF
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./Statistique-en-grande-dimension.epub">
+            <i class="bi bi-bi-journal pe-1"></i>
+          Download ePub
+          </a>
+        </li>
+    </ul>
+    <a href="" title="Share" id="sidebar-tool-dropdown-1" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-1">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+            <i class="bi bi-bi-facebook pe-1"></i>
+          Facebook
+          </a>
+        </li>
+    </ul>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Présentation</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Supervisée</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro-grande-dim.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Les problèmes de la grande dimension</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-reg-comp.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Régression sur composantes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-ridge-lasso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Régressions pénalisées (ou sous contraintes)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-mod-add.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modèle additif</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Non supevisée</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-kmeans-cah.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rappels sur le <span class="math inline">\(k\)</span>-means et la CAH</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">Références</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table des matières</h2>
+   
+  <ul>
+  <li><a href="#pseudo-backfitting" id="toc-pseudo-backfitting" class="nav-link active" data-scroll-target="#pseudo-backfitting"> <span class="header-section-number">4.1</span> Pseudo backfitting</a></li>
+  <li><a href="#modèle-gam" id="toc-modèle-gam" class="nav-link" data-scroll-target="#modèle-gam"> <span class="header-section-number">4.2</span> Modèle GAM</a></li>
+  <li><a href="#régression-logistique-additive" id="toc-régression-logistique-additive" class="nav-link" data-scroll-target="#régression-logistique-additive"> <span class="header-section-number">4.3</span> Régression logistique additive</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="mod-add" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modèle additif</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div>
+<div class="cell">
+
+</div>
+<style>
+div.correction {
+  color: black;
+  background-color: #F0F0F0;
+  font-style: normal;
+  /*display: none;*/
+}
+
+.corR {
+  font-style: italic;
+  /*display: none;*/
+}
+</style>
+</div>
+<div class="cell">
+
+</div>
+<p>Le modèle additif (modèle GAM) peut être vu comme un compromis entre une modélisation linéaire et non paramétrique de la fonction de régression. Il suppose que cette fonction s’écrit <span class="math display">\[m(x)=m(x_1,\dots,x_d)=\alpha+g_1(x_1)+\dots+g_d(x_d).\]</span></p>
+<section id="pseudo-backfitting" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="pseudo-backfitting"><span class="header-section-number">4.1</span> Pseudo backfitting</h2>
+<p>L’algorithme du backfitting est souvent utilisé pour estimer les composantes du modèle additif. Etant donné un échantillon <span class="math inline">\((x_i,y_i),i=1,\dots,n\)</span> on note <span class="math inline">\(\bar{\mathbb Y}\)</span> le vecteur des <span class="math inline">\(y_i\)</span> et <span class="math inline">\(\mathbb X_k\)</span> le vecteur contenant les observations de la variable <span class="math inline">\(k\)</span> pour <span class="math inline">\(k=1,\dots,d\)</span>. L’algorithme se résume ainsi</p>
+<div style="background-color: #F0F0F0">
+<ol type="1">
+<li>Initialisation : <span class="math inline">\(\widehat\alpha=\bar{\mathbb Y}\)</span>, <span class="math inline">\(\widehat g_k(x_k)=\bar{\mathbb X}_k\)</span>.</li>
+<li>Pour <span class="math inline">\(k=1,\dots,d\)</span> :
+<ul>
+<li><span class="math inline">\(\mathbb Y^{(k)}=\mathbb Y-\widehat\alpha-\sum_{j\neq k}\widehat g_j(\mathbb X_j)\)</span> (résidus partiels)</li>
+<li><span class="math inline">\(\widehat g_k\)</span> : lissage non paramétrique de <span class="math inline">\(\mathbb Y^{(k)}\)</span> sur <span class="math inline">\(\mathbb X_k\)</span>.</li>
+</ul></li>
+<li>Répéter l’étape précédente tant que les <span class="math inline">\(\widehat g_k\)</span> changent.</li>
+</ol>
+</div>
+<p>On propose dans cette partie d’utiliser cet algorithme pour estimer les paramètres du modèle linéaire en remplaçant le lissage non paramétrique par un estimateur MCO. On considère le modèle de régression linéaire</p>
+<p><span class="math display">\[Y=\beta_0+\beta_1X_1+\beta_2X_2+\varepsilon\]</span> avec <span class="math inline">\(X_1\)</span> et <span class="math inline">\(X_2\)</span> de lois uniformes sur <span class="math inline">\([0,1]\)</span> et <span class="math inline">\(\varepsilon\)</span> de loi <span class="math inline">\(\mathcal N(0,1)\)</span> (<span class="math inline">\(\varepsilon\)</span> est indépendante de <span class="math inline">\((X_1,X_2)^\prime\)</span>).</p>
+<ol type="1">
+<li><p>Générer un échantillon <span class="math inline">\((x_i,y_i)\)</span> de taille <span class="math inline">\(n=300\)</span> selon le modèle ci-dessus pour <span class="math inline">\(\beta_0=1,\beta_1=3,\beta_2=5\)</span>.</p>
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>X1<span class="ot">&lt;-</span><span class="fu">runif</span>(n)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>X2<span class="ot">&lt;-</span><span class="fu">runif</span>(n)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>bruit<span class="ot">&lt;-</span><span class="fu">rnorm</span>(n)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">+</span><span class="dv">3</span><span class="sc">*</span>X1<span class="sc">+</span><span class="dv">5</span><span class="sc">*</span>X2<span class="sc">+</span>bruit</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>donnees<span class="ot">&lt;-</span><span class="fu">data.frame</span>(Y,X1,X2)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li><p>Créer une fonction <strong>R</strong> qui admet en entrée un jeu de données et qui fournit en sortie les estimateurs par la méthode du backfitting.</p>
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pseudo_back <span class="ot">&lt;-</span> <span class="cf">function</span>(df,<span class="at">eps=</span><span class="fl">0.00001</span>){</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  mat.X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(Y<span class="sc">~</span>.,<span class="at">data=</span>df)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  beta_i <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="fu">ncol</span>(mat.X))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  beta <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>,<span class="fu">ncol</span>(mat.X))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (<span class="fu">min</span>(<span class="fu">abs</span>(beta_i<span class="sc">-</span>beta))<span class="sc">&gt;</span>eps){</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    beta_i <span class="ot">&lt;-</span> beta</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(mat.X)){</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      Yk <span class="ot">&lt;-</span> Y<span class="sc">-</span>mat.X[,<span class="sc">-</span>k]<span class="sc">%*%</span>(beta[<span class="sc">-</span>k])</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      dfk <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Yk=</span>Yk,<span class="at">Xk=</span>mat.X[,k])</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>      beta[k]<span class="ot">&lt;-</span><span class="fu">coef</span>(<span class="fu">lm</span>(Yk<span class="sc">~</span>Xk<span class="dv">-1</span>,<span class="at">data=</span>dfk))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(beta)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li><p>En déduire les estimateurs backfitting pour le problème considéré.</p>
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pseudo_back</span>(donnees)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.021341 2.864543 4.980367</code></pre>
+</div>
+</div></li>
+<li><p>Comparer aux estimateurs <strong>MCO</strong>.</p>
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(Y<span class="sc">~</span>.,<span class="at">data=</span>donnees)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ ., data = donnees)
+
+Coefficients:
+(Intercept)           X1           X2  
+      1.021        2.865        4.981  </code></pre>
+</div>
+</div>
+<div class="cell" type="corR">
+<div class="corR">
+<p>
+On obtient les mêmes estimateurs.
+</p>
+</div>
+</div></li>
+</ol>
+</section>
+<section id="modèle-gam" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="modèle-gam"><span class="header-section-number">4.2</span> Modèle GAM</h2>
+<p>On considère les données générées selon</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1465</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>X1 <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">runif</span>(n)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>X2 <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">runif</span>(n)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>bruit <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>X1<span class="sc">+</span><span class="fu">sin</span>(<span class="dv">8</span><span class="sc">*</span>pi<span class="sc">*</span>X2)<span class="sc">+</span>bruit</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>donnees<span class="ot">&lt;-</span><span class="fu">data.frame</span>(Y,X1,X2)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li><p>Écrire le modèle</p>
+<div class="corR">
+<p>Il s’agit d’un modèle additif <span class="math display">\[Y=2X_1+\sin(8\pi X_2)+\varepsilon\]</span> où <span class="math inline">\(X_1\)</span> et <span class="math inline">\(X_2\)</span> sont uniformes sur <span class="math inline">\([0,1]\)</span> et <span class="math inline">\(\varepsilon\)</span> suit une <span class="math inline">\(\mathcal N(0,1)\)</span>.</p>
+</div></li>
+<li><p>A l’aide du package <strong>gam</strong> visualiser les estimateurs des composantes additives du modèle. On utilisera tout d’abord un lissage par <strong>spline</strong> avec 1 ddl pour la première composante et 24.579 ddl pour la seconde.</p>
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gam)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">gam</span>(Y<span class="sc">~</span><span class="fu">s</span>(X1,<span class="at">df=</span><span class="dv">1</span>)<span class="sc">+</span><span class="fu">s</span>(X2,<span class="at">df=</span><span class="fl">24.579</span>)<span class="sc">-</span><span class="dv">1</span>,<span class="at">data=</span>donnees)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model1)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-mod-add_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="04-mod-add_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
+</div>
+</div></li>
+<li><p>Faire varier les degrés de liberté, interpréter.</p>
+<div class="corR">
+<p>On prend d’abord peu de degrés de liberté.</p>
+</div>
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">gam</span>(Y<span class="sc">~</span><span class="fu">s</span>(X1,<span class="at">df=</span><span class="fl">0.001</span>)<span class="sc">+</span><span class="fu">s</span>(X2,<span class="at">df=</span><span class="fl">0.001</span>)<span class="sc">-</span><span class="dv">1</span>,<span class="at">data=</span>donnees)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model2)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-mod-add_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="04-mod-add_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="corR">
+<p>Le sinus n’est pas bien estimé. On prend maintenant un grand nombre de degrés de liberté.</p>
+</div>
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">gam</span>(Y<span class="sc">~</span><span class="fu">s</span>(X1,<span class="at">df=</span><span class="dv">100</span>)<span class="sc">+</span><span class="fu">s</span>(X2,<span class="at">df=</span><span class="dv">100</span>)<span class="sc">-</span><span class="dv">1</span>,<span class="at">data=</span>donnees)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model2)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-mod-add_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="04-mod-add_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="corR">
+<p>Le modèle est trop flexible, risque de sur-ajustement.</p>
+</div></li>
+<li><p>Faire le même travail avec le lisseur <strong>loess</strong>. On commencera avec <code>degree=2</code> et <code>span=0.15</code> puis on fera varier le paramètre <code>span</code>.</p>
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">gam</span>(Y<span class="sc">~</span><span class="fu">lo</span>(X1,<span class="at">span=</span><span class="dv">3</span>)<span class="sc">+</span><span class="fu">lo</span>(X2,<span class="at">span=</span><span class="fl">0.15</span>,<span class="at">degree=</span><span class="dv">2</span>)<span class="sc">-</span><span class="dv">1</span>,<span class="at">data=</span>donnees)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model4)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-mod-add_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="04-mod-add_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="corR">
+<p>On fait varier <code>span</code> :</p>
+</div>
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model5 <span class="ot">&lt;-</span> <span class="fu">gam</span>(Y<span class="sc">~</span><span class="fu">lo</span>(X1,<span class="at">span=</span><span class="dv">5</span>)<span class="sc">+</span><span class="fu">lo</span>(X2,<span class="at">span=</span><span class="dv">5</span>,<span class="at">degree=</span><span class="dv">2</span>)<span class="sc">-</span><span class="dv">1</span>,<span class="at">data=</span>donnees)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model5)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-mod-add_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="04-mod-add_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model6 <span class="ot">&lt;-</span> <span class="fu">gam</span>(Y<span class="sc">~</span><span class="fu">lo</span>(X1,<span class="at">span=</span><span class="fl">0.01</span>)<span class="sc">+</span><span class="fu">lo</span>(X2,<span class="at">span=</span><span class="fl">0.01</span>,<span class="at">degree=</span><span class="dv">2</span>)<span class="sc">-</span><span class="dv">1</span>,<span class="at">data=</span>donnees)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model6)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-mod-add_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="04-mod-add_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="corR">
+<p>On a les mêmes remarques que pour les splines.</p>
+</div></li>
+<li><p>Estimer le degrés de liberté avec la fonction <code>gam</code> du package <strong>mgcv</strong> (Il n’est pas nécessaire de charger le package pour éviter les conflits).</p>
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mod.mgcv <span class="ot">&lt;-</span> mgcv<span class="sc">::</span><span class="fu">gam</span>(Y<span class="sc">~</span><span class="fu">s</span>(X1)<span class="sc">+</span><span class="fu">s</span>(X2),<span class="at">data=</span>donnees)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod.mgcv)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-mod-add_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="04-mod-add_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid" width="672"></p>
+</div>
+</div></li>
+</ol>
+</section>
+<section id="régression-logistique-additive" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="régression-logistique-additive"><span class="header-section-number">4.3</span> Régression logistique additive</h2>
+<p>On considère le jeu de données <strong>panne.txt</strong> qui recense des pannes de machine (<code>etat=1</code>) en fonction de leur âge et de leur marque.</p>
+<ol type="1">
+<li><p>Faire une régression logistique permettant d’expliquer la variable <code>etat</code> par la variable <code>age</code> uniquement. Critiquer le modèle.</p>
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>panne <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/panne.txt"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(etat<span class="sc">~</span>age,<span class="at">data=</span>panne,<span class="at">family=</span>binomial)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = etat ~ age, family = binomial, data = panne)
+
+Deviance Residuals: 
+   Min      1Q  Median      3Q     Max  
+-1.253  -1.199   1.015   1.183   1.210  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept) -0.10748    0.59864  -0.180    0.858
+age          0.03141    0.09117   0.345    0.730
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 45.717  on 32  degrees of freedom
+Residual deviance: 45.598  on 31  degrees of freedom
+AIC: 49.598
+
+Number of Fisher Scoring iterations: 3</code></pre>
+</div>
+</div>
+<div class="corR">
+<p>Le modèle n’est pas pertinent. On accepte la nullité du coefficient <code>age</code>, ce qui signifie que le modèle constant est meilleur que le modèle avec la variable <code>age</code>.</p>
+</div></li>
+<li><p>Ajuster un modèle additif, toujours avec uniquement la variable <code>age</code>.</p>
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mod.panne <span class="ot">&lt;-</span> mgcv<span class="sc">::</span><span class="fu">gam</span>(etat<span class="sc">~</span><span class="fu">s</span>(age),<span class="at">data=</span>panne)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod.panne)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-mod-add_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div></li>
+<li><p>En utilisant le modèle additif, proposer un nouveau modèle logistique plus pertinent.</p>
+<div class="corR">
+<p>Il semble que l’âge agisse de façon quadratique. Cela peut s’expliquer par le fait que les pannes interviennent souvent au début (phase de rodage) et à la fin (vieillissement de la machine).</p>
+</div>
+<div class="cell" data-teacher="true">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(etat<span class="sc">~</span>age<span class="sc">+</span><span class="fu">I</span>(age<span class="sc">^</span><span class="dv">2</span>),<span class="at">data=</span>panne,<span class="at">family=</span>binomial)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = etat ~ age + I(age^2), family = binomial, data = panne)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.54043  -0.74739   0.00033   0.64877   1.88091  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept)  4.18501    1.73860   2.407  0.01608 * 
+age         -2.03343    0.77401  -2.627  0.00861 **
+I(age^2)     0.17601    0.07044   2.499  0.01247 * 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 45.717  on 32  degrees of freedom
+Residual deviance: 31.279  on 30  degrees of freedom
+AIC: 37.279
+
+Number of Fisher Scoring iterations: 6</code></pre>
+</div>
+</div>
+<div class="corR">
+<p>On remarque ici que l’âge devient “significatif” !</p>
+</div></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copié");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03-ridge-lasso.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Régressions pénalisées (ou sous contraintes)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05-kmeans-cah.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rappels sur le <span class="math inline">\(k\)</span>-means et la CAH</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
