@@ -241,7 +241,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Non supevisée</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Non supervisée</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -250,6 +250,11 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-kmeans-cah.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rappels sur le <span class="math inline">\(k\)</span>-means et la CAH</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-dbscan-spectral.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Dbscan et clustering spectral</span></a>
   </div>
 </li>
       </ul>
@@ -310,6 +315,13 @@ div.correction {
   font-style: italic;
   /*display: none;*/
 }
+
+.algo{
+  color: black;
+  background-color: #F9C4ED;
+  font-style: normal;
+}
+
 </style>
 </div>
 <div class="cell">
@@ -419,7 +431,7 @@ div.correction {
 <div class="cell" data-teacher="true">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ridgeCV<span class="sc">$</span>lambda.min</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8.884372</code></pre>
+<pre><code>[1] 11.74462</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ridgeCV<span class="sc">$</span>lambda<span class="fl">.1</span>se</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -444,8 +456,8 @@ div.correction {
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ridgeCV,<span class="at">newx =</span> ozone.X[<span class="dv">50</span><span class="sc">:</span><span class="dv">51</span>,],<span class="at">s=</span><span class="st">"lambda.min"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         lambda.min
-20010723   89.87168
-20010724   96.76818</code></pre>
+20010723   90.58487
+20010724   96.69488</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ridgeCV,<span class="at">newx =</span> ozone.X[<span class="dv">50</span><span class="sc">:</span><span class="dv">51</span>,],<span class="at">s=</span><span class="st">"lambda.1se"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -461,14 +473,14 @@ div.correction {
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lassoCV,<span class="at">newx =</span> ozone.X[<span class="dv">50</span><span class="sc">:</span><span class="dv">51</span>,],<span class="at">s=</span><span class="st">"lambda.min"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         lambda.min
-20010723   87.21680
-20010724   97.48428</code></pre>
+20010723   87.18235
+20010724   98.23752</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lassoCV,<span class="at">newx =</span> ozone.X[<span class="dv">50</span><span class="sc">:</span><span class="dv">51</span>,],<span class="at">s=</span><span class="st">"lambda.1se"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         lambda.1se
-20010723   87.56923
-20010724   95.31019</code></pre>
+20010723   87.36120
+20010724   96.08368</code></pre>
 </div>
 </div></li>
 <li><p>A l’aide d’une validation croisée, comparer les performances des estimateurs <strong>MCO</strong>, <strong>ridge</strong> et <strong>lasso</strong>. On pourra utiliser les données <code>ozone_complet.txt</code> qui contiennent plus d’individus et de variables.</p>

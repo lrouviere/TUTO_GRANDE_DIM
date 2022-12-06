@@ -30,9 +30,10 @@ book:
         - 02-reg-comp.qmd
         - 03-ridge-lasso.qmd
         - 04-mod-add.qmd
-    - part: "Non supevisée"
+    - part: "Non supervisée"
       chapters:
         - 05-kmeans-cah.qmd
+        - 06-dbscan-spectral.qmd
     - references.qmd
 
 bibliography: references.bib
@@ -59,7 +60,7 @@ format:
     urlcolor: magenta
     toccolor: red
     include-in-header: 
-      - /Users/laurent//Google Drive/FICHIERS_STYLE/tuto_quarto/preamble.tex
+      - /Users/laurent/Google Drive/FICHIERS_STYLE/tuto_quarto/preamble.tex
     lang: fr
   epub: 
     keep-md: true
