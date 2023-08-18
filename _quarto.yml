@@ -1,12 +1,12 @@
 project:
   type: book
-  output-dir: docs/correction #changer display dans css et \solnfalse dnas preamble.tex pour les corrections 
+  output-dir: docs #/correction #changer display dans css et \solnfalse dnas preamble.tex pour les corrections 
   
 book:
   sidebar: 
     style: docked 
     search: true
-    background: primary
+    background: "#D9E3E4" #primary
 #    title: "L. Rouvière"
 #    collapse-level: 3
   title: "Statistique en grande dimension"
@@ -46,7 +46,7 @@ format:
 #    code-block-background: false
     code-block-bg: true
     code-block-border-left: "#31BAE9"
-    backgroundcolor: LightYellow
+    #backgroundcolor: LightYellow
     toc: true
 #    code-tools: true
   pdf:
@@ -79,5 +79,5 @@ execute:
 #  cache: false
 #  freeze: auto
 
-editor: visual
+editor: source
 
