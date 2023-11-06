@@ -1,1 +1,1 @@
-Ce tutoriel présente quelques exercices sur le cours "Régression en grande dimension" que l'on pourra trouver à cette url : [https://lrouviere.github.io/stat_grand_dim/](https://lrouviere.github.io/stat_grand_dim/)
+Ce tutoriel présente quelques exercices sur le cours "Statistique en grande dimension" que l'on pourra trouver à cette url : [https://lrouviere.github.io/stat_grand_dim/](https://lrouviere.github.io/stat_grand_dim/)

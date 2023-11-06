@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -110,7 +110,8 @@ div.csl-indent {
     "search-more-matches-text": "correspondances de plus dans ce document",
     "search-clear-button-title": "Effacer",
     "search-detached-cancel-button-title": "Annuler",
-    "search-submit-button-title": "Envoyer"
+    "search-submit-button-title": "Envoyer",
+    "search-label": "Recherche"
   }
 }</script>
 
@@ -132,7 +133,7 @@ div.csl-indent {
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-intro-grande-dim.html">Supervisée</a></li><li class="breadcrumb-item"><a href="./03-ridge-lasso.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Régressions pénalisées (ou sous contraintes)</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -462,17 +463,12 @@ y_i=\beta_0+\beta_1x_i+\varepsilon_i
 <p>L’algorithme <strong>lasso</strong> a permis de corriger le problème de sur-apprentissage.</p>
 </div></li>
 <li><p>Identifier les coefficients lasso sélectionnés qui ne sont pas nuls.</p></li>
-<li><p>Ajouter les signaux ajustés par les algorithme PCR et PLS.</p>
+<li><p>Ajouter les signaux ajustés par les algorithme Ridge, PCR et PLS. Comparer les performances.</p>
 <div class="corR">
 <ul>
+<li><p>On commence par la <code>régression ridge</code> :</p></li>
 <li><p>On effectue la <code>PCR</code> :</p></li>
-</ul>
-<!-- -->
-<ul>
 <li><p>Puis la <code>PLS</code> :</p></li>
-</ul>
-<!-- -->
-<ul>
 <li><p>On trace les signaux :</p></li>
 </ul>
 <p>On peut également obtenir les erreurs quadratiques (puisqu’on connait la vraie courbe)</p>
@@ -483,10 +479,10 @@ y_i=\beta_0+\beta_1x_i+\varepsilon_i
 <h2 data-number="3.3" class="anchored" data-anchor-id="régression-logistique-pénalisée"><span class="header-section-number">3.3</span> Régression logistique pénalisée</h2>
 <p>On considère le jeu de données sur la détection d’images publicitaires disponible ici <a href="https://archive.ics.uci.edu/ml/datasets/internet+advertisements" class="uri">https://archive.ics.uci.edu/ml/datasets/internet+advertisements</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ad.data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/ad_data.txt"</span>,<span class="at">header=</span><span class="cn">FALSE</span>,<span class="at">sep=</span><span class="st">","</span>,<span class="at">dec=</span><span class="st">"."</span>,</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">na.strings =</span> <span class="st">"?"</span>,<span class="at">strip.white =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(ad.data)[<span class="fu">ncol</span>(ad.data)] <span class="ot">&lt;-</span> <span class="st">"Y"</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>ad.data<span class="sc">$</span>Y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ad.data<span class="sc">$</span>Y)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ad.data <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"data/ad_data.txt"</span>,<span class="at">delim=</span><span class="st">","</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">col_names =</span> <span class="cn">FALSE</span>,<span class="at">na=</span><span class="fu">c</span>(<span class="st">"?"</span>),<span class="at">trim_ws =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"Y"</span><span class="ot">=</span><span class="fu">last_col</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Y=</span><span class="fu">fct</span>(Y))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>La variable à expliquer est</p>
 <div class="cell">
@@ -507,7 +503,7 @@ y_i=\beta_0+\beta_1x_i+\varepsilon_i
 <p>On construit les matrices des variables explicatives pour les méthodes lasso et ridge (<code>glmnet</code> veut les variables explicatives sous forme de matrices).</p>
 </div>
 <div class="corR">
-<p>Avant de faire la validation croisée, nous présentons juste comment faire l’algorithme <code>lasso</code>. Comme pour la régression, on utilise la fonction <code>cv.glmnet</code>, il faut juste ajouter l’argument <code>family="binomial"</code> :</p>
+<p>Avant de faire la validation croisée, nous présentons la syntaxe de l’algorithme <code>lasso</code>. Comme pour la régression, on utilise la fonction <code>cv.glmnet</code>, il faut simplement ajouter l’argument <code>family="binomial"</code> :</p>
 </div>
 <div class="corR">
 <p>Par défaut le critère utilisé pour la classification binaire est celui de la <code>déviance</code>. On peut utiliser d’autres critères comme l’<code>erreur de classification</code> ou l’<code>auc</code> en modifiant l’argument <code>type.measure</code>. On gardera la déviance dans la suite. On peut maintenant faire la validation croisée 10 blocs pour calculer les prévisions des 3 algorithmes.</p>
@@ -517,16 +513,12 @@ y_i=\beta_0+\beta_1x_i+\varepsilon_i
 <p>On peut déduire de ce tableau les critères souhaités :</p>
 <ul>
 <li><p>les <code>courbes ROC</code>:</p></li>
-</ul>
-<!-- -->
-<ul>
 <li><p>les <code>AUC</code>:</p></li>
-</ul>
-<!-- -->
-<ul>
-<li><p>les <code>erreurs de classification</code> :</p></li>
+<li><p>les <code>accuracy</code> :</p></li>
 </ul>
 <p>On remarque que les méthodes pénalisées sont nettement meilleures que l’approche classique par maximum de vraisemblance sur cet exemple.</p>
+<p>On peut également faire le travail dans un environnement <strong>tidymodels</strong> :</p>
+<p>On peut maintenant choisir l’algorithme, par exemple <code>ridge</code> :</p>
 </div>
 </section>
 <section id="exo-ridgelasso" class="level2" data-number="3.4">
