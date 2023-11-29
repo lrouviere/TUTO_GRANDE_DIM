@@ -312,7 +312,7 @@ div.correction {
 <ol type="1">
 <li><p>Discuter du nombre de clusters pour ce jeu de données.</p>
 <div class="corR">
-<p>Le choix du nombre de groupes est toujours une question difficile. On peut dire a minimma qu’il y a 4 groupes : un dans chaque coin. Ensuite, il semble éventuellement possible de scinder les groupes de droite en sous-groupes pour arriver au total à 9-10 groupes.</p>
+<p>Le choix du nombre de groupes est toujours une question difficile. On peut dire à minima qu’il y a 4 groupes : un dans chaque coin. Ensuite, il semble éventuellement possible de scinder les groupes de droite en sous-groupes pour arriver au total à 9-10 groupes.</p>
 </div></li>
 <li><p>Tester différents algorithmes <span class="math inline">\(k\)</span>-means, visualiser les résultats et discuter de la capacité de cet algorithme à identifier les différentes structures géométriques des données.</p>
 <div class="corR">
@@ -327,7 +327,11 @@ div.correction {
 <div class="corR">
 <p>Sans surprise, le <span class="math inline">\(k\)</span>-means ne parvient pas à scinder les spirales en bas à droite et les cercles concentriques en haut à droite.</p>
 </div></li>
-<li><p>Faire le même travail avec la classification ascendente hiérarchique. On commencera par comparer les différentes méthodes d’agglomération en fonction du nombre de cluster, afin d’en déduire une stratégie efficace permettant notamment d’identifier les spirales et les cercles concentriques.</p>
+<li><p>Sélectionner le nombre de classes à l’aide du coefficient de silhouette. On pourra utiliser la fonction <code>fviz_nbclust</code> du package <strong>factoextra</strong>. Visualiser les clusters avec <code>fviz_cluster</code>.</p>
+<div class="corR">
+<p>On choisit 4 groupes que l’on visualise :</p>
+</div></li>
+<li><p>Faire le même travail avec la classification ascendente hiérarchique. On commencera par comparer les différentes méthodes d’agglomération en fonction du nombre de clusters, afin d’en déduire une stratégie efficace permettant notamment d’identifier les spirales et les cercles concentriques.</p>
 <div class="corR">
 <p>On commence par calculer la <strong>matrice de distances</strong> et on visualise les <strong>dendrogrammes</strong></p>
 </div>
@@ -335,7 +339,16 @@ div.correction {
 <p>On regarde maintenant ce qu’il se passe pour un nombre de classes fixé, par exemple 8.</p>
 </div>
 <div class="corR">
-<p>Ici encore il est difficile d’identifier les cercles concentriques et la spirale. Pour y parvenir, on propose d’utiliser le lien simple avec un très grand nombre de groupes (par exemple 100), et on ne conserve que les groupes à effectif important :</p>
+<p>Ici encore il est difficile d’identifier les cercles concentriques et la spirale. Pour y parvenir, on propose de regarder un peu plus en détails le lien simple :</p>
+</div>
+<div class="corR">
+<p>La silouhette augmente à nouveau quand on passe à 17 groupes : cela correspond à la division des groupes du bas :</p>
+</div>
+<div class="corR">
+<p>On a également une cassure lorsqu’on passe à 35 groupes avec ici une baisse de la silouhette :</p>
+</div>
+<div class="corR">
+<p>Elle provient de la séparation des spirales. L’identification des spirales produit donc une baisse de la silouhette. Cela s’explique par le fait que ce coefficient n’est pas adapté à ce type de structures géométriques (il va privilégier des clusters à géométrie sphérique). On termine en visualisant la classification à 35 groupes, en ne conservant que les “gros” groupes :</p>
 </div></li>
 </ol>
 </div>

@@ -425,7 +425,7 @@ div.correction {
 <div class="cell" data-teacher="true">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ridgeCV<span class="sc">$</span>lambda.min</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8.095109</code></pre>
+<pre><code>[1] 9.750588</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ridgeCV<span class="sc">$</span>lambda<span class="fl">.1</span>se</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -450,8 +450,8 @@ div.correction {
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ridgeCV,<span class="at">newx =</span> ozone.X[<span class="dv">50</span><span class="sc">:</span><span class="dv">51</span>,],<span class="at">s=</span><span class="st">"lambda.min"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         lambda.min
-20010723   89.63446
-20010724   96.79269</code></pre>
+20010723   90.10981
+20010724   96.74374</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ridgeCV,<span class="at">newx =</span> ozone.X[<span class="dv">50</span><span class="sc">:</span><span class="dv">51</span>,],<span class="at">s=</span><span class="st">"lambda.1se"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -467,14 +467,14 @@ div.correction {
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lassoCV,<span class="at">newx =</span> ozone.X[<span class="dv">50</span><span class="sc">:</span><span class="dv">51</span>,],<span class="at">s=</span><span class="st">"lambda.min"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         lambda.min
-20010723   87.18235
-20010724   98.23752</code></pre>
+20010723   87.18766
+20010724   98.11351</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lassoCV,<span class="at">newx =</span> ozone.X[<span class="dv">50</span><span class="sc">:</span><span class="dv">51</span>,],<span class="at">s=</span><span class="st">"lambda.1se"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         lambda.1se
-20010723   87.36120
-20010724   96.08368</code></pre>
+20010723   87.40631
+20010724   95.85602</code></pre>
 </div>
 </div></li>
 <li><p>A l’aide d’une validation croisée, comparer les performances des estimateurs <strong>MCO</strong>, <strong>ridge</strong> et <strong>lasso</strong>. On pourra utiliser les données <code>ozone_complet.txt</code> qui contiennent plus d’individus et de variables.</p>
